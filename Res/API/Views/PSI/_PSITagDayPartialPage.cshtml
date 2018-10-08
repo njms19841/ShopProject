@@ -1,0 +1,57 @@
+﻿@model Market.APIService.Controllers.tagModel
+<div style="width:100%;background-color:steelblue;font-size:18px;height:40px;text-align:center;">
+    <label style="color:white">
+      @Model.Month 每日目标明细
+    </label>
+   
+</div>
+@{
+    foreach (var subModel in Model.subModel)
+    {
+        <div class="divgridDay">
+            <label style="padding-left:10px;color :black;">
+               @subModel.day
+            </label>
+            <label style="color:black;padding-left:10px;">@subModel.value</label>
+        </div>
+    }
+}
+
+
+
+<div style="width:100%;padding-left:10px;">
+    <button class="buttonstyGray close-panel" type="button" style="width:40%;">关闭</button>
+    <button class="buttonstyBlue close-panel" onclick="CheckShButton()" type="button" style="width:40%;">按比例分配</button>
+    
+</div>
+<script>
+
+    function CheckShButton() {
+        var r = "shTag";
+        // alert(r);
+        $.ajax({
+            url: r,
+            type: "Post",
+            data: {
+                month: '@Model.Month',
+                userid: '@Model.UserId',
+                prodect: '@Model.Prodect',
+                PorgId: '@Model.OrgId',
+                bllNo: '@Model.billNo',
+                BrandCode:'@Model.BrandCode',
+                type:1
+            },
+            success: function (data) {
+                $.toast(data);
+            },
+
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.toast("操作失败");
+
+            }
+        });
+
+
+    }
+
+</script>

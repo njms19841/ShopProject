@@ -1,0 +1,1649 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+
+
+
+    <link href="https://iretailerapp.flnet.com/Content/framework7.css" rel="stylesheet">
+
+    <title>排班</title>
+
+    <script type="text/javascript" src="https://iretailerapp.flnet.com/Scripts/framework7.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+    <style>
+        .buttonNoSelect {
+            background-color: white;
+            color: rgb(36,172,202);
+            font-size: 16pt;
+            height: 30pt;
+            border: 1pt solid rgb(36,172,202); /* Green */
+        }
+
+        .buttonSelect {
+            background-color: rgb(36,172,202);
+            color: white;
+            font-size: 16pt;
+            height: 30pt;
+            border: 1pt solid rgb(36,172,202); /* Green */
+        }
+
+        .viewHig {
+            height: 80px !important;
+        }
+    </style>
+</head>
+<body>
+
+    @{
+        string userId = (string)ViewData["userId"];
+        string shopCode = (string)ViewData["shopCode"];
+        //string isSetBanBie = (string)ViewData["isSetBanBie"];
+
+
+        //List<Market.APIService.Controllers.CusModel> Vdata = (List < Market.APIService.Controllers.CusModel>) ViewData["vModel"];
+    }
+    <div id="app" style="background-color:#f2f2f2;">
+        <div class="navbar" style="height:60px">
+            <div class="navbar-inner" style="height:60px;background:url('/Content/Img/bg_navbar.png');background-size:100% 60px;background-repeat:no-repeat;display:flex;">
+                <div style="width:10px;float:left;"></div>
+                <div class="left" style="width:30px;" onclick="breakMenu();">
+                    <img style="height:25px; width:15px;" src="~/Content/Img/btn_back.png" />
+                </div>
+                <div class="title" style="flex:1;text-align:center;color:white;" id="main_title">排班表</div>
+                <div onclick="selectMenu();" id="rigth_title" class="right" style="color:white;">
+                    制定排班
+                </div>
+                <div style="width:10px;float:left;"></div>
+            </div>
+        </div>
+        <div class="view view-main">
+
+            <div id="Dview" style="padding-top:0px;padding-left:0px;padding-right:0px;" class="page-content">
+                <div id="mainPageView">
+                    <div style="width:100%;height:10px;background-color:#ffffff"></div>
+                    <div style="width: 100%; height: 15px; display: flex; background-color:#ffffff">
+                        <div style="height:15px;flex:0.5;"></div>
+                        <div onclick="prearrowDay();" style="width:15px; height:15px; float:left; ">
+                            <img style="height:15px; width:15px;" src="/Content/Img/img_prearrow.png" />
+                        </div>
+                        <div style="height:15px;width:10px;" onclick="clickButton();"></div>
+                        <div style="float:left;height:15px;" onclick="clickButton();">
+                            <div id="lab_SelectDay" style="width:100%;height:15px;font-size:15px;color:rgb(36,172,202);line-height:15px;">05-20 ~ 05-27</div>
+                        </div>
+                        <div style="height:15px;width:10px;" onclick="clickButton();"></div>
+
+                        <div onclick="nextDay();" style="width:15px; height:15px; float:left;">
+                            <img style="height:15px; width:15px;" src="/Content/Img/img_next.png" />
+                        </div>
+                        <div style="height:15px;flex:0.5;"></div>
+                    </div>
+                    <div style="width:100%;height:10px;background-color:#ffffff"></div>
+                    <div style="width:100%;display:flex;background-color:#ffffff">
+                        <div style="width:10px;float:left;">
+
+                        </div>
+                        <div style="flex:1; float:left;">
+                            <div style="width:100%">
+                                <div style="width:100%; height:33px;text-align:center;color:#656d78;display:flex;">
+                                    <div style="width:70px;font-size: 10px;height:33px;line-height:33px; float:left"></div>
+                                    <div style="flex:0.14; font-size: 10px;height:33px;line-height:33px; float:left">日</div>
+                                    <div style="flex:0.14;font-size: 10px;height:33px;line-height:33px; float:left">一</div>
+                                    <div style="flex:0.14;font-size: 10px;height:33px;line-height:33px; float:left">二</div>
+                                    <div style="flex:0.14;font-size: 10px;height:33px;line-height:33px; float:left">三</div>
+                                    <div style="flex:0.14;font-size: 10px;height:33px;line-height:33px; float:left">四</div>
+                                    <div style="flex:0.14;font-size: 10px;height:33px;line-height:33px; float:left">五</div>
+                                    <div style="flex:0.14;font-size: 10px;height:33px;line-height:33px; float:left">六</div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div style="width:10px;float:left;">
+
+                        </div>
+                    </div>
+                    <div style="width:100%;display:flex;background-color:#ffffff">
+                        <div style="width:10px;float:left;">
+
+                        </div>
+                        <div style="flex:1; float:left;">
+                            <div style="width:100%" id="paibanView_A">
+
+                                <div style="width:100%;height:33px; text-align:center; border-bottom:solid;border-bottom-width:1px;border-bottom-color:#cccccc;display:flex;">
+                                    <div style="width:70px;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;text-align:left;">王世聪</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">B</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px; float:left;color:#333333;">B</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">B</div>
+                                </div>
+                                <div style="width:100%;height:33px; text-align:center; border-bottom:solid;border-bottom-width:1px;border-bottom-color:#cccccc;display:flex;">
+                                    <div style="width:70px;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;text-align:left;">王世聪</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#cccccc;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#cccccc;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#cccccc;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#cccccc;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#cccccc;">B</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px; float:left;color:#cccccc;">B</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#cccccc;">B</div>
+                                </div>
+                                <div style="width:100%;height:33px; text-align:center; border-bottom:solid;border-bottom-width:1px;border-bottom-color:#cccccc;display:flex;">
+                                    <div style="width:70px;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;text-align:left;">王世聪</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">B</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px; float:left;color:#333333;">B</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">B</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width:10px;float:left;">
+
+                        </div>
+                    </div>
+
+                    <div style="width:100%;display:flex;height:33px;background-color:#ffffff">
+                        <div style="width:10px;float:left;">
+
+                        </div>
+                        <div id="paibanView_B" style="flex:1; float:left;text-align:left;font-size:10px;color:#727373;height:33px;line-height:33px;">
+                            2人已排班 1人已排班
+                        </div>
+
+                    </div>
+                    <div id="tableRows" style="border-radius: 5px; width: 100%;text-align: center; padding-top: 10px;">
+
+                        <div onclick="" style="width: 100%;display:flex; height: 80px;font-size:20px;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                            <div style="height:80px;float:left;width:10px;"></div>
+                            <div style="width:51px; height:80px;float:left;">
+                                <div style="width:51px; height:14.5px"></div>
+                                <div style="width:51px; height:51px">
+                                    <img src="~/Content/Img/tab_user_active.png" style="width:51px; height:51px;" />
+                                </div>
+                            </div><div style="height:100px;float:left;width:14px;"></div>
+                            <div style="height:100px;float:left;flex:1">
+                                <div style="width:100%; height:25px;color:rgb(36,172,202);font-size:16px;line-height:25px; text-align:left;">
+                                    王云云(CX12345)
+                                </div>
+                                <div style="width:100%; height:17px;color:#434343;font-size:12px;line-height:17px; text-align:left; ">
+                                    今日 白班
+                                </div>
+                                <div style="width:100%; height:17px;color:#434343;font-size:12px;line-height:17px; text-align:left; ">
+                                    本周2天白班 1天晚班
+                                </div>
+                                <div style="width:100%; height:17px;color:#434343;font-size:12px;line-height:17px; text-align:left; ">
+                                    下周尚未排版
+                                </div>
+
+                            </div>
+                            <div style="width:15px; height:80px; float:left; ">
+                                <div style="width:15px; height:25px"></div>
+                                <div style="width:15px; height:15px; ">
+                                    <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                                </div>
+
+                            </div>
+                            <div style="height:80px;float:left;width:14px;"></div>
+                        </div>
+                        <div onclick="" style="width: 100%;display:flex; height: 80px;font-size:20px;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                            <div style="height:80px;float:left;width:10px;"></div>
+                            <div style="width:51px; height:80px;float:left;">
+                                <div style="width:51px; height:14.5px"></div>
+                                <div style="width:51px; height:51px">
+                                    <img src="~/Content/Img/tab_user_active.png" style="width:51px; height:51px;" />
+                                </div>
+                            </div><div style="height:100px;float:left;width:14px;"></div>
+                            <div style="height:100px;float:left;flex:1">
+                                <div style="width:100%; height:25px;color:rgb(36,172,202);font-size:16px;line-height:25px; text-align:left;">
+                                    王云云(CX12345)
+                                </div>
+                                <div style="width:100%; height:17px;color:#434343;font-size:12px;line-height:17px; text-align:left; ">
+                                    今日 白班
+                                </div>
+                                <div style="width:100%; height:17px;color:#434343;font-size:12px;line-height:17px; text-align:left; ">
+                                    本周2天白班 1天晚班
+                                </div>
+                                <div style="width:100%; height:17px;color:#434343;font-size:12px;line-height:17px; text-align:left; ">
+                                    下周尚未排版
+                                </div>
+
+                            </div>
+                            <div style="width:15px; height:80px; float:left; ">
+                                <div style="width:15px; height:25px"></div>
+                                <div style="width:15px; height:15px; ">
+                                    <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                                </div>
+
+                            </div>
+                            <div style="height:80px;float:left;width:14px;"></div>
+                        </div>
+
+                    </div>
+                    <div style="height:150px;"></div>
+                </div>
+                <div id="BanBiePageView" hidden="hidden" style="background-color:#f2f2f2;">
+                    <div style="height:5px;float:left;width:10px;"></div>
+                    <div style="width: 100%; height: 50px; text-align: left;display:flex;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                        <div style="width: 10px; height: 50px;float:left;"> </div>
+                        <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">早班时间(A)</div>
+                        <div onclick="clickTimeSet('A');" id="tile_timeSet_A" style="height: 50px;line-height:50px; float:left;text-align:right;font-size:14px;color:#333333">
+                            8:00~12:00
+                        </div>
+
+                        <div onclick="clickTimeSet('A');" style="width: 10px; height: 50px;float:left;"> </div>
+                        <div onclick="clickTimeSet('A');" style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                            <div style="width:100%;height:18px;display:flex;">
+                            </div>
+                            <div style="width:15px; height:15px;">
+                                <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: 50px; text-align: left;display:flex;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                        <div style="width: 10px; height: 50px;float:left;"> </div>
+                        <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">中班时间(B)</div>
+                        <div onclick="clickTimeSet('B');" id="tile_timeSet_B" style="height: 50px;line-height:50px; float:left;text-align:right;font-size:14px;color:#333333">
+                            12:00~16:00
+                        </div>
+
+                        <div onclick="clickTimeSet('B');" style="width: 10px; height: 50px;float:left;"> </div>
+                        <div onclick="clickTimeSet('B');" style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                            <div style="width:100%;height:18px;display:flex;">
+                            </div>
+                            <div style="width:15px; height:15px;">
+                                <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: 50px; text-align: left;display:flex;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                        <div style="width: 10px; height: 50px;float:left;"> </div>
+                        <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">晚班时间(C)</div>
+                        <div onclick="clickTimeSet('C');" id="tile_timeSet_C" style="height: 50px;line-height:50px; float:left;text-align:right;font-size:14px;color:#333333">
+                            18:00~23:00
+                        </div>
+
+                        <div onclick="clickTimeSet('C');" style="width: 10px; height: 50px;float:left;"> </div>
+                        <div onclick="clickTimeSet('C');" style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                            <div style="width:100%;height:18px;display:flex;">
+                            </div>
+                            <div style="width:15px; height:15px;">
+                                <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: 50px; text-align: left;display:flex;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                        <div style="width: 10px; height: 50px;float:left;"> </div>
+                        <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">特殊班时间(D)</div>
+                        <div onclick="clickTimeSet('D');" id="tile_timeSet_D" style="height: 50px;line-height:50px; float:left;text-align:right;font-size:14px;color:#333333">
+                            19:00~23:59
+                        </div>
+
+                        <div onclick="clickTimeSet('D');" style="width: 10px; height: 50px;float:left;"> </div>
+                        <div onclick="clickTimeSet('D');" style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                            <div style="width:100%;height:18px;display:flex;">
+                            </div>
+                            <div style="width:15px; height:15px;">
+                                <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="PaiBanPageView" hidden="hidden">
+                    <div style="width: 100%; height: 38px; text-align: left;display:flex; background-color:#ffffff;">
+                        <div style="width: 10px; height: 38px;float:left;"> </div>
+                        <div style="flex:1; height: 38px;float:left;text-align:left;font-size:14px;line-height:38px;color:#36b8d5">排班区间</div>
+                    </div>
+                    <div style="width: 100%; height: 50px; text-align: left;display:flex;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                        <div style="width: 10px; height: 50px;float:left;"> </div>
+                        <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">开始日期</div>
+                        <div style="height: 50px;line-height:50px; float:left;text-align:right;font-size:14px;color:#333333">
+                            <div style="width: 10px; height: 17px;"> </div>
+                            <input type="date" id="startDay" style="text-align:right;" placeholder="开始日期" value="@System.DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" />
+                        </div>
+
+                        <div onclick="" style="width: 1px; height: 50px;float:left;"> </div>
+                        <div onclick="" style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                            <div style="width:100%;height:18px;display:flex;">
+                            </div>
+                            <div style="width:15px; height:15px;">
+                                <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: 50px; text-align: left;display:flex;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                        <div style="width: 10px; height: 50px;float:left;"> </div>
+                        <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">结束日期</div>
+                        <div style="height: 50px;line-height:50px; float:left;text-align:right;font-size:14px;color:#333333">
+                            <div style="width: 10px; height: 17px;"> </div>
+                            <input type="date" id="endDay" style="text-align:right;" placeholder="结束日期" value="@System.DateTime.Now.AddDays(1).AddMonths(1).ToString("yyyy-MM-dd")" />
+                        </div>
+
+                        <div onclick="" style="width: 1px; height: 50px;float:left;"> </div>
+                        <div onclick="" style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                            <div style="width:100%;height:18px;display:flex;">
+                            </div>
+                            <div style="width:15px; height:15px;">
+                                <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: 38px; text-align: left;display:flex; background-color:#ffffff;">
+                        <div style="width: 10px; height: 38px;float:left;"> </div>
+                        <div style="flex:1; height: 38px;float:left;text-align:left;font-size:14px;line-height:38px;color:#36b8d5">排班</div>
+                    </div>
+                    <div style="width: 100%; height: 50px; text-align: left;display:flex;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                        <div style="width: 10px; height: 50px;float:left;"> </div>
+                        <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">姓名</div>
+                        <div style="height: 50px;line-height:50px; float:left;text-align:right;font-size:14px;color:#333333">
+                            <div style="width: 10px; height: 17px;"> </div>
+                            <select id="panbaiPop" multiple="multiple" style="width:80px;text-align:right;">
+                                <option value="1" selected="selected">张三</option>
+                                <option value="2" selected="selected">李四</option>
+                            </select>
+                        </div>
+                        <div onclick="" style="width: 1px; height: 50px;float:left;"> </div>
+                        <div onclick="" style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                            <div style="width:100%;height:18px;display:flex;">
+                            </div>
+                            <div style="width:15px; height:15px;">
+                                <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: 50px; text-align: left;display:flex;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                        <div style="width: 10px; height: 50px;float:left;"> </div>
+                        <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">星期日</div>
+                        <div style="height: 50px;line-height:50px; float:left;text-align:right;font-size:14px;color:#333333">
+                            <div style="width: 10px; height: 17px;"> </div>
+                            <select id="panbaiType_7" style="width:80px;text-align:right;">
+                                <option value="A" selected="selected">早班(A)</option>
+                                <option value="B">中班(B)</option>
+                                <option value="C">晚班(C)</option>
+                                <option value="D">特别班(D)</option>
+
+                            </select>
+                        </div>
+                        <div onclick="" style="width: 1px; height: 50px;float:left;"> </div>
+                        <div onclick="" style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                            <div style="width:100%;height:18px;display:flex;">
+                            </div>
+                            <div style="width:15px; height:15px;">
+                                <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: 50px; text-align: left;display:flex;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                        <div style="width: 10px; height: 50px;float:left;"> </div>
+                        <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">星期一</div>
+                        <div style="height: 50px;line-height:50px; float:left;text-align:right;font-size:14px;color:#333333">
+                            <div style="width: 10px; height: 17px;"> </div>
+                            <select id="panbaiType_1" style="width:80px;text-align:right;">
+                                <option value="A" selected="selected">早班(A)</option>
+                                <option value="B">中班(B)</option>
+                                <option value="C">晚班(C)</option>
+                                <option value="D">特别班(D)</option>
+
+                            </select>
+                        </div>
+                        <div onclick="" style="width: 1px; height: 50px;float:left;"> </div>
+                        <div onclick="" style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                            <div style="width:100%;height:18px;display:flex;">
+                            </div>
+                            <div style="width:15px; height:15px;">
+                                <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: 50px; text-align: left;display:flex;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                        <div style="width: 10px; height: 50px;float:left;"> </div>
+                        <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">星期二</div>
+                        <div style="height: 50px;line-height:50px; float:left;text-align:right;font-size:14px;color:#333333">
+                            <div style="width: 10px; height: 17px;"> </div>
+                            <select id="panbaiType_2" style="width:80px;text-align:right;">
+                                <option value="A" selected="selected">早班(A)</option>
+                                <option value="B">中班(B)</option>
+                                <option value="C">晚班(C)</option>
+                                <option value="D">特别班(D)</option>
+
+                            </select>
+                        </div>
+                        <div onclick="" style="width: 1px; height: 50px;float:left;"> </div>
+                        <div onclick="" style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                            <div style="width:100%;height:18px;display:flex;">
+                            </div>
+                            <div style="width:15px; height:15px;">
+                                <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: 50px; text-align: left;display:flex;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                        <div style="width: 10px; height: 50px;float:left;"> </div>
+                        <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">星期三</div>
+                        <div style="height: 50px;line-height:50px; float:left;text-align:right;font-size:14px;color:#333333">
+                            <div style="width: 10px; height: 17px;"> </div>
+                            <select id="panbaiType_3" style="width:80px;text-align:right;">
+                                <option value="A" selected="selected">早班(A)</option>
+                                <option value="B">中班(B)</option>
+                                <option value="C">晚班(C)</option>
+                                <option value="D">特别班(D)</option>
+
+                            </select>
+                        </div>
+                        <div onclick="" style="width: 1px; height: 50px;float:left;"> </div>
+                        <div onclick="" style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                            <div style="width:100%;height:18px;display:flex;">
+                            </div>
+                            <div style="width:15px; height:15px;">
+                                <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: 50px; text-align: left;display:flex;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                        <div style="width: 10px; height: 50px;float:left;"> </div>
+                        <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">星期四</div>
+                        <div style="height: 50px;line-height:50px; float:left;text-align:right;font-size:14px;color:#333333">
+                            <div style="width: 10px; height: 17px;"> </div>
+                            <select id="panbaiType_4" style="width:80px;text-align:right;">
+                                <option value="A" selected="selected">早班(A)</option>
+                                <option value="B">中班(B)</option>
+                                <option value="C">晚班(C)</option>
+                                <option value="D">特别班(D)</option>
+
+                            </select>
+                        </div>
+                        <div onclick="" style="width: 1px; height: 50px;float:left;"> </div>
+                        <div onclick="" style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                            <div style="width:100%;height:18px;display:flex;">
+                            </div>
+                            <div style="width:15px; height:15px;">
+                                <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: 50px; text-align: left;display:flex;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                        <div style="width: 10px; height: 50px;float:left;"> </div>
+                        <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">星期五</div>
+                        <div style="height: 50px;line-height:50px; float:left;text-align:right;font-size:14px;color:#333333">
+                            <div style="width: 10px; height: 17px;"> </div>
+                            <select id="panbaiType_5" style="width:80px;text-align:right;">
+                                <option value="A" selected="selected">早班(A)</option>
+                                <option value="B">中班(B)</option>
+                                <option value="C">晚班(C)</option>
+                                <option value="D">特别班(D)</option>
+
+                            </select>
+                        </div>
+                        <div onclick="" style="width: 1px; height: 50px;float:left;"> </div>
+                        <div onclick="" style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                            <div style="width:100%;height:18px;display:flex;">
+                            </div>
+                            <div style="width:15px; height:15px;">
+                                <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: 50px; text-align: left;display:flex;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                        <div style="width: 10px; height: 50px;float:left;"> </div>
+                        <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">星期六</div>
+                        <div style="height: 50px;line-height:50px; float:left;text-align:right;font-size:14px;color:#333333">
+                            <div style="width: 10px; height: 17px;"> </div>
+                            <select id="panbaiType_6" style="width:80px;text-align:right;">
+                                <option value="A" selected="selected">早班(A)</option>
+                                <option value="B">中班(B)</option>
+                                <option value="C">晚班(C)</option>
+                                <option value="D">特别班(D)</option>
+
+                            </select>
+                        </div>
+                        <div onclick="" style="width: 1px; height: 50px;float:left;"> </div>
+                        <div onclick="" style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                            <div style="width:100%;height:18px;display:flex;">
+                            </div>
+                            <div style="width:15px; height:15px;">
+                                <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="height:10px;"></div>
+                    <div style="height:50px;display:flex;">
+                        <div style="height:10px; width:10px;"></div>
+                        <div onclick="prePaiban()" style="height:50px;flex:1;border:solid;border-width:1px;border-color:#787878;color:#787878;line-height:50px;font-size:15px;text-align:center">
+                            预览
+                        </div>
+                        <div style="height:10px; width:10px;"></div>
+                    </div>
+                    <div style="height:150px;"></div>
+                </div>
+                <div id="EditPaibanPageView" hidden="hidden">
+
+                </div>
+                <div id="PaibanPreView" hidden="hidden">
+                    <div style="width:100%;height:10px;background-color:#ffffff"></div>
+                    <div style="width: 100%; height: 15px; display: flex; background-color:#ffffff">
+                        <div style="height:15px;flex:0.5;"></div>
+
+                        <div style="height:15px;width:10px;"></div>
+                        <div style="float:left;height:15px;">
+                            <div id="lab_SelectDayPre" style="width:100%;height:15px;font-size:15px;color:rgb(36,172,202);line-height:15px;">05-20 ~ 05-27</div>
+                        </div>
+
+
+
+                        <div style="height:15px;flex:0.5;"></div>
+                    </div>
+                    <div style="width:100%;height:10px;background-color:#ffffff"></div>
+                    <div style="width:100%;display:flex;background-color:#ffffff">
+                        <div style="width:10px;float:left;">
+
+                        </div>
+                        <div style="flex:1; float:left;">
+                            <div style="width:100%">
+                                <div style="width:100%; height:33px;text-align:center;color:#656d78;display:flex;">
+                                    <div style="width:70px;font-size: 10px;height:33px;line-height:33px; float:left"></div>
+                                    <div style="flex:0.14; font-size: 10px;height:33px;line-height:33px; float:left">日</div>
+                                    <div style="flex:0.14;font-size: 10px;height:33px;line-height:33px; float:left">一</div>
+                                    <div style="flex:0.14;font-size: 10px;height:33px;line-height:33px; float:left">二</div>
+                                    <div style="flex:0.14;font-size: 10px;height:33px;line-height:33px; float:left">三</div>
+                                    <div style="flex:0.14;font-size: 10px;height:33px;line-height:33px; float:left">四</div>
+                                    <div style="flex:0.14;font-size: 10px;height:33px;line-height:33px; float:left">五</div>
+                                    <div style="flex:0.14;font-size: 10px;height:33px;line-height:33px; float:left">六</div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div style="width:10px;float:left;">
+
+                        </div>
+                    </div>
+                    <div style="width:100%;display:flex;background-color:#ffffff">
+                        <div style="width:10px;float:left;">
+
+                        </div>
+                        <div style="flex:1; float:left;">
+                            <div id="view_paibanRow" style="width:100%">
+
+                                <div style="width:100%;height:33px; text-align:center; border-bottom:solid;border-bottom-width:1px;border-bottom-color:#cccccc;display:flex;">
+                                    <div style="width:70px;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;text-align:left;">王世聪</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">B</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px; float:left;color:#333333;">B</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">B</div>
+                                </div>
+                                <div style="width:100%;height:33px; text-align:center; border-bottom:solid;border-bottom-width:1px;border-bottom-color:#cccccc;display:flex;">
+                                    <div style="width:70px;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;text-align:left;">王世聪</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#cccccc;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#cccccc;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#cccccc;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#cccccc;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#cccccc;">B</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px; float:left;color:#cccccc;">B</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#cccccc;">B</div>
+                                </div>
+                                <div style="width:100%;height:33px; text-align:center; border-bottom:solid;border-bottom-width:1px;border-bottom-color:#cccccc;display:flex;">
+                                    <div style="width:70px;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;text-align:left;">王世聪</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">A</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">B</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px; float:left;color:#333333;">B</div>
+                                    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">B</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width:10px;float:left;">
+
+                        </div>
+                    </div>
+                </div>
+                <div hidden="hidden">
+                    <div style="width:256px;display:block;border-radius:2px;background-color:white; left:50%;margin-left:-128px;" class="dialog dialog-no-buttons" id="dig_Info_Ok">
+                        <div style="width:100%;height:10.5px;font-size:10.5px;color:black; display:flex;flex-flow:row;text-align:center;">
+                        </div>
+                        <div style="width:100%;font-size:11px;color:black; display:flex;flex-flow:row;text-align:center;">
+                            <div style="flex:0.5;"></div><img src="~/Content/Img/img_success.png" style="width:90px;height:90px;" />
+                            <div style="flex:0.5;"></div>
+                        </div>
+                        <div style="width:100%;font-size:11px;color:black; display:flex;flex-flow:row;text-align:center;">
+                            <div style="flex:0.5;"></div>
+                            <div>
+                                保存成功
+                            </div>
+                            <div style="flex:0.5;"></div>
+                        </div>
+
+                        <div onclick="javascript: dialog.close();" style="width:100%;height:44px;float:left;text-align:center; line-height:44px;font-size:11px;border:solid;border-width:1px;border-left:none; border-right:none; border-bottom:none;border-color:#b1b1b1;color:#36b8d5;">
+                            确定
+                        </div>
+                    </div>
+                    <div style="width:256px; display:block;border-radius:2px;background-color:white; left:50%;margin-left:-128px;" class="dialog dialog-no-buttons" id="dig_Info_fail">
+                        <div style="width:100%;height:10.5px;font-size:10.5px;color:black; display:flex;flex-flow:row;text-align:center;">
+                        </div>
+                        <div style="width:100%;font-size:10.5px;color:black; display:flex;flex-flow:row;text-align:center;">
+                            <div style="flex:0.5;"></div><img src="~/Content/Img/img_fail.png" style="width:90px;height:90px;" />
+                            <div style="flex:0.5;"></div>
+                        </div>
+                        <div style="width:100%;font-size:11px;color:black; display:flex;flex-flow:row;text-align:center;">
+                            <div style="flex:0.5;"></div>
+                            <div id="lib_info">
+                                打卡失败
+                            </div>
+                            <div style="flex:0.5;"></div>
+                        </div>
+                        <div onclick="javascript: dialog.close();" style="width:100%;height:44px;float:left;text-align:center; line-height:44px;font-size:11px;border:solid;border-width:1px;border-left:none; border-right:none; border-bottom:none;border-color:#b1b1b1;color:#36b8d5;">
+                            确定
+                        </div>
+                    </div>
+                    <div style="width:256px;display:block;border-radius:2px;background-color:white; left:50%;margin-left:-128px;" class="dialog dialog-no-buttons" id="dig_mune">
+
+                        <div onclick="clickMenu(1)" style="width: 100%;display:flex; height: 40px;line-height:40px; font-size:20px;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                            <div style="height:40px;float:left;width:14px;"></div>
+                            <div style="float:left;flex:1;text-align:left;">
+                                制定班别
+                            </div>
+                        </div>
+                        <div onclick="clickMenu(2)" style="width: 100%;display:flex; height: 40px;line-height:40px; font-size:20px;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">
+                            <div style="height:40px;float:left;width:14px;"></div>
+                            <div style="float:left;flex:1;text-align:left;">
+                                制定排班
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="width:256px;display:block;border-radius:2px;background-color:white; left:50%;margin-left:-128px;" class="dialog dialog-no-buttons" id="dig_date_select">
+                        <div style="width:100%; text-align:center;background-color:Gainsboro;">
+                            <div style="width:100%;line-height: 40px; height: 40px;font-size: 20px; background-color:white; color:rgb(36,172,202); text-align:center;">选择周别</div>
+                            <div id="picker-date-container-1">
+                            </div>
+                            <p>
+                                <div style="height:50px;margin-bottom:-15px;">
+                                    <button id="dateSelect_btn_Cancel" onclick="CloseModle(1);" style="float:left; font-size: 20px;width:50%;height:50px;background-color: Gainsboro;color:dimgray;border: 0px solid rgb(36,172,202); /* Green */">取消</button>
+                                    <button id="dateSelect_btn_Ok" onclick="CloseModle(2);" style="float:left;width:50%;font-size: 20px;height:50px;background-color: Gainsboro;color: rgb(36,172,202);border: 0px solid rgb(36,172,202); /* Green */">确定</button>
+                                </div>
+                            </p>
+
+                        </div>
+                    </div>
+                    <div style="width:256px;display:block;border-radius:2px;background-color:white; left:50%;margin-left:-128px;" class="dialog dialog-no-buttons" id="dig_Time_select">
+                        <div style="width:100%; text-align:center;background-color:white;">
+                            <div style="width:100%;line-height: 40px; height: 40px;font-size: 20px; background-color:#f2f2f2;  text-align:center;">设置时间</div>
+                            <div style="width:100%;line-height: 40px; height: 40px;font-size: 20px;text-align:left;">
+                                &nbsp;  开始时间
+                            </div>
+                            <div id="picker-time-container-start" style="height:80px">
+                            </div>
+                            <div style="width:100%;line-height: 40px; height: 40px;font-size: 20px;text-align:left;">
+                                &nbsp;   结束时间
+                            </div>
+                            <div id="picker-time-container-end" style="height:80px">
+                            </div>
+                            <p>
+                                <div style="height:50px;margin-bottom:-15px;">
+                                    <button onclick="CloseTimeModle(1);" style="float:left; font-size: 20px;background-color:white; width:50%;height:50px;color:dimgray;border: 0px solid rgb(36,172,202); /* Green */">取消</button>
+                                    <button onclick="CloseTimeModle(2);" style="float:left;width:50%;font-size: 20px;background-color:white; height:50px;color: rgb(36,172,202);border: 0px solid rgb(36,172,202); /* Green */">确定</button>
+                                </div>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+
+        var myApp = new Framework7({
+            // App root element
+            root: '#app',
+            // App Name
+            name: 'My App',
+            // App id
+            id: 'com.myapp.test',
+            // Enable swipe panel
+            panel: {
+                swipe: 'left',
+            },
+            // Add default routes
+            routes: [
+              {
+                  path: '/about/',
+                  url: 'about.html',
+              },
+            ],
+            // ... other parameters
+        });
+        var $$ = Framework7.$;
+        var dialog = null;
+        function clickButton() {
+
+
+            dialog = myApp.dialog.create({
+                text: "",
+                el: '#dig_date_select',
+                buttons: [
+
+                ]
+            });
+            selectBtn = 1;
+            dialog.open();
+            CreatePick();
+            $$('#picker-date-container-1').show();
+
+
+        }
+        var A_H_Start = 8, A_M_Start = 0, A_H_End = 12, A_M_End = 0,
+            B_H_Start = 12, B_M_Start = 0, B_H_End = 16, B_M_End = 0,
+            C_H_Start = 18, C_M_Start = 0, C_H_End = 23, C_M_End = 0,
+            D_H_Start = 19, D_M_Start = 0, D_H_End = 23, D_M_End = 59;
+        var selectStartH = 8, selectStartM = 0, selectEndH = 12, selectEndM = 0;
+        var clickTimeSetType = "A";
+        function clickTimeSet(p) {
+            clickTimeSetType = p;
+            dialog = myApp.dialog.create({
+                text: "",
+                el: '#dig_Time_select',
+                buttons: [
+
+                ]
+            });
+
+            dialog.open();
+            if (p == "A") {
+                CreateTimePick(A_H_Start, A_M_Start, A_H_End, A_M_End);
+            }
+            else if (p == "B") {
+                CreateTimePick(B_H_Start, B_M_Start, B_H_End, B_M_End);
+            }
+            else if (p == "C") {
+                CreateTimePick(C_H_Start, C_M_Start, C_H_End, C_M_End);
+            }
+            else if (p == "D") {
+                CreateTimePick(D_H_Start, D_M_Start, D_H_End, D_M_End);
+            }
+
+        }
+
+        function prePaiban() {
+
+            var p_pops = $$('#panbaiPop').val();
+            var html = "";
+            for (i = 0; i < p_pops.length ; i++) {
+                var name = "";
+                for (var j = 0; j < pops.length; j++) {
+                    if (pops[j].code == p_pops[i])
+                    {
+                        name = pops[j].name;
+                    }
+                }
+
+                html = html + '<div style="width:100%;height:33px; text-align:center; border-bottom:solid;border-bottom-width:1px;border-bottom-color:#cccccc;display:flex;">'
+                               + '    <div style="width:70px;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;text-align:left;">' + name + '</div>'
+                               + '    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">' + $$('#panbaiType_7').val() + '</div>'
+                               + '    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">' + $$('#panbaiType_1').val() + '</div>'
+                                + '   <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">' + $$('#panbaiType_2').val() + '</div>'
+                                + '   <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">' + $$('#panbaiType_3').val() + '</div>'
+                                + '   <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">' + $$('#panbaiType_4').val() + '</div>'
+                                + '   <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px; float:left;color:#333333;">' + $$('#panbaiType_5').val() + '</div>'
+                                + '   <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">' + $$('#panbaiType_6').val() + '</div>'
+                               + '</div>';
+            }
+            $$('#rigth_title').text('');
+            pageModel = 9;
+            $$('#PaibanPreView').show();
+            $$('#PaiBanPageView').hide();
+            $$('#main_title').text('排班预览');
+            $$('#view_paibanRow').html(html);
+
+        }
+        function breakMenu() {
+            if (pageModel == 1) {
+                
+                window.postMessage('Back');
+            }
+            else if (pageModel == 2) {
+                $$('#rigth_title').text('制定排班');
+                $$('#main_title').text('排班表');
+
+                pageModel = 1;
+                $$('#mainPageView').show();
+                $$('#BanBiePageView').hide();
+                getAllPaiban();
+            }
+            else if (pageModel == 3) {
+                $$('#rigth_title').text('制定排班');
+                $$('#main_title').text('排班表');
+
+                pageModel = 1;
+                $$('#mainPageView').show();
+                $$('#PaiBanPageView').hide();
+                getAllPaiban();
+            }
+            else if (pageModel == 9) {
+
+                $$('#rigth_title').text('保存');
+                $$('#main_title').text('制定排班表');
+                pageModel = 3;
+                $$('#PaibanPreView').hide();
+                $$('#PaiBanPageView').show();
+            }
+            
+        }
+        function showBanbieView() {
+            $$('#rigth_title').text('保存');
+            $$('#main_title').text('制定班别');
+            pageModel = 2;
+            $$('#mainPageView').hide();
+            $$('#BanBiePageView').show();
+            myApp.request.json('GetBanBie?shopCode=' + '@shopCode',
+          null,
+          function (data) {
+              A_H_Start = data.A_StartH;
+              A_M_Start = data.A_StartM;
+              A_H_End = data.A_EndH;
+              A_M_End = data.A_EndM;
+              $$('#tile_timeSet_A').text(PrefixInteger(A_H_Start, 2) + ':' + PrefixInteger(A_M_Start, 2) + '~' + PrefixInteger(A_H_End, 2) + ':' + PrefixInteger(A_M_End, 2))
+              B_H_Start = data.B_StartH;
+              B_M_Start = data.B_StartM;
+              B_H_End = data.B_EndH;
+              B_M_End = data.B_EndM;
+              $$('#tile_timeSet_B').text(PrefixInteger(B_H_Start, 2) + ':' + PrefixInteger(B_M_Start, 2) + '~' + PrefixInteger(B_H_End, 2) + ':' + PrefixInteger(B_M_End, 2))
+              C_H_Start = data.C_StartH;
+              C_M_Start = data.C_StartM;
+              C_H_End = data.C_EndH;
+              C_M_End = data.C_EndM;
+              $$('#tile_timeSet_C').text(PrefixInteger(C_H_Start, 2) + ':' + PrefixInteger(C_M_Start, 2) + '~' + PrefixInteger(C_H_End, 2) + ':' + PrefixInteger(C_M_End, 2))
+              D_H_Start = data.D_StartH;
+              D_M_Start = data.D_StartM;
+              D_H_End = data.D_EndH;
+              D_M_End = data.D_EndM;
+              $$('#tile_timeSet_D').text(PrefixInteger(D_H_Start, 2) + ':' + PrefixInteger(D_M_Start, 2) + '~' + PrefixInteger(D_H_End, 2) + ':' + PrefixInteger(D_M_End, 2))
+          });
+        }
+        var pops;
+        function editPopPaiban(code,name)
+        {
+            var json = [];
+            var j = {};
+            j.code = code;
+            j.name = name;
+            json.push(j);
+          
+            pops = json;
+                            var html = '';
+                            for (var i = 0; i < pops.length; i++) {
+                                var pop = pops[i];
+                                html = html + '<option value="' + pop.code + '" selected="selected">' + pop.name + '</option>';
+                            }
+                            $$('#panbaiPop').html(html);
+                            $$('#rigth_title').text('保存');
+                            $$('#main_title').text('制定排班表');
+                            pageModel = 3;
+                            $$('#mainPageView').hide();
+                            $$('#PaiBanPageView').show();
+
+                      
+        }
+        function clickMenu(m) {
+            if (m == 1) {
+                showBanbieView();
+            }
+            else if (m == 2) {
+                myApp.request.json('isBanBieSet?shopCode=' + '@shopCode',
+             null,
+             function (data) {
+                 if (data.isSetBanBie == 1) {
+                     //getShopPops
+
+                     myApp.request.json('getShopPops?shopCode=' + '@shopCode',
+                         null,
+                         function (data2) {
+                             pops = data2.pop;
+
+
+
+                                var html='';
+                             for (var i = 0; i < pops.length; i++)
+                             {
+                                 var pop = pops[i];
+                                 html = html + '<option value="' + pop.code + '" selected="selected">' + pop .name+ '</option>';
+                             }
+                             $$('#panbaiPop').html(html);
+                             $$('#rigth_title').text('保存');
+                             $$('#main_title').text('制定排班表');
+                            pageModel = 3;
+                            $$('#mainPageView').hide();
+                            $$('#PaiBanPageView').show();
+
+                        });
+
+                 }
+                 else {
+                     showBanbieView();
+                 }
+
+             });
+            }
+
+            dialog.close();
+        }
+        function selectMenu() {
+            if (pageModel == 1) {
+                dialog = myApp.dialog.create({
+                    text: "",
+                    el: '#dig_mune',
+                    buttons: [
+
+                    ]
+                });
+
+                dialog.open();
+            }
+            else if (pageModel == 2) {
+                myApp.request.json('saveBanBie?shopCode=' + '@shopCode' + '&A_StartH=' + A_H_Start + '&A_StartM=' + A_M_Start + '&A_EndH=' + A_H_End + '&A_EndM=' + A_M_End + '&B_StartH=' + B_H_Start + '&B_StartM=' + B_M_Start + '&B_EndH=' + B_H_End + '&B_EndM=' + B_M_End + '&C_StartH=' + C_H_Start + '&C_StartM=' + C_M_Start + '&C_EndH=' + C_H_End + '&C_EndM=' + C_M_End + '&D_StartH=' + D_H_Start + '&D_StartM=' + D_M_Start + '&D_EndH=' + D_H_End + '&D_EndM=' + D_M_End,
+               null,
+               function (data) {
+                   dialog = myApp.dialog.create({
+                       text: "",
+                       el: '#dig_Info_Ok',
+                       buttons: [
+
+                       ]
+                   });
+
+                   dialog.open();
+               });
+                //保存班别
+
+            }
+            else if (pageModel == 3) {
+                var popstr = '';
+                var p_pops = $$('#panbaiPop').val();
+
+                for (i = 0; i < p_pops.length ; i++) {
+                    if (popstr == '') {
+                        popstr = p_pops[i];
+                    }
+                    else {
+                        popstr =popstr+ ',' + p_pops[i];
+                    }
+                }
+                var url = 'savePaiban?shopCode=' + '@shopCode' + '&pops=' + popstr + '&startDay=' + $$("#startDay").val() + '&endDay=' + $$("#endDay").val()
+                    + '&paiban_Type_1=' + $$("#panbaiType_1").val() + '&paiban_Type_2=' + $$("#panbaiType_2").val() + '&paiban_Type_3=' + $$("#panbaiType_3").val()
+                + '&paiban_Type_4=' + $$("#panbaiType_4").val() + '&paiban_Type_5=' + $$("#panbaiType_5").val() + '&paiban_Type_6=' + $$("#panbaiType_6").val()
+                + '&paiban_Type_7=' + $$("#panbaiType_7").val();
+
+                myApp.request.json(url,
+               null,
+               function (data) {
+                   if (data.isOk == 1) {
+                       dialog = myApp.dialog.create({
+                           text: "",
+                           el: '#dig_Info_Ok',
+                           buttons: [
+
+                           ]
+                       });
+
+                       dialog.open();
+                   }
+                   else {
+                       dialog = myApp.dialog.create({
+                           text: "",
+                           el: '#dig_Info_fail',
+                           buttons: [
+
+                           ]
+                       });
+                       $$('#lib_info').text(data.message);
+                       dialog.open();
+
+                   }
+               });
+            }
+        }
+
+        // 对Date的扩展，将 Date 转化为指定格式的String
+        // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
+        // 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
+        // 例子：
+        // (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+        // (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+        Date.prototype.Format = function (fmt) { //author: meizz
+            var o = {
+                "M+": this.getMonth() + 1,                 //月份
+                "d+": this.getDate(),                    //日
+                "h+": this.getHours(),                   //小时
+                "m+": this.getMinutes(),                 //分
+                "s+": this.getSeconds(),                 //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds()             //毫秒
+            };
+            if (/(y+)/.test(fmt))
+                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt))
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+
+        /**
+*js中更改日期
+* y年， m月， d日， h小时， n分钟，s秒
+*/
+        function DateAdd(part, value, date) {
+            var now = date;
+            value *= 1;
+            if (isNaN(value)) {
+                value = 0;
+            }
+            switch (part) {
+                case "y":
+                    now.setFullYear(date.getFullYear() + value);
+                    break;
+                case "m":
+                    now.setMonth(date.getMonth() + value);
+                    break;
+                case "d":
+                    now.setDate(date.getDate() + value);
+                    break;
+                case "h":
+                    now.setHours(date.getHours() + value);
+                    break;
+                case "n":
+                    now.setMinutes(date.getMinutes() + value);
+                    break;
+                case "s":
+                    now.setSeconds(date.getSeconds() + value);
+                    break;
+                default:
+
+            }
+            return now;
+        }
+        ///定义公用变量
+        var today = new Date();
+
+        var selectBtn = 1;//表示选择的模式
+        var selectDay = today.getDate();//控件选择的日期
+        var selectYear = today.getFullYear();//控件选择的年份
+        var selectMonth = today.getMonth();//控件选择的月份 0开始
+        var selectWeek = 1;
+
+        var c_selectBtn = 1;//确定选择的模式
+        var c_selectDay = today.getDate();//确定选择的日期
+        var c_selectYear = today.getFullYear();//确定选择的年份
+        var c_selectMonth = today.getMonth() * 1 + 1;//确定选择的月份
+        var c_selectWeek = 1;
+        var pageModel = 1;
+        var Select_StartDay = today.getDate();
+        var Select_EndDay = today.getDate();
+        //getYearWeek(DateAdd('d', -7, new Date(c_selectYear, c_selectMonth, c_selectDay)).Format("yyyy-MM-dd"));
+        myApp.request.json('GetWeekNumber?dt=' + today.Format("yyyy-MM-dd"),
+                null,
+                function (data) {
+                    c_selectWeek = data.weekNumber;
+                    selectWeek = data.weekNumber;
+                    myApp.request.json('GetWeekDays?year=' + c_selectYear + "&weeks=" + c_selectWeek,
+                              null,
+                  function (data) {
+                      var tempStartDay = new Date(data.firstDay.substr(0, 4), (Number(data.firstDay.substr(5, 2))) - 1, data.firstDay.substr(8));
+                      var tempEndDay = new Date(data.lastDay.substr(0, 4), (Number(data.lastDay.substr(5, 2))) - 1, data.lastDay.substr(8));
+                      Select_StartDay = tempStartDay;
+                      Select_EndDay = tempEndDay;
+                      getAllPaiban();
+                      $$('#lab_SelectDay').text(tempStartDay.Format("MM-dd") + '~' + tempEndDay.Format("MM-dd"));
+                  }
+                  );
+                });
+
+        //初始化UI元素
+        function PrefixInteger(num, n) {
+            return (Array(n).join(0) + num).slice(-n);
+
+        }
+        $$('#lab_SelectDay').text(today.Format("MM-dd") + '~' + today.Format("MM-dd"));
+        //var tempDay = DateAdd('d', -1, today)
+        // $$('#lab_SelectDay2').text('相比' + tempDay.Format("MM-dd") + '~' + tempDay.Format("MM-dd"));
+        function CloseTimeModle(model) {
+            if (model == 1) {
+
+
+            }
+            else if (model == 2) {
+                if (clickTimeSetType == "A") {
+                    A_H_Start = selectStartH;
+                    A_M_Start = selectStartM;
+                    A_H_End = selectEndH;
+                    A_M_End = selectEndM;
+                    $$('#tile_timeSet_A').text(PrefixInteger(A_H_Start, 2) + ':' + PrefixInteger(A_M_Start, 2) + '~' + PrefixInteger(A_H_End, 2) + ':' + PrefixInteger(A_M_End, 2))
+                }
+                else if (clickTimeSetType == "B") {
+                    B_H_Start = selectStartH;
+                    B_M_Start = selectStartM;
+                    B_H_End = selectEndH;
+                    B_M_End = selectEndM;
+                    $$('#tile_timeSet_B').text(PrefixInteger(B_H_Start, 2) + ':' + PrefixInteger(B_M_Start, 2) + '~' + PrefixInteger(B_H_End, 2) + ':' + PrefixInteger(B_M_End, 2))
+                }
+                else if (clickTimeSetType == "C") {
+                    C_H_Start = selectStartH;
+                    C_M_Start = selectStartM;
+                    C_H_End = selectEndH;
+                    C_M_End = selectEndM;
+                    $$('#tile_timeSet_C').text(PrefixInteger(C_H_Start, 2) + ':' + PrefixInteger(C_M_Start, 2) + '~' + PrefixInteger(C_H_End, 2) + ':' + PrefixInteger(C_M_End, 2))
+                }
+                else if (clickTimeSetType == "D") {
+                    D_H_Start = selectStartH;
+                    D_M_Start = selectStartM;
+                    D_H_End = selectEndH;
+                    D_M_End = selectEndM;
+                    $$('#tile_timeSet_D').text(PrefixInteger(D_H_Start, 2) + ':' + PrefixInteger(D_M_Start, 2) + '~' + PrefixInteger(D_H_End, 2) + ':' + PrefixInteger(D_M_End, 2))
+                }
+
+
+            }
+            if (dialog != null)
+                dialog.close();
+        }
+
+        function CloseModle(model) {
+            if (model == 1) {
+
+                selectDay = c_selectDay; //重置选择的日期
+                selectYear = c_selectYear; //重置选择的年份
+                selectMonth = c_selectMonth; //重置选择的月份
+                selectWeek = c_selectWeek;
+                selectBtn = c_selectBtn;
+            }
+            else if (model == 2) {
+                c_selectBtn = selectBtn;//确定选择的模式
+                c_selectDay = selectDay;//确定选择的日期
+                c_selectYear = selectYear;//确定选择的年份
+                c_selectMonth = selectMonth;//确定选择的月份
+                c_selectWeek = selectWeek;
+                if (c_selectBtn == 1)//周模式
+                {
+                    myApp.request.json('GetWeekDays?year=' + c_selectYear + "&weeks=" + c_selectWeek,
+                               null,
+                   function (data) {
+
+                       //alert(data.lastDay); //2018-01-01
+
+                       var tempStartDay = new Date(data.firstDay.substr(0, 4), (Number(data.firstDay.substr(5, 2))) - 1, data.firstDay.substr(8));
+                       var tempEndDay = new Date(data.lastDay.substr(0, 4), (Number(data.lastDay.substr(5, 2))) - 1, data.lastDay.substr(8));
+
+                       Select_StartDay=tempStartDay;
+                       Select_EndDay=tempEndDay;
+                       getAllPaiban();
+                       $$('#lab_SelectDay').text(tempStartDay.Format("MM-dd") + '~' + tempEndDay.Format("MM-dd"));
+
+
+
+                   });
+
+
+
+                }
+
+            }
+            if (dialog != null)
+                dialog.close();
+        }
+        function ChangeSelectBtn(index) {
+
+
+            if (selectBtn != index) {
+                selectBtn = index;
+
+                if ($$('#dateSelect_btn_' + index).hasClass("buttonNoSelect") == true) {
+                    $$('#dateSelect_btn_' + index).removeClass("buttonNoSelect");
+                }
+                $$('#dateSelect_btn_' + index).addClass("buttonSelect");
+
+                for (var i = 0; i <= 2; i++) {
+
+                    if (i != index) {
+                        if ($$('#dateSelect_btn_' + i).hasClass("buttonNoSelect") == true) {
+                            $$('#dateSelect_btn_' + i).removeClass("buttonNoSelect");
+                        }
+                        if ($$('#dateSelect_btn_' + i).hasClass("buttonSelect") == true) {
+                            $$('#dateSelect_btn_' + i).removeClass("buttonSelect");
+                        }
+                        $$('#dateSelect_btn_' + i).addClass("buttonNoSelect");
+
+                        $$('#picker-date-container-' + i).hide();
+                    }
+                    else {
+                        $$('#picker-date-container-' + i).show();
+                    }
+
+                }
+            }
+
+        }
+        function CreateDataTable(data) {
+            //tableDataRows
+            var rowsHtml = "";
+            for (var i = 0; i < data.numbers.length; i++) {
+                rowsHtml = rowsHtml +
+                    '<tr>' +
+            '<td style="font-size: 9pt;width:10%">' + data.timeGroupName[i] + '</td>' +
+            '<td class="numeric-cell" style="font-size: 9pt;width:20%">' + data.numbers[i].toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + '</td>' +
+            '<td class="numeric-cell" style="font-size: 9pt;width:20%">' + data.preNumbers[i].toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + '</td>'
+                if (data.preNumbersCt[i] == 0) {
+                    rowsHtml = rowsHtml + '<td class="numeric-cell" style="font-size: 9pt;width:35%">' + (data.preNumbersCt[i] * 100).toFixed(0) + '%' +
+                    '  <img style="width:9pt;vertical-align:middle;" src="/Content/Img/img_normal.png" />' +
+                  '</td>' +
+                  '</tr>'
+                } else if (data.preNumbersCt[i] > 0) {
+                    rowsHtml = rowsHtml + '<td class="numeric-cell" style="font-size: 9pt;width:35%">' + (data.preNumbersCt[i] * 100).toFixed(0) + '%' +
+                    '  <img style=" width:9pt;vertical-align:middle;" src="/Content/Img/img_up.png" />' +
+                  '</td>' +
+                  '</tr>'
+                } else if (data.preNumbersCt[i] < 0) {
+                    rowsHtml = rowsHtml + '<td class="numeric-cell" style="font-size: 9pt;width:35%">' + (data.preNumbersCt[i] * 100).toFixed(0) + '%' +
+                    '  <img style="width:9pt;vertical-align:middle;" src="/Content/Img/img_down.png" />' +
+                  '</td>' +
+                  '</tr>'
+                }
+            }
+            $$('#tableDataRows').html(rowsHtml);
+        }
+        function prearrowDay() {
+            if (c_selectBtn == 0) {
+                var tempDay = DateAdd('d', -1, new Date(c_selectYear, c_selectMonth, c_selectDay))
+                selectBtn = 0;//表示选择的模式
+                selectDay = tempDay.getDate();//控件选择的日期
+                selectYear = tempDay.getFullYear();//控件选择的年份
+                selectMonth = tempDay.getMonth();//控件选择的月份 0开始
+
+            }
+            else if (c_selectBtn == 1) {
+                if (c_selectWeek == 1) {
+                    selectYear = c_selectYear * 1 - 1;
+                    selectWeek = 53;
+
+                }
+                else {
+                    selectYear = c_selectYear;
+                    selectWeek = c_selectWeek * 1 - 1;
+                }
+
+
+            }
+            else if (c_selectBtn == 2) {
+                var tempDay = DateAdd('m', -1, new Date(c_selectYear, c_selectMonth, c_selectDay))
+                selectBtn = 2;//表示选择的模式
+                selectDay = tempDay.getDate();//控件选择的日期
+                selectYear = tempDay.getFullYear();//控件选择的年份
+                selectMonth = tempDay.getMonth();//控件选择的月份 0开始
+
+
+            }
+            CloseModle(2);
+        }
+        function nextDay() {
+            if (c_selectBtn == 0) {
+
+                var tempDay = DateAdd('d', 1, new Date(c_selectYear, c_selectMonth, c_selectDay))
+                selectBtn = 0;//表示选择的模式
+                selectDay = tempDay.getDate();//控件选择的日期
+                selectYear = tempDay.getFullYear();//控件选择的年份
+                selectMonth = tempDay.getMonth();//控件选择的月份 0开始
+
+            }
+            else if (c_selectBtn == 1) {
+                if (c_selectWeek == 53) {
+                    selectYear = c_selectYear * 1 + 1;
+                    selectWeek = 1;
+
+                }
+                else {
+                    selectYear = c_selectYear;
+                    selectWeek = c_selectWeek * 1 + 1;
+                }
+
+
+            }
+            else if (c_selectBtn == 2) {
+                var tempDay = DateAdd('m', 1, new Date(c_selectYear, c_selectMonth, c_selectDay))
+                selectBtn = 2;//表示选择的模式
+                selectDay = tempDay.getDate();//控件选择的日期
+                selectYear = tempDay.getFullYear();//控件选择的年份
+                selectMonth = tempDay.getMonth();//控件选择的月份 0开始
+
+
+            }
+            CloseModle(2);
+        }
+
+        function CreateTimePick(p_selectStartH, p_selectStartM, p_selectEndH, p_selectEndM) {
+            $$('#picker-time-container-start').html('');
+            var pickerInlineStartTime = myApp.picker.create({
+                containerEl: '#picker-time-container-start',
+                cssClass: 'viewHig',
+                toolbar: false,
+                rotateEffect: true,
+                value: [
+                  p_selectStartH,
+                  p_selectStartM
+                ],
+                formatValue: function (values, displayValues) {
+
+                    return displayValues[0];
+                },
+                cols: [
+                    // 小时
+                    {
+                        values: (function () {
+                            var arr = [];
+                            for (var i = 0; i <= 23 ; i++) { arr.push(i); }
+                            return arr;
+                        })(),
+                        textAlign: 'left',
+                        width: '50%'
+                    },
+                  // 分钟
+                  {
+                      values: (function () {
+                          var arr = [];
+                          for (var i = 0; i <= 59 ; i++) { arr.push(i); }
+                          return arr;
+                      })(),
+                      displayValues: (function () {
+                          var arr = [];
+                          for (var i = 0; i <= 59 ; i++) {
+                              if (i < 10) {
+                                  arr.push('0' + i);
+                              }
+                              else {
+                                  arr.push(i);
+                              }
+                          }
+                          return arr;
+                      })(),
+                      textAlign: 'left',
+                      width: '50%'
+                  },
+
+                ],
+                on: {
+                    change: function (picker, values, displayValues) {
+
+
+                        selectStartH = picker.value[0];
+                        selectStartM = picker.value[1];
+
+                    },
+                }
+            });
+            pickerInlineStartTime.open();
+            $$('#picker-time-container-end').html('');
+            var pickerInlineEndTime = myApp.picker.create({
+                containerEl: '#picker-time-container-end',
+                cssClass: 'viewHig',
+                toolbar: false,
+                rotateEffect: true,
+                value: [
+                  p_selectEndH,
+                  p_selectEndM
+                ],
+                formatValue: function (values, displayValues) {
+
+                    return displayValues[0];
+                },
+                cols: [
+                    // 小时
+                    {
+                        values: (function () {
+                            var arr = [];
+                            for (var i = 0; i <= 23 ; i++) { arr.push(i); }
+                            return arr;
+                        })(),
+                        textAlign: 'left',
+                        width: '50%'
+                    },
+                  // 分钟
+                  {
+                      values: (function () {
+                          var arr = [];
+                          for (var i = 0; i <= 59 ; i++) { arr.push(i); }
+                          return arr;
+                      })(),
+                      displayValues: (function () {
+                          var arr = [];
+                          for (var i = 0; i <= 59 ; i++) {
+                              if (i < 10) {
+                                  arr.push('0' + i);
+                              }
+                              else {
+                                  arr.push(i);
+                              }
+                          }
+                          return arr;
+                      })(),
+                      textAlign: 'left',
+                      width: '50%'
+                  },
+
+                ],
+                on: {
+                    change: function (picker, values, displayValues) {
+
+
+                        selectEndH = picker.value[0];
+                        selectEndM = picker.value[1];
+
+                    },
+                }
+            });
+            pickerInlineEndTime.open();
+        }
+
+        function CreatePick() {
+            $$('#picker-date-container-1').html('');
+            var pickerInlineWeek = myApp.picker.create({
+                containerEl: '#picker-date-container-1',
+
+                toolbar: false,
+                rotateEffect: true,
+                value: [
+                  selectYear,
+                  selectWeek
+                ],
+                formatValue: function (values, displayValues) {
+
+                    return displayValues[0];
+                },
+                cols: [
+                    // Years
+                    {
+                        values: (function () {
+                            var arr = [];
+                            for (var i = 2017; i <= today.getFullYear() + 2 ; i++) { arr.push(i); }
+                            return arr;
+                        })(),
+                        textAlign: 'left',
+                        width: '50%'
+                    },
+                  // Months
+                  {
+                      values: (function () {
+                          var arr = [];
+                          for (var i = 1; i <= 53 ; i++) { arr.push(i); }
+                          return arr;
+                      })(),
+                      displayValues: (function () {
+                          var arr = [];
+                          for (var i = 1; i <= 53 ; i++) { arr.push("第" + i + "周"); }
+                          return arr;
+                      })(),
+                      textAlign: 'left',
+                      width: '50%'
+                  },
+
+                ],
+                on: {
+                    change: function (picker, values, displayValues) {
+
+
+                        selectYear = picker.value[0];
+                        selectWeek = picker.value[1];
+
+                    },
+                }
+            });
+            pickerInlineWeek.open();
+
+        }
+
+        function getAllPaiban() {
+            var url = 'getAllPaiban?shopCode=' + '@shopCode' + '&startDay=' + Select_StartDay.Format("yyyy-MM-dd") + '&endDay=' + Select_EndDay.Format("yyyy-MM-dd");
+
+            myApp.request.json(url,
+                         null,
+                         function (data2) {
+                             var html = "";
+                             var html2 = "";
+
+                             for (i = 0; i < data2.list.length ; i++) {
+                                 var item = data2.list[i];
+
+                                 html = html + '<div style="width:100%;height:33px; text-align:center; border-bottom:solid;border-bottom-width:1px;border-bottom-color:#cccccc;display:flex;">'
+                                                + '    <div style="width:70px;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;text-align:left;">' + item.empName + '</div>'
+                                                + '    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">' + item.type7 + '</div>'
+                                                + '    <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">' + item.type1 + '</div>'
+                                                 + '   <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">' + item.type2 + '</div>'
+                                                 + '   <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">' + item.type3 + '</div>'
+                                                 + '   <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">' + item.type4 + '</div>'
+                                                 + '   <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px; float:left;color:#333333;">' + item.type5 + '</div>'
+                                                 + '   <div style="flex:0.14;height:33px;line-height:33px; font-size: 14px;float:left;color:#333333;">' + item.type6 + '</div>'
+                                                + '</div>';
+                                 var taodayText = "今日 未排班";
+                                 if (item.todayType == "A")
+                                 {
+                                     taodayText="今日 早班"
+                                 }
+                                 else if (item.todayType == "B") {
+                                     taodayText = "今日 中班"
+                                 }
+                                 else if (item.todayType == "C") {
+                                     taodayText = "今日 晚班"
+                                 }
+                                 else if (item.todayType == "D") {
+                                     taodayText = "今日 特殊班"
+                                 }
+                                 var currentWeekText = "本周";
+                                 if (item.sumTypeA > 0)
+                                 {
+                                     currentWeekText = currentWeekText+' '+item.sumTypeA+'天早班'
+                                 }
+                                 if (item.sumTypeB > 0) {
+                                     currentWeekText = currentWeekText + ' ' + item.sumTypeB + '天中班'
+                                 }
+                                 if (item.sumTypeC > 0) {
+                                     currentWeekText = currentWeekText + ' ' + item.sumTypeC + '天晚班'
+                                 }
+                                 if (item.sumTypeD > 0) {
+                                     currentWeekText = currentWeekText + ' ' + item.sumTypeD + '天特殊班'
+                                 }
+                                 if (currentWeekText == "本周")
+                                 {
+                                     currentWeekText = "本周未排班";
+                                 }
+                                 var nextWeekText = "下周";
+                                 if (item.nextSumTypeA > 0) {
+                                     nextWeekText = nextWeekText + ' ' + item.nextSumTypeA + '天早班'
+                                 }
+                                 if (item.nextSumTypeB > 0) {
+                                     nextWeekText = nextWeekText + ' ' + item.nextSumTypeB + '天中班'
+                                 }
+                                 if (item.nextSumTypeC > 0) {
+                                     nextWeekText = nextWeekText + ' ' + item.nextSumTypeC + '天晚班'
+                                 }
+                                 if (item.nextSumTypeD > 0) {
+                                     nextWeekText = nextWeekText + ' ' + item.nextSumTypeD + '天特殊班'
+                                 }
+                                 if (nextWeekText == "下周") {
+                                     nextWeekText = "下周未排班";
+                                 }
+                                 html2 = html2 + ' <div onclick="editPopPaiban(\'' + item.empCode + '\',\'' + item.empName+ '\')" style="width: 100%;display:flex; height: 80px;font-size:20px;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none;border-top:none; ">'
+                            + '  <div style="height:80px;float:left;width:10px;"></div>'
+                             + ' <div style="width:51px; height:80px;float:left;">'
+                              + '    <div style="width:51px; height:14.5px"></div>'
+                              + '    <div style="width:51px; height:51px">'
+                              + '        <img src="https://iretailerapp.flnet.com/Content/Img/tab_user_active.png" style="width:51px; height:51px;" />'
+                              + '    </div>'
+                            + '  </div><div style="height:100px;float:left;width:14px;"></div>'
+                            + '  <div style="height:100px;float:left;flex:1">'
+                            + '      <div style="width:100%; height:25px;color:rgb(36,172,202);font-size:16px;line-height:25px; text-align:left;">'
+                             + item.empName + '(' + item.empCode + ')'
+                             + '     </div>'
+                             + '     <div style="width:100%; height:17px;color:#434343;font-size:12px;line-height:17px; text-align:left; ">'
+                              + taodayText
+                              + '    </div>'
+                              + '    <div style="width:100%; height:17px;color:#434343;font-size:12px;line-height:17px; text-align:left; ">'
+                              + currentWeekText
+                              + '    </div>'
+                              + '    <div style="width:100%; height:17px;color:#434343;font-size:12px;line-height:17px; text-align:left; ">'
+                              + nextWeekText
+                              + '    </div>'
+
+                            + '  </div>'
+                            + '  <div style="width:15px; height:80px; float:left; ">'
+                            + '      <div style="width:15px; height:25px"></div>'
+                           + '       <div style="width:15px; height:15px; ">'
+                            + '          <img src="https://iretailerapp.flnet.com/Content/Img/img_next.png" style="width:15px; height:15px; " />'
+                          + '        </div>'
+
+                           + '   </div>'
+                           + '   <div style="height:80px;float:left;width:14px;"></div>'
+                         + ' </div>';
+                             }
+                             $$('#paibanView_A').html(html);
+                             $$('#tableRows').html(html2);
+                             //paibanView_B
+                             var text="";
+                             if (data2.panbanCount > 0)
+                             {
+                                 text = text+data2.panbanCount+'人已排班'
+                             }
+                             if (data2.noPanbanCount > 0) {
+                                 text = text +" "+ data2.noPanbanCount + '人未排班'
+                             }
+                             $$('#paibanView_B').text(text);
+
+
+                         });
+        }
+    </script>
+
+
+    <!-- Path to your app js-->
+
+
+
+</body>
+</html>

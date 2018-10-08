@@ -1,0 +1,205 @@
+﻿@model Market.APIService.Controllers.VModel
+
+
+
+
+<div>
+    <div style="width:100%;background-color:white;font-size:15px;line-height:40px;height:40px;border-bottom:1px solid gray;">
+                <div style="width:49%;float:left;height:30px;">
+                    <label style="padding-left:10px;">
+                        目标月份:
+                    </label>
+                    <label style="color:cornflowerblue;padding-left:5px;">@Model.MonthName</label>
+                </div>
+                <div style="width:49%;float:left;">
+                    品牌:
+                    <label style="color:cornflowerblue;padding-left:5px;">@Model.BrandName</label>
+                </div>
+    </div>
+    <div style="width:100%;background-color:white;font-size:15px;line-height:40px;height:40px;border-bottom:1px solid gray;">
+        <div style="width:49%;float:left;">
+            <label style="padding-left:10px;">
+                战区:
+            </label>
+
+            <label style="color:cornflowerblue;padding-left:5px;">@Model.OrgName</label>
+        </div><div style="width:49%;float:left;">
+            产品分类:
+            <label style="color:cornflowerblue;padding-left:5px;">@Model.ProdectName</label>
+        </div>
+    </div>
+    <div style="width:100%;background-color:white;font-size:15px;line-height:40px;height:40px;border-bottom:1px solid gray;">
+        <div style="width:49%;float:left;">
+            <label style="padding-left:10px;">
+                目标台数:
+            </label>
+            <a href="#" onclick="CheckTagButton()" style="padding-left:5px;color:blue;">@Model.TotalTagQty</a>
+        </div><div style="width:49%;float:left;">
+            已认领台数:
+        @{
+            if (Model.TotalTagQty > Model.TotalCQty)
+            {
+                <label style="color:red;padding-left:5px;">@Model.TotalCQty</label>
+            }
+            else
+            {
+                <label style="color:cornflowerblue;padding-left:5px;">@Model.TotalCQty</label>
+            }
+        }
+            
+        </div>
+    </div>
+
+</div>
+@{
+    foreach (var subModel in Model.subModel)
+    {
+        <div class="card">
+            <div class="card-header">@subModel.cityName---责任人:@subModel.popName</div>
+            <div class="card-content">
+                <div class="card-content-inner">
+                    <div class="list-block">
+                        <ul>
+                            <!-- Text inputs -->
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon icon-form-name"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title label">当月分配数量</div>
+                                        <div class="item-input">
+                                            <input type="number" pattern="[0-9]*" id="value_@subModel.cityCode" placeholder="点击输入" value="@subModel.tagQty">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon icon-form-email"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title label">已提交数量</div>
+                                        <div class="item-input">
+                                            <label >@subModel.cmQty</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="CheckDeButton('@subModel.popCode','@subModel.cityCode')" style="color:blue;">(查看日明细)</a>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+              @{  if (subModel.popCode.Length > 0)
+                  {
+            <div class="card-footer">
+                <button class="buttonstyBlue" type="button" onclick="ChecksubShButton('@subModel.cityCode','value_@subModel.cityCode')" style="width:30%;">分配数量</button>
+                <button class="buttonstyBlue" type="button" style="width:30%; " onclick="CheckAButton('@subModel.popCode','@subModel.cityCode','1')">审核通过</button>
+                <button class="buttonstyRead" type="button" style="width:30%;" onclick="CheckAButton('@subModel.popCode','@subModel.cityCode','2')">审核拒绝</button>
+
+            </div>
+                      }
+                  }
+        </div>
+    }
+}
+<script>
+    function ChecksubShButton(orgId, qtyid) {
+        var r = "shTag";
+        var qty = $("#" + qtyid).val();
+        if (!qty) qty = 0;
+        // alert(r);
+        $.ajax({
+            url: r,
+            type: "Post",
+            data: {
+                month: '@Model.Month',
+                userid: '@Model.UserId',
+                prodect: '@Model.Prodect',
+                PorgId: '@Model.OrgId',
+                BrandCode:'@Model.Brand',
+                orgId: orgId,
+                qty: qty,
+                bllNo: '@Model.billNo',
+                type: 2
+            },
+            success: function (data) {
+                $.toast(data);
+            },
+
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.toast("操作失败");
+
+            }
+        });
+    }
+    function CheckAButton(userId, city,status) {
+        var r = "setStatus?userId=" + userId + "&city=" + city + "&month=" + "@Model.Month" + "&prodect=" + "@Model.Prodect" + "&status=" + status + "&BrandCode="+"@Model.Brand";
+        // alert(r);
+        $.ajax({
+            url: r,
+            type: "Post",
+            success: function (data) {
+
+                //TODO:处理添加新问卷成功后的事件
+                $.toast("操作成功");
+               
+            },
+
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.toast("操作失败");
+
+            }
+        });
+
+
+    }
+        function CheckDeButton(userId, city) {
+            var r = "DayDataView?userId=" + userId + "&city=" + city + "&month=" + "@Model.Month" + "&prodect=" + "@Model.Prodect" + "&BrandCode="+"@Model.Brand";
+            //alert(r);
+            $.ajax({
+                url: r,
+                type: "Get",
+                success: function (data) {
+
+                    //TODO:处理添加新问卷成功后的事件
+
+                    $("#panel-right-day").html(data);
+                    $.openPanel("#panel-right-day");
+
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.toast("操作失败");
+
+                }
+            });
+
+
+        }
+        function CheckTagButton() {
+            var r = "TagDataView?BrandValue=" + "@Model.Brand" + "&ProdectValue=" + "@Model.Prodect" + "&MonthValue=" + "@Model.Month" + "&UserId=" + "@Model.UserId" + "&orgId=" + "@Model.OrgId" + "&billNo=" + "@Model.billNo";
+            $.ajax({
+                url: r,
+                type: "Get",
+                success: function (data) {
+
+                    //TODO:处理添加新问卷成功后的事件
+
+                    $("#panel-right-day").html(data);
+                    $.openPanel("#panel-right-day");
+
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.toast("操作失败");
+
+                }
+            });
+
+
+        
+    }
+</script>
+

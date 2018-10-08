@@ -1,0 +1,24 @@
+﻿@model Market.APIService.Controllers.tagModel
+<div style="width:100%;background-color:steelblue;font-size:18px;height:40px;text-align:center;">
+    <label style="color:white">
+         每日提交明细
+    </label>
+
+</div>
+@{
+    foreach (var subModel in Model.subModel)
+    {
+        <div class="divgridDay">
+            <label style="padding-left:10px;color :black;">
+                @subModel.day
+            </label>
+            <label style="color:black;padding-left:10px;">@subModel.value</label>
+        </div>
+    }
+}
+
+<div style="width:100%;padding-left:70px;">
+    <button class="buttonstyGray close-panel" type="button" style="width:40%;">关闭</button>
+    
+    
+</div>

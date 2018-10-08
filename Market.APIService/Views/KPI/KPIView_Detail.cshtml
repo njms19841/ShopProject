@@ -1,0 +1,1240 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+
+
+
+    <link href="https://iretailerapp.flnet.com/Content/framework7.css" rel="stylesheet">
+
+    <title>全渠道sellout看板</title>
+
+    <script type="text/javascript" src="https://iretailerapp.flnet.com/Scripts/framework7.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+    <style>
+        .buttonNoSelect {
+            background-color: white;
+            color: rgb(36,172,202);
+            font-size: 16pt;
+            height: 30pt;
+            border: 1pt solid rgb(36,172,202); /* Green */
+        }
+
+        .buttonSelect {
+            background-color: rgb(36,172,202);
+            color: white;
+            font-size: 16pt;
+            height: 30pt;
+            border: 1pt solid rgb(36,172,202); /* Green */
+        }
+    </style>
+</head>
+<body>
+
+    @{
+        string userId = (string)ViewData["userId"];
+        //string shopCode = (string)ViewData["shopCode"];
+        
+        //List<Market.APIService.Controllers.CusModel> Vdata = (List < Market.APIService.Controllers.CusModel>) ViewData["vModel"];
+    }
+    <div id="app" style="background-color:rgb(247,247,247);">
+        <div class="view view-main">
+
+            <div id="Dview" style="padding-top:6px;padding-left:6px;padding-right:6px;" class="page-content">
+                <div style="height:30px;display:flex">
+                    <div style="flex:0.5"></div>
+                    <div style="width:150px;">
+                        <div style="height: 30px;width:130px;float:left;text-align:right;">
+                            <div style="width:130px;height:5px;display:flex;">
+                            </div>
+                            <div style="width:130px;display:flex;color:rgb(36,172,202);">
+                                <input type="date" id="Day" onchange="changeDate()" style="width:130px;text-align:right; font-size:15px" placeholder="开始日期" value="@System.DateTime.Now.ToString("yyyy-MM-dd")" />
+                            </div>
+
+                        </div>
+                        <div style="height: 30px;width:15px;float:left;text-align:right;">
+                            <div style="width:15px;height:5px;display:flex;">
+                            </div>
+                            <div style="width:15px;display:flex;color:rgb(36,172,202);">
+                                <div style="width:15px; height:15px;">
+                                    <img src="~/Content/Img/img_downarrow.png" style="width:15px; height:10px; " />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div style="flex:0.5"></div>
+                </div>
+                    
+                    <div style="border-radius: 5px; width: 100%; height: 220px; text-align: center; padding-top: 10px; background-color: white;">
+                        <div style="width:100%;height:14px;"></div>
+                        <div style="width: 100%;height:50px;">
+                            
+                            <div style="width: 50%; height: 50px;float:left;">
+                                <div style="width:100%;height: 23px;display:flex;">
+                                    <div style="flex:0.5"></div>
+                                    <div id="lab_data1" style="height: 23px;font-size:23px;line-height:23px;color:#333333;float:left;  ">
+                                        40,000
+                                    </div>
+                                    <div style="height: 23px;float:left;">
+                                        <div style="height:6px"></div>
+                                        <div style="font-size:14px;line-height:14px;height:14px; color:#333333;">台</div>
+                                    </div>
+                                    <div style="flex:0.5"></div>
+                                </div>
+                                <div style="width:100%;height:10px;"></div>
+                                <div style="border-image: none; width: 100%; height: 14px; color: rgb(186, 186, 186); line-height: 14px; font-size: 14px; border-right-width: 1px; border-right-style: solid;">
+                                    日目标量
+                                </div>
+                            </div>
+
+                            <div style="width: 50%; height: 50px;float:left; ">
+                                <div id="lab_data2" style="width: 100%;  height: 23px;font-size:23px;line-height:23px;color:#333333;  ">
+                                    40,000
+                                </div>
+                                <div style="width:100%;height:10px;"></div>
+                                <div style="border-image: none; width: 100%; height: 14px; color: rgb(186, 186, 186); line-height: 14px; font-size: 14px;">
+                                    日目标额
+                                </div>
+                            </div>
+
+                        </div>
+                         <div style="width:100%;height:18px;"></div>
+                        <div style="width: 100%;height:50px;">
+                            
+                            <div style="width: 50%; height: 50px;float:left;">
+                                <div style="width:100%;height: 23px;display:flex;">
+                                    <div style="flex:0.5"></div>
+                                    <div id="lab_data3" style="height: 23px;font-size:23px;line-height:23px;color:#333333;float:left;  ">
+                                        40,000
+                                    </div>
+                                    <div style="height: 23px;float:left;">
+                                        <div style="height:6px"></div>
+                                        <div style="font-size:14px;line-height:14px;height:14px; color:#333333;">台</div>
+                                    </div>
+                                    <div style="flex:0.5"></div>
+                                </div>
+                                <div style="width:100%;height:10px;"></div>
+                                <div style="border-image: none; width: 100%; height: 14px; color: rgb(186, 186, 186); line-height: 14px; font-size: 14px; border-right-width: 1px; border-right-style: solid;">
+                                    日零售量
+                                </div>
+                            </div>
+                            <div style="width: 50%; height: 50px;float:left; ">
+                                <div id="lab_data4" style="width: 100%;  height: 23px;font-size:23px;line-height:23px;color:#333333;  ">
+                                    40,000
+                                </div>
+                                <div style="width:100%;height:10px;"></div>
+                                <div style="border-image: none; width: 100%; height: 14px; color: rgb(186, 186, 186); line-height: 14px; font-size: 14px;">
+                                    日零售额
+                                </div>
+                            </div>
+
+                        </div>
+                        <div style="width:100%;height:18px;"></div>
+                        <div style="width: 100%;height:50px;">
+                            <div style="width: 50%; height: 50px;float:left">
+                                <div id="lab_data5" style="width: 100%;  height: 23px;font-size:23px;line-height:23px;color:#333333;  ">
+                                    80%
+                                </div>
+                                <div style="width:100%;height:10px;"></div>
+                                <div style="border-image: none; width: 100%; height: 14px; color: rgb(186, 186, 186); line-height: 14px; font-size: 14px;">
+                                    销售量达标率
+                                </div>
+                            </div>
+                            <div style="width: 50%; height: 50px;float:left; ">
+                                <div id="lab_data5_2" style="width: 100%;  height: 23px;font-size:23px;line-height:23px;color:#333333;  ">
+                                    70%
+                                </div>
+                                <div style="width:100%;height:10px;"></div>
+                                <div style="border-image: none; width: 100%; height: 14px; color: rgb(186, 186, 186); line-height: 14px; font-size: 14px;">
+                                    销售额达标率
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                <div style="width: 100%; height: 10px; opacity:0.4; text-align: center;background:url('/Content/Img/imb_shadow.png');background-size:100% 10px;background-repeat:no-repeat;">
+                </div>
+                <div style="width:100%;height:7px;"></div>
+                <div style="border-radius: 5px; width: 100%; height: 78px; text-align: center; padding-top: 10px; background-color: white;">
+                    <div style="width:100%;height:7px;"></div>
+                    <div style="border-radius: 5px; width: 100%; height: 78px; text-align: center; padding-top: 10px; background-color: white;">
+                        <div style="width:100%;height:14px;"></div>
+                        <div style="width: 100%;height:50px;">
+                            <div style="width: 50%; height: 50px;float:left">
+                                <div id="lab_data7" style="width: 100%;  height: 23px;font-size:23px;line-height:23px;color:#333333;  ">
+                                    400
+                                </div>
+                                <div style="width:100%;height:10px;"></div>
+                                <div style="border-image: none; width: 100%; height: 14px; color: rgb(186, 186, 186); line-height: 14px; font-size: 14px; border-right-width: 1px; border-right-style: solid;">
+                                    销售额
+                                </div>
+                            </div>
+                            <div style="width: 50%; height: 50px;float:left;">
+                                <div style="width:100%;height: 23px;display:flex;">
+                                    <div style="flex:0.5"></div>
+                                    <div id="lab_data8" style="height: 23px;font-size:23px;line-height:23px;color:#333333;float:left;  ">
+                                        40,000
+                                    </div>
+                                    <div style="height: 23px;float:left;">
+                                        <div style="height:6px"></div>
+                                        <div style="font-size:14px;line-height:14px;height:14px; color:#333333;">台</div>
+                                    </div>
+                                    <div style="flex:0.5"></div>
+                                </div>
+                                <div style="width:100%;height:10px;"></div>
+                                <div style="border-image: none; width: 100%; height: 14px; color: rgb(186, 186, 186); line-height: 14px; font-size: 14px;">
+                                    销售量
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div style="width: 100%; height: 10px; opacity:0.4; text-align: center;background:url('/Content/Img/imb_shadow.png');background-size:100% 10px;background-repeat:no-repeat;">
+                    </div>
+                    <div style="width:100%;height:7px;"></div>
+                    <div style="width: 100%; text-align: center; background-color:  white;">
+                        <div style="width:100%; height: 144px;">
+                            <div style="width:100%;height:36px;  background-color:#a80101;display:flex">
+                                <div style="flex:0.5;float:left;"></div>
+                                <div style="width:36px; float:left;">
+                                    <div style="width:20px; height:8px;"></div>
+                                        <div style="width:20px; height:20px;">
+                                            <img src="~/Content/Img/img_taobao.png" style="width:20px; height:20px;" />
+                                        </div>
+                                    </div>
+                                <div style="float:left;height: 36px; line-height:36px; color:white; font-weight:bold;font-size:20px; ">天猫</div>
+                                
+                                <div style="flex:0.5;float:left;"></div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_1_1" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_1_2" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_1_3" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_1_4" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;border-right:solid;border-right-width:1px;border-color:rgb(186, 186, 186);">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_1_5" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div  style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售额达成率
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_1_6" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售量达成率
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="width:100%;height:10px;"></div>
+                    <div style="width: 100%; text-align: center; background-color:  white;">
+                        <div style="width:100%; height: 144px;">
+                            <div style="width:100%;height:36px;  background-color:#a80101;display:flex">
+                                <div style="flex:0.5;float:left;"></div>
+                                <div style="width:36px; float:left;">
+                                    <div style="width:20px; height:8px;"></div>
+                                    <div style="width:20px; height:20px;">
+                                        <img src="~/Content/Img/img_gome.png" style="width:20px; height:20px;" />
+                                    </div>
+                                </div>
+                                <div style="float:left;height: 36px; line-height:36px; color:white; font-weight:bold;font-size:20px; ">国美</div>
+
+                                <div style="flex:0.5;float:left;"></div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_2_1" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_2_2" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_2_3" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_2_4" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;border-right:solid;border-right-width:1px;border-color:rgb(186, 186, 186);">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_2_5" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售额达成率
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_2_6" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售量达成率
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="width:100%;height:10px;"></div>
+                    <div style="width: 100%; text-align: center; background-color:  white;">
+                        <div style="width:100%; height: 144px;">
+                            <div style="width:100%;height:36px;  background-color:#0d6de6;display:flex">
+                                <div style="flex:0.5;float:left;"></div>
+                                <div style="width:36px; float:left;">
+                                    <div style="width:20px; height:8px;"></div>
+                                    <div style="width:20px; height:20px;">
+                                        <img src="~/Content/Img/img_flnet.png" style="width:20px; height:20px;" />
+                                    </div>
+                                </div>
+                                <div style="float:left;height: 36px; line-height:36px; color:white; font-weight:bold;font-size:20px; ">富连网</div>
+
+                                <div style="flex:0.5;float:left;"></div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_3_1" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_3_2" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_3_3" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_3_4" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;border-right:solid;border-right-width:1px;border-color:rgb(186, 186, 186);">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_3_5" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售额达成率
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_3_6" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售量达成率
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="width:100%;height:10px;"></div>
+                    <div style="width: 100%; text-align: center; background-color:  white;">
+                        <div style="width:100%; height: 144px;">
+                            <div style="width:100%;height:36px;  background-color:#0d6de6;display:flex">
+                                <div style="flex:0.5;float:left;"></div>
+                                <div style="width:36px; float:left;">
+                                    <div style="width:20px; height:8px;"></div>
+                                    <div style="width:20px; height:20px;">
+                                        <img src="~/Content/Img/img_flnet.png" style="width:20px; height:20px;" />
+                                    </div>
+                                </div>
+                                <div style="float:left;height: 36px; line-height:36px; color:white; font-weight:bold;font-size:20px; ">推广员</div>
+
+                                <div style="flex:0.5;float:left;"></div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_4_1" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_4_2" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_4_3" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_4_4" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;border-right:solid;border-right-width:1px;border-color:rgb(186, 186, 186);">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_4_5" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售额达成率
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_4_6" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售量达成率
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="width:100%;height:10px;"></div>
+                    <div style="width: 100%; text-align: center; background-color:  white;">
+                        <div style="width:100%; height: 144px;">
+                            <div style="width:100%;height:36px;  background-color:#e7670c;display:flex">
+                                <div style="flex:0.5;float:left;"></div>
+                                <div style="width:36px; float:left;">
+                                    <div style="width:20px; height:8px;"></div>
+                                    <div style="width:20px; height:20px;">
+                                        <img src="~/Content/Img/img_suning.png" style="width:20px; height:20px;" />
+                                    </div>
+                                </div>
+                                <div style="float:left;height: 36px; line-height:36px; color:white; font-weight:bold;font-size:20px; ">苏宁线上</div>
+
+                                <div style="flex:0.5;float:left;"></div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_5_1" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_5_2" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_5_3" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_5_4" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;border-right:solid;border-right-width:1px;border-color:rgb(186, 186, 186);">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_5_5" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售额达成率
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_5_6" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售量达成率
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="width:100%;height:10px;"></div>
+                    <div style="width: 100%; text-align: center; background-color:  white;">
+                        <div style="width:100%; height: 144px;">
+                            <div style="width:100%;height:36px;  background-color:#7804d9;display:flex">
+                                <div style="flex:0.5;float:left;"></div>
+                                <div style="width:36px; float:left;">
+                                    <div style="width:20px; height:8px;"></div>
+                                    <div style="width:20px; height:20px;">
+                                        <img src="~/Content/Img/img_jd.png" style="width:20px; height:20px;" />
+                                    </div>
+                                </div>
+                                <div style="float:left;height: 36px; line-height:36px; color:white; font-weight:bold;font-size:20px; ">京东</div>
+
+                                <div style="flex:0.5;float:left;"></div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_6_1" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_6_2" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_6_3" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_6_4" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;border-right:solid;border-right-width:1px;border-color:rgb(186, 186, 186);">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_6_5" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售额达成率
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_6_6" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售量达成率
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="width:100%;height:10px;"></div>
+                    <div style="width: 100%; text-align: center; background-color:  white;">
+                        <div style="width:100%; height: 144px;">
+                            <div style="width:100%;height:36px;  background-color:#e7670c;display:flex">
+                                <div style="flex:0.5;float:left;"></div>
+                                <div style="width:36px; float:left;">
+                                    <div style="width:20px; height:8px;"></div>
+                                    <div style="width:20px; height:20px;">
+                                        <img src="~/Content/Img/img_suning.png" style="width:20px; height:20px;" />
+                                    </div>
+                                </div>
+                                <div style="float:left;height: 36px; line-height:36px; color:white; font-weight:bold;font-size:20px; ">苏宁</div>
+
+                                <div style="flex:0.5;float:left;"></div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_7_1" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_7_2" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_7_3" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_7_4" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;border-right:solid;border-right-width:1px;border-color:rgb(186, 186, 186);">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_7_5" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售额达成率
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_7_6" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售量达成率
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="width:100%;height:10px;"></div>
+                    <div style="width: 100%; text-align: center; background-color:  white;">
+                        <div style="width:100%; height: 144px;">
+                            <div style="width:100%;height:36px;  background-color:#0d6de6;display:flex">
+                                <div style="flex:0.5;float:left;"></div>
+                                <div style="float:left;">
+                                    <div style="height:8px;"></div>
+                                    <div style="height:20px;">
+                                        <img src="~/Content/Img/img_flnethome.png" style="height:20px;" />
+                                    </div>
+                                </div>
+                                <div style="float:left;height: 36px; line-height:36px; color:white; font-weight:bold;font-size:20px; ">战区</div>
+
+                                <div style="flex:0.5;float:left;"></div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_8_1" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_8_2" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_8_3" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_8_4" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;border-right:solid;border-right-width:1px;border-color:rgb(186, 186, 186);">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_8_5" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售额达成率
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_8_6" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售量达成率
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="width:100%;height:10px;"></div>
+                    <div style="width: 100%; text-align: center; background-color:  white;">
+                        <div style="width:100%; height: 144px;">
+                            <div style="width:100%;height:36px;  background-color:#cf0c12;display:flex">
+                                <div style="flex:0.5;float:left;"></div>
+                                <div style="width:36px; float:left;">
+                                    <div style="width:20px; height:8px;"></div>
+                                    <div style="width:20px; height:20px;">
+                                        <img src="~/Content/Img/img_gome.png" style="width:20px; height:20px;" />
+                                    </div>
+                                </div>
+                                <div style="float:left;height: 36px; line-height:36px; color:white; font-weight:bold;font-size:20px; ">国美线上</div>
+
+                                <div style="flex:0.5;float:left;"></div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_9_1" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_9_2" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">万</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_9_3" style="height: 36px;font-size:20px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:15px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;display:flex;">
+                                        <div style="flex:0.5"></div>
+                                        <div id="lab_data_9_4" style="height: 36px;font-size:14px;line-height:36px;color:#333333;float:left;  ">
+                                            40,000
+                                        </div>
+                                        <div style="height: 36px;float:left;">
+                                            <div style="height:13px"></div>
+                                            <div style="font-size:11px;line-height:11px;height:11px; color:#333333;">台</div>
+                                        </div>
+                                        <div style="flex:0.5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;height:36px;display:flex;border-bottom:solid;border-bottom-width:1px;border-color:rgb(186, 186, 186);">
+                                <div style="flex:0.5;float:left; text-align:center;border-right:solid;border-right-width:1px;border-color:rgb(186, 186, 186);">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_9_5" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售额达成率
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="flex:0.5;float:left; text-align:center;">
+                                    <div style="width:100%;height: 36px;">
+                                        <div style="height:7px"></div>
+                                        <div id="lab_data_9_6" style="height: 12px;font-size:12px;line-height:12px;color:#333333;  ">
+                                            50%
+                                        </div>
+                                        <div style="height: 10px;font-size:10px;line-height:10px;color:#333333;  ">
+                                            销售量达成率
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="width:100%;height:40px;"></div>
+
+                </div>
+
+    </div>
+</div>
+
+    <script>
+
+
+        var myApp = new Framework7({
+            // App root element
+            root: '#app',
+            // App Name
+            name: 'My App',
+            // App id
+            id: 'com.myapp.test',
+            // Enable swipe panel
+            panel: {
+                swipe: 'left',
+            },
+            // Add default routes
+            routes: [
+              {
+                  path: '/about/',
+                  url: 'about.html',
+              },
+            ],
+            // ... other parameters
+        });
+        var $$ = Framework7.$;
+
+       
+
+
+
+
+
+        getData('@DateTime.Now.ToString("yyyy-MM-dd")');
+        function changeDate()
+        {
+            getData($$('#Day').val());
+        }
+        function getData(day)
+        {
+
+            var url = 'getKpiData?day=' + day;
+           
+            myApp.request.json(url,
+                  null,
+                    function (data) {
+
+                        $$('#lab_data1').text(data.totalTargetQty.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'))
+                        $$('#lab_data2').text(data.totalTargetAmt.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'))
+                        $$('#lab_data3').text(data.totalQty.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'))
+                        $$('#lab_data4').text(data.totalAmt.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'))
+                        $$('#lab_data5').text((data.totalQty_Rate * 100).toFixed(0) + "%")
+                        $$('#lab_data5_2').text((data.totalAmt_Rate * 100).toFixed(0) + "%")
+                        
+                        $$('#lab_data8').text(data.totalQty.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'))
+                        $$('#lab_data7').text(data.totalAmt.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'))
+
+                        for (var i = 0; i < data.list.length; i++)
+                        {
+                            var item = data.list[i];
+                            if (item.type == '天猫')
+                            {
+                                $$('#lab_data_1_1').text(((item.TOTAL_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_1_2').text(((item.TARGET_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_1_3').text(item.TOTAL_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_1_4').text(item.TARGET_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_1_5').text((item.TARGET_AMOUNT_RATE * 100).toFixed(0) + "%")
+                                $$('#lab_data_1_6').text((item.TARGET_QTY_RATE * 100).toFixed(0) + "%")
+                            } else if (item.type == '国美') {
+                                $$('#lab_data_2_1').text(((item.TOTAL_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_2_2').text(((item.TARGET_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_2_3').text(item.TOTAL_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_2_4').text(item.TARGET_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_2_5').text((item.TARGET_AMOUNT_RATE * 100).toFixed(0) + "%")
+                                $$('#lab_data_2_6').text((item.TARGET_QTY_RATE * 100).toFixed(0) + "%")
+                            }
+                            else if (item.type == '富连网') {
+                                $$('#lab_data_3_1').text(((item.TOTAL_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_3_2').text(((item.TARGET_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_3_3').text(item.TOTAL_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_3_4').text(item.TARGET_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_3_5').text((item.TARGET_AMOUNT_RATE * 100).toFixed(0) + "%")
+                                $$('#lab_data_3_6').text((item.TARGET_QTY_RATE * 100).toFixed(0) + "%")
+                            }
+                            else if (item.type == '推广员') {
+                                $$('#lab_data_4_1').text(((item.TOTAL_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_4_2').text(((item.TARGET_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_4_3').text(item.TOTAL_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_4_4').text(item.TARGET_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_4_5').text((item.TARGET_AMOUNT_RATE * 100).toFixed(0) + "%")
+                                $$('#lab_data_4_6').text((item.TARGET_QTY_RATE * 100).toFixed(0) + "%")
+                            }
+                            else if (item.type == '苏宁线上') {
+                                $$('#lab_data_5_1').text(((item.TOTAL_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_5_2').text(((item.TARGET_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_5_3').text(item.TOTAL_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_5_4').text(item.TARGET_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_5_5').text((item.TARGET_AMOUNT_RATE * 100).toFixed(0) + "%")
+                                $$('#lab_data_5_6').text((item.TARGET_QTY_RATE * 100).toFixed(0) + "%")
+                            }
+                            else if (item.type == '京东') {
+                                $$('#lab_data_6_1').text(((item.TOTAL_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_6_2').text(((item.TARGET_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_6_3').text(item.TOTAL_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_6_4').text(item.TARGET_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_6_5').text((item.TARGET_AMOUNT_RATE * 100).toFixed(0) + "%")
+                                $$('#lab_data_6_6').text((item.TARGET_QTY_RATE * 100).toFixed(0) + "%")
+                            }
+                            else if (item.type == '苏宁') {
+                                $$('#lab_data_7_1').text(((item.TOTAL_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_7_2').text(((item.TARGET_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_7_3').text(item.TOTAL_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_7_4').text(item.TARGET_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_7_5').text((item.TARGET_AMOUNT_RATE * 100).toFixed(0) + "%")
+                                $$('#lab_data_7_6').text((item.TARGET_QTY_RATE * 100).toFixed(0) + "%")
+                            }
+                            else if (item.type == '战区') {
+                                $$('#lab_data_8_1').text(((item.TOTAL_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_8_2').text(((item.TARGET_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_8_3').text(item.TOTAL_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_8_4').text(item.TARGET_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_8_5').text((item.TARGET_AMOUNT_RATE * 100).toFixed(0) + "%")
+                                $$('#lab_data_8_6').text((item.TARGET_QTY_RATE * 100).toFixed(0) + "%")
+                            }
+                            else if (item.type == '国美线上') {
+                                $$('#lab_data_9_1').text(((item.TOTAL_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_9_2').text(((item.TARGET_AMOUNT) / 10000).toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_9_3').text(item.TOTAL_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_9_4').text(item.TARGET_QTY.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                                $$('#lab_data_9_5').text((item.TARGET_AMOUNT_RATE * 100).toFixed(0) + "%")
+                                $$('#lab_data_9_6').text((item.TARGET_QTY_RATE * 100).toFixed(0) + "%")
+                            }
+
+                            
+                        }
+
+                    });
+        }
+
+
+    </script>
+
+
+    <!-- Path to your app js-->
+
+
+
+</body>
+</html>

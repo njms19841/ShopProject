@@ -1,0 +1,269 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+
+
+
+    <link href="https://iretailerapp.flnet.com/Content/framework7.css" rel="stylesheet">
+
+    <title>订单管理</title>
+
+    <script type="text/javascript" src="https://iretailerapp.flnet.com/Scripts/framework7.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+    <style>
+        .buttonNoSelect {
+            background-color: white;
+            color: rgb(36,172,202);
+            font-size: 16px;
+            height: 30px;
+            border: 1px solid rgb(36,172,202); /* Green */
+        }
+
+        .buttonSelect {
+            background-color: rgb(36,172,202);
+            color: white;
+            font-size: 16px;
+            height: 30px;
+            border: 1px solid rgb(36,172,202); /* Green */
+        }
+    </style>
+</head>
+<body>
+
+    @{
+        string userId = (string)ViewData["userId"];
+        string shopCode = (string)ViewData["shopCode"];
+        
+        //List<Market.APIService.Controllers.CusModel> Vdata = (List < Market.APIService.Controllers.CusModel>) ViewData["vModel"];
+    }
+    <div id="app" style="background-color:rgb(247,247,247);">
+        <div class="view view-main">
+
+            <div id="Dview" style="padding-top:3pt;padding-left:3pt;padding-right:3pt;" class="page-content infinite-scroll-content">
+                <div style="border-radius: 5pt; width: 100%; height: 45pt; text-align: center; background-color: white;display:flex;">
+                    <div style="width:20pt;height:45pt;float:left; text-align:center;">
+                        </div>
+                        <div style="width:15pt;height:45pt;float:left; text-align:center;">
+                            <div style="width:100%;height:15pt">
+
+                            </div>
+                            <div style="width:15pt; height:15pt;">
+                                <img src="~/Content/Img/img_search.png" style="width:15pt; height:15pt;" />
+                            </div>
+                            <div style="width:100%;height:15pt">
+
+                            </div>
+                        </div>
+                    <div style="width:5pt;height:45pt;float:left; text-align:center;">
+                    </div>
+                        <div style="flex:1; height:45pt;float:left;">
+                            <div style="width:100%;height:10pt">
+
+                            </div>
+                            <div style="width:100%;height:25pt;">
+                                <input id="seachText" type="search" placeholder="输入手机号码" style="width:100%;height:25pt;font-size:14pt; " onsearch="seachData()">
+                            </div>
+                            <div style="width:100%;height:10pt;">
+                            </div>
+
+                        </div>
+                    </div>
+                <div id="div_row" style="border-radius: 5pt;width: 100%; text-align: center; ">
+                   
+
+                 </div>
+                <div  style="border-radius: 5pt; width: 100%; height: 45pt; text-align: center; display:flex;">
+                    <div style="height:45pt; text-align: center; flex:0.5 ;">
+                    </div>
+                    <div style="height:45pt; text-align: center;width:100pt; ">
+                        <div style="height:12.5pt;">
+                        </div>
+                        <button id="btn_loadMore" onclick="loadData()"   style="border-radius: 10pt;width:80pt;font-size: 14px;height:20pt;color: rgb(36,172,202);border:1pt solid rgb(36,172,202);" >加载更多</button>
+                        <div style="height:12.5pt;">
+                        </div>
+                     </div>
+                    <div style="height:45pt; text-align: center; flex:0.5;">
+                    </div>
+                    
+                </div>
+
+
+
+                </div>
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+
+        var myApp = new Framework7({
+            // App root element
+            root: '#app',
+            // App Name
+            name: 'My App',
+            // App id
+            id: 'com.myapp.test',
+            // Enable swipe panel
+            panel: {
+                swipe: 'left',
+            },
+            // Add default routes
+            routes: [
+              {
+                  path: '/about/',
+                  url: 'about.html',
+              },
+            ],
+            // ... other parameters
+        });
+        var $$ = Framework7.$;
+        
+        $$('#btn_loadMore').hide();
+        var page = 1;
+        loadData();
+        function seachData()
+        {
+            $$('#div_row').html("");;
+            var value = $$('#seachText').val();
+            if (value == "") {
+                page = 1;
+                loadData();
+            }
+            else 
+            {
+                page = 1;
+                $$('#btn_loadMore').hide();
+                var url = 'SeachOrderData?' + "shopCode=" + '@shopCode' + "&phone=" + value;
+               
+                myApp.request.json(url,
+                          null,
+                            function (data) {
+                               
+                                
+                                for (var i = 0; i < data.orders.length; i++) {
+                                    loadMore(data.orders[i]);
+                                }
+                               
+
+                            });
+            }
+            $$('#seachText').blur();
+
+        }
+        function loadData()
+        {
+            $$('#btn_loadMore').hide();
+            var url = 'GetOrderData?' + "shopCode=" + '@shopCode' + "&page=" + page;
+            
+            myApp.request.json(url,
+                      null,
+                        function (data) {
+                          
+                            page = page + 1;
+                            for (var i = 0; i < data.orders.length; i++)
+                            {
+                                loadMore(data.orders[i]);
+                            }
+                            if (data.orders.length>=10)
+                            {
+                                $$('#btn_loadMore').show();
+                            }
+
+                        });
+        }
+       
+        function loadMore(data)
+        {
+           
+            var html = ' <div onclick="window.location = \'HKPIOrderSubIndex?order=' + data.orderNo + '\'" style="width:100%;height:150pt; text-align: center; display:flex; border-bottom:solid;border-width:1px;border-color:#b8b8b8">'
+                      + '  <div style="width:68pt;height:150pt; text-align: center;  ">'
+                        +'      <div style="width:100%;height:41pt; text-align: center;  ">'
+                        +'      </div>'
+                          +'    <div style="width:68pt; height:68pt;line-height:50pt;">'
+                          +'        <div style="width:68pt; height:68pt;">'
+                            + '          <img src="https://iretailerapp.flnet.com/Content/Img/tab_user_active.png" style="width:68pt; height:68pt;" />'
+                            +'      </div>'
+                           +'   </div>'
+                           +'   <div style="width:100%;height:41pt; text-align: center;  ">'
+                          +'    </div>'
+                         +' </div>'
+                         +' <div style="height:150pt; text-align: center; width:10pt; ">'
+                         +' </div>'
+                         +' <div style="height:150pt; text-align: left; flex:1; ">'
+                         +'     <div style="height:10pt;">'
+                          +'    </div>'
+                           +'   <div style="height:12pt;font-size:12pt;line-height:12pt;color:#24acca">'
+                           + data.orderNo
+                           +'   </div>'
+                            +'  <div style="height:5pt;">'
+                           + '   </div>'
+                           + '<div style="width:50pt;text-align: center;  height:12pt;font-size:10pt;line-height:12pt;background-color:#24acca;color:#ffffff;border-radius:6pt;">' + data.status + '</div>'
+                            + '  <div style="height:5pt;">'
+                           + '   </div>'
+                           +'   <div style="height:10pt;font-size:10pt;line-height:10pt;">'
+                 + ' 订单金额: ' + data.amount.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + ''
+              +'</div>'
+              +'<div style="height:8pt;">'
+             +' </div>'
+             +' <div style="height:10pt;font-size:10pt;line-height:10pt;">'
+              + '    商品件数: ' + data.pCount
+              +'</div>'
+              +'<div style="height:8pt;">'
+             +' </div>'
+             +' <div style="height:10pt;font-size:10pt;line-height:10pt;">'
+              + '    取货码: ' + data.landingCode
+             +' </div>'
+             +' <div style="height:8pt;">'
+             +' </div>'
+             +' <div style="height:10pt;font-size:10pt;line-height:10pt;">'
+              + '    联系人姓名: ' + data.name
+             +' </div>'
+             +' <div style="height:8pt;">'
+             +' </div>'
+             +' <div style="height:10pt;font-size:10pt;line-height:10pt;">'
+              + '    联系人手机号码: ' + data.phoneNumber
+             +' </div>'
+             +' <div style="height:8pt;">'
+             +' </div>'
+             +' <div style="height:10pt;font-size:10pt;line-height:10pt;">'
+             + '     订单建立时间: ' + data.orderDate
+             +' </div>'
+          +'</div>'
+         +' <div style="width:15pt; height:150pt;line-height:150pt; vertical-align:middle;position:relative; float:left; ">'
+          +'    <div style="width:15pt; height:15pt;position:absolute;right:0px; ">'
+           + '       <img src="https://iretailerapp.flnet.com/Content/Img/img_next.png" style="width:15px; height:15px; " />'
+            +'  </div>'
+          +'</div>'
+
+     +' </div>';
+
+
+            $$('#div_row').append(html);
+        }
+
+
+    </script>
+
+
+    <!-- Path to your app js-->
+
+
+
+</body>
+</html>

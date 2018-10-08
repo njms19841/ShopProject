@@ -1,0 +1,138 @@
+﻿@model Market.APIService.Controllers.QJCreatedModel
+<div class="list-block">
+    <ul>
+        <!-- Text inputs -->
+        
+        <!-- Date -->
+        <li>
+            <div class="item-content">
+                <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                <div class="item-inner">
+                    <div class="item-title label">日期起</div>
+                    <div class="item-input">
+                        <input  type="date" id="startDay"  placeholder="日期起" value="@System.DateTime.Now.ToString("yyyy-MM-dd")">
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="item-content">
+                <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                <div class="item-inner">
+                    <div class="item-title label">日期止</div>
+
+                    <div class="item-input">
+                        <input  type="date" id="endDay"   placeholder="日期止" value="@System.DateTime.Now.ToString("yyyy-MM-dd")">
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="item-content">
+                <div class="item-media"><i class="icon icon-form-gender"></i></div>
+                <div class="item-inner">
+                    <div class="item-title label">类型</div>
+                    
+                    <div class="item-input">
+                        <select id="leaveType">
+                            <option value="1">产假</option>
+                            <option value="2">病假</option>
+                            <option value="3" selected="selected">事假</option>
+                            <option value="4">婚假</option>
+                            <option value="5">丧假</option>
+                            <option value="6">护理假</option>
+                            <option value="7">年休假</option>
+                            <option value="8">休息</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li class="align-top">
+            <div class="item-content">
+                <div class="item-media"><i class="icon icon-form-comment"></i></div>
+                <div class="item-inner">
+                    <div class="item-title label">备注</div>
+                    <div class="item-input" >
+                        <textarea id="desc"></textarea>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="content-block">
+    <div class="row">
+        <div class="col-50"><a href="#" class="button button-big button-fill button-danger" onclick="CheckCancelButton()">取消</a></div>
+        <div class="col-50"><a href="#" class="button button-big button-fill button-success" onclick="CheckOkButton()">提交</a></div>
+        <script>
+            function CheckCancelButton() {
+                var r2 = "QJQueryView?userId=" + '@Model.userId'
+                // alert(r);
+                $.ajax({
+                    url: r2,
+                    type: "Get",
+                    success: function (data) {
+
+                        //TODO:处理添加新问卷成功后的事件
+
+                        $("#Dview").html(data);
+
+                    },
+
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $.toast("操作失败");
+
+                    }
+                });
+            }
+    function CheckOkButton() {
+        var r = "Leave?userId=" + "@Model.userId" + "&startDay=" + $("#startDay").val() + "&endDay=" + $("#endDay").val() + "&desc=" + $("#desc").val() + "&leaveType=" + $("#leaveType").val();
+
+        // alert(r);
+        $.ajax({
+            url: r,
+            type: "Post",
+            data: {
+
+            },
+            success: function (data) {
+                if (data == '1') {
+                    var r2 = "QJQueryView?userId=" + '@Model.userId'
+                    // alert(r);
+                    $.ajax({
+                        url: r2,
+                        type: "Get",
+                        success: function (data) {
+
+                            //TODO:处理添加新问卷成功后的事件
+
+                            $("#Dview").html(data);
+
+                        },
+
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            $.toast("操作失败");
+
+                        }
+                    });
+                }
+                else {
+                    $.toast(data);
+
+                }
+                
+
+            },
+
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.toast("操作失败");
+
+            }
+        });
+    }
+        </script>
+    </div>
+</div>
+

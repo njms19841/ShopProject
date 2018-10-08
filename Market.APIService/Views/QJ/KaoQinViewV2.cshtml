@@ -1,0 +1,572 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+
+
+
+    <link href="https://iretailerapp.flnet.com/Content/framework7.css" rel="stylesheet">
+
+    <title>考勤查询</title>
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css" />
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.8&key=2fa5b0e6a73820d253f18b119598ba1f&plugin=AMap.Geocoder"></script>
+    <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+
+    <script type="text/javascript" src="https://iretailerapp.flnet.com/Scripts/framework7.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+    <style>
+        .buttonNoSelect {
+            background-color: white;
+            color: rgb(36,172,202);
+            font-size: 16pt;
+            height: 30pt;
+            border: 1pt solid rgb(36,172,202); /* Green */
+        }
+
+        .buttonSelect {
+            background-color: rgb(36,172,202);
+            color: white;
+            font-size: 16pt;
+            height: 30pt;
+            border: 1pt solid rgb(36,172,202); /* Green */
+        }
+
+        .tabNoSelect {
+             width:60pt; height: 36pt;float:left; text-align:center;font-size:12pt;line-height:38pt;color:#acacac;
+        }
+
+        .tabSelect {
+           width:60pt; height: 36pt;float:left; text-align:center;font-size:12pt;line-height:38pt;color:#24acca;border-bottom:solid;border-color:#24acca;border-width:2px;
+        }
+    </style>
+</head>
+<body>
+
+    @{
+        string userId = (string)ViewData["userId"];
+      
+        //string shopCode = (string)ViewData["shopCode"];
+
+        //List<Market.APIService.Controllers.CusModel> Vdata = (List < Market.APIService.Controllers.CusModel>) ViewData["vModel"];
+    }
+    <div id="app" style="background-color:rgb(247,247,247);">
+        <div class="view view-main">
+
+            <div id="Dview" style="" class="page-content">
+                <div style="width: 100%; height: 38pt; text-align: left; background-color:white;display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                    <div style="flex:0.5; height: 38pt;float:left;text-align:left;font-size:12pt;line-height:38pt;color:#333333">姓名</div>
+                    <div id="lab_data_1" style="flex:0.5; height: 38pt;float:left;text-align:right;font-size:12pt;line-height:38pt;color:#333333"></div>
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                </div>
+                <div style="width: 100%; height: 38pt; text-align: left; background-color:white;display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                    <div style="flex:0.5; height: 38pt;float:left;text-align:left;font-size:12pt;line-height:38pt;color:#333333">所属组织</div>
+                    <div id="lab_data_2" style="flex:0.5; height: 38pt;float:left;text-align:right;font-size:12pt;line-height:38pt;color:#333333"></div>
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                </div>
+                <div style="width: 100%; height: 38pt; text-align: left;display:flex;background-color:#e7e5e5; ">
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                    <div style="flex:0.5; height: 38pt;float:left;text-align:left;font-size:12pt;line-height:38pt;color:#000000">考勤表</div>
+                    <div style="flex:0.5; height: 38pt;float:left;text-align:right;font-size:12pt;color:#24acca"></div>
+                        <div style="width: 126pt; height: 38pt;float:left;text-align:right;font-size:12pt;color:#24acca">
+                            <div onclick="prearrowDay();" style="width:38pt; height:38pt; float:left;text-align:center;  ">
+                                <div style="width:100%;height:13pt;"></div>
+                                <div style="width:100%;height:12pt;">
+                                    <div style="width:14pt;height:12pt;float:left;">
+                                    </div>
+                                    <img style="height:12pt; width:9pt;float:left;"  src="/Content/Img/img_prearrow.png" />
+                                    <div style="width:14pt;height:12pt;float:left;">
+
+                                    </div>
+                                </div>
+                                <div style="width:100%;height:13pt;"></div>
+                            </div>
+                            <div  style="width:50pt; height:38pt; float:left; text-align:center; ">
+                                <div style="width:100%;height:10pt;"></div>
+                                <div id="lib_month" style="height:12pt;font-size:12pt;">2018-07</div>
+                                <div style="width:100%;height:13pt;"></div>
+                            </div>
+                            <div onclick="nextDay();" style="width:38pt; height:38pt; float:left; text-align:center; ">
+                                <div style="width:100%;height:13pt;"></div>
+                                <div style="width:100%;height:12pt;">
+                                    <div style="width:14pt;height:12pt;float:left;">
+                                    </div>
+                                    <img style="height:12pt; width:9pt;float:left;" src="/Content/Img/img_next.png" />
+                                    <div style="width:14pt;height:12pt;float:left;">
+
+                                    </div>
+                                </div>
+                                <div style="width:100%;height:13pt;"></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                <div style="width: 100%; height: 38pt; text-align: left;display:flex;background-color:white; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="flex:0.5; height: 38pt;float:left;"> </div>
+                    <div id="btn_typ1" onclick="ClickType(1);"  class="tabNoSelect">考勤明细</div>
+                    <div style="width:40pt; height: 38pt;"></div>
+                    <div id="btn_typ2" onclick="ClickType(2);" class="tabSelect">打卡记录</div>
+                    <div style="flex:0.5; height: 38pt;float:left;"> </div>
+                </div>
+                <div id="table_clockDetail" class="data-table" style="color:black;"  >
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="color: black; font-size: 10pt;width:50%">日期</th>
+                                <th style="color: black; font-size: 10pt;width:25%">类型</th>
+                                <th style="color: black; font-size: 10pt;width:25%">状态</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableDataRows2">
+                            <tr>
+                                <td style="font-size: 9pt;width:60%">6/01</td>
+                                <td style="font-size: 9pt;width:20%">V</td>
+                                <td style="font-size: 9pt;width:20%">V</td>
+                                
+                            </tr>
+                            <tr>
+                                <td style="font-size: 9pt;width:60%">6/02</td>
+                                <td style="font-size: 9pt;width:20%">V</td>
+                                <td style="font-size: 9pt;width:20%"></td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="table_clock" class="data-table" style="color:black; ">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="color: black; font-size: 10pt;width:20%">日期</th>
+                                <th style="color: black; font-size: 10pt;width:20%">上班</th>
+                                <th style="color: black; font-size: 10pt;width:20%">下班</th>
+                                <th style="color: black; font-size: 10pt;width:20%">请假</th>
+                                <th style="color: black; font-size: 10pt;width:20%">状态</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableDataRows1">
+                            <tr>
+                               
+                                <td style="font-size: 9pt;width:20%">6/01</td>
+                                <td style="font-size: 9pt;width:20%"><img style="height:9pt; width:9pt;" src="/Content/Img/img_datecheck.png" /></td>
+                                <td style="font-size: 9pt;width:20%"><img style="height:9pt; width:9pt;" src="/Content/Img/img_datecheck.png" /></td>
+                                <td style="font-size: 9pt;width:20%"><img style="height:9pt; width:9pt;" src="/Content/Img/img_datecheck.png" /></td>
+                                <td style="font-size: 9pt;width:20%"></td>
+                            </tr>
+                            <tr>
+
+                                <td style="font-size: 9pt;width:20%">6/02</td>
+                                <td style="font-size: 9pt;width:20%">V</td>
+                                <td style="font-size: 9pt;width:20%"></td>
+                                <td style="font-size: 9pt;width:20%"></td>
+                                <td style="font-size: 9pt;width:20%">V</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="width: 100%; height: 38pt; text-align: left;display:flex;background-color:#e7e5e5; ">
+                    <div style="flex:0.5; height: 38pt;float:left;"> </div>
+                    <div style="height:38pt;float:left;text-align:left;font-size:12pt;line-height:38pt;color:#000000">请假情况(本年累计)</div>
+                    <div style="flex:0.5; height: 38pt;float:left;text-align:right;font-size:12pt;color:#24acca"></div>
+                </div>
+                <div style="width: 100%; height: 5pt; text-align: left; display:flex; "></div>
+                    <div style="width: 100%; height: 88pt; text-align: left; display:flex; ">
+
+                        <div style="width: 5pt;"></div>
+                        <div style="flex:0.25; background-color:white;height: 88pt;float:left;text-align:center;color:#333333">
+                            <div style="height:28pt;"></div>
+                            <div style="height:11pt;width:100%;display:flex; ">
+                                <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                                <div id="lib_LeveData1" style="height:12pt; float:left;font-size:12pt;">
+                                    0
+                                </div>
+                               
+                                <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                            </div>
+                            <div style="height:5pt;"></div>
+                            <div style="width:100%; text-align:center; float:left;font-size:9pt;">
+                                产假
+                            </div>
+                            <div style="width: 5pt;"></div>
+                        </div>
+                        <div style="width: 5pt;"></div>
+                        <div style="flex:0.25; background-color:white;height: 88pt;float:left;text-align:center;color:#333333">
+                            <div style="height:28pt;"></div>
+                            <div style="height:11pt;width:100%;display:flex; ">
+                                <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                                <div id="lib_LeveData2" style="height:12pt; float:left;font-size:12pt;">
+                                    0
+                                </div>
+                                
+                                <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                            </div>
+                            <div style="height:5pt;"></div>
+                            <div style="width:100%; text-align:center; float:left;font-size:9pt;">
+                                病假
+                            </div>
+                            <div style="width: 5pt;"></div>
+                        </div>
+                        <div style="width: 5pt;"></div>
+                        <div style="flex:0.25; background-color:white;height: 88pt;float:left;text-align:center;color:#333333">
+                            <div style="height:28pt;"></div>
+                            <div style="height:11pt;width:100%;display:flex; ">
+                                <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                                <div id="lib_LeveData3" style="height:12pt; float:left;font-size:12pt;">
+                                    0
+                                </div>
+                                
+                                <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                            </div>
+                            <div style="height:5pt;"></div>
+                            <div style="width:100%; text-align:center; float:left;font-size:9pt;">
+                                事假
+                            </div>
+                            <div style="width: 5pt;"></div>
+                        </div>
+                        <div style="width: 5pt;"></div>
+                        <div style="flex:0.25; background-color:white;height: 88pt;float:left;text-align:center;color:#333333">
+                            <div style="height:28pt;"></div>
+                            <div style="height:11pt;width:100%;display:flex; ">
+                                <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                                <div id="lib_LeveData4" style="height:12pt; float:left;font-size:12pt;">
+                                    0
+                                </div>
+                               
+                                <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                            </div>
+                            <div style="height:5pt;"></div>
+                            <div style="width:100%; text-align:center; float:left;font-size:9pt;">
+                                婚假
+                            </div>
+                            <div style="width: 5pt;"></div>
+                        </div>
+                        <div style="width: 5pt;"></div>
+                    </div>
+                <div style="width: 100%; height: 5pt; text-align: left; display:flex; "></div>
+                <div style="width: 100%; height: 88pt; text-align: left; display:flex; ">
+
+                    <div style="width: 5pt;"></div>
+                    <div style="flex:0.25; background-color:white;height: 88pt;float:left;text-align:center;color:#333333">
+                        <div style="height:28pt;"></div>
+                        <div style="height:11pt;width:100%;display:flex; ">
+                            <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                            <div id="lib_LeveData5" style="height:12pt; float:left;font-size:12pt;">
+                                0
+                            </div>
+                            
+                            <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                        </div>
+                        <div style="height:5pt;"></div>
+                        <div style="width:100%; text-align:center; float:left;font-size:9pt;">
+                            丧假
+                        </div>
+                        <div style="width: 5pt;"></div>
+                    </div>
+                    <div style="width: 5pt;"></div>
+                    <div style="flex:0.25; background-color:white;height: 88pt;float:left;text-align:center;color:#333333">
+                        <div style="height:28pt;"></div>
+                        <div style="height:11pt;width:100%;display:flex; ">
+                            <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                            <div id="lib_LeveData6" style="height:12pt; float:left;font-size:12pt;">
+                                0
+                            </div>
+                            
+                            <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                        </div>
+                        <div style="height:5pt;"></div>
+                        <div style="width:100%; text-align:center; float:left;font-size:9pt;">
+                            护理假
+                        </div>
+                        <div style="width: 5pt;"></div>
+                    </div>
+                    <div style="width: 5pt;"></div>
+                    <div style="flex:0.25; background-color:white;height: 88pt;float:left;text-align:center;color:#333333">
+                        <div style="height:28pt;"></div>
+                        <div style="height:11pt;width:100%;display:flex; ">
+                            <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                            <div id="lib_LeveData7" style="height:12pt; float:left;font-size:12pt;">
+                                0
+                            </div>
+                           
+                            <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                        </div>
+                        <div style="height:5pt;"></div>
+                        <div style="width:100%; text-align:center; float:left;font-size:9pt;">
+                            年休假
+                        </div>
+                        <div style="width: 5pt;"></div>
+                    </div>
+                    <div style="width: 5pt;"></div>
+                    <div style="flex:0.25; background-color:white;height: 88pt;float:left;text-align:center;color:#333333">
+                        <div style="height:28pt;"></div>
+                        <div style="height:11pt;width:100%;display:flex; ">
+                            <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                            <div id="lib_LeveData8" style="height:12pt; float:left;font-size:12pt;">
+                                0
+                            </div>
+                            
+                            <div style="flex:0.5; height:13pt;float:left;font-size:11pt;"></div>
+                        </div>
+                        <div style="height:5pt;"></div>
+                        <div style="width:100%; text-align:center; float:left;font-size:9pt;">
+                            休息
+                        </div>
+                        <div style="width: 5pt;"></div>
+                    </div>
+                    <div style="width: 5pt;"></div>
+                </div>
+                </div>
+
+        </div>
+    </div>
+
+    <script>
+        var myApp = new Framework7({
+            // App root element
+            root: '#app',
+            // App Name
+            name: 'My App',
+            // App id
+            id: 'com.myapp.test',
+            // Enable swipe panel
+            panel: {
+                swipe: 'left',
+            },
+            // Add default routes
+            routes: [
+              {
+                  path: '/about/',
+                  url: 'about.html',
+              },
+            ],
+            // ... other parameters
+        });
+        var $$ = Framework7.$;
+       
+        //dialog.open();
+        function ClickType(type) {
+           
+            if (type == 1) {
+                $$('#table_clockDetail').hide();
+                $$('#table_clock').show();
+                if ($$('#btn_typ1').hasClass("tabSelect") == true) {
+                    $$('#btn_typ1').removeClass("tabSelect");
+                }
+                if ($$('#btn_typ1').hasClass("tabNoSelect") == true) {
+                    $$('#btn_typ1').removeClass("tabNoSelect");
+                }
+                if ($$('#btn_typ2').hasClass("tabSelect") == true) {
+                    $$('#btn_typ2').removeClass("tabSelect");
+                }
+                if ($$('#btn_typ2').hasClass("tabNoSelect") == true) {
+                    $$('#btn_typ2').removeClass("tabNoSelect");
+                }
+                $$('#btn_typ1').addClass("tabSelect");
+                $$('#btn_typ2').addClass("tabNoSelect");
+             
+
+            }
+            else if (type == 2) {
+                $$('#table_clock').hide();
+                $$('#table_clockDetail').show();
+                if ($$('#btn_typ1').hasClass("tabSelect") == true) {
+                    $$('#btn_typ1').removeClass("tabSelect");
+                }
+                if ($$('#btn_typ1').hasClass("tabNoSelect") == true) {
+                    $$('#btn_typ1').removeClass("tabNoSelect");
+                }
+                if ($$('#btn_typ2').hasClass("tabSelect") == true) {
+                    $$('#btn_typ2').removeClass("tabSelect");
+                }
+                if ($$('#btn_typ2').hasClass("tabNoSelect") == true) {
+                    $$('#btn_typ2').removeClass("tabNoSelect");
+                }
+                $$('#btn_typ2').addClass("tabSelect");
+                $$('#btn_typ1').addClass("tabNoSelect");
+               
+
+            }
+           
+
+        }
+        ClickType(1);
+
+        function DateAdd(part, value, date) {
+            var now = date;
+            value *= 1;
+            if (isNaN(value)) {
+                value = 0;
+            }
+            switch (part) {
+                case "y":
+                    now.setFullYear(date.getFullYear() + value);
+                    break;
+                case "m":
+                    now.setMonth(date.getMonth() + value);
+                    break;
+                case "d":
+                    now.setDate(date.getDate() + value);
+                    break;
+                case "h":
+                    now.setHours(date.getHours() + value);
+                    break;
+                case "n":
+                    now.setMinutes(date.getMinutes() + value);
+                    break;
+                case "s":
+                    now.setSeconds(date.getSeconds() + value);
+                    break;
+                default:
+
+            }
+            return now;
+        }
+        // 对Date的扩展，将 Date 转化为指定格式的String
+        // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
+        // 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
+        // 例子：
+        // (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+        // (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+        Date.prototype.Format = function (fmt) { //author: meizz
+            var o = {
+                "M+": this.getMonth() + 1,                 //月份
+                "d+": this.getDate(),                    //日
+                "h+": this.getHours(),                   //小时
+                "m+": this.getMinutes(),                 //分
+                "s+": this.getSeconds(),                 //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds()             //毫秒
+            };
+            if (/(y+)/.test(fmt))
+                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt))
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+        ///定义公用变量
+        var today = new Date();
+
+       
+        var selectDay = 1;
+        var selectYear = today.getFullYear();//控件选择的年份
+        var selectMonth = today.getMonth();//控件选择的月份 0开始
+        var selectMonthStr=today.Format("yyyyMM");
+        $$('#lib_month').text(today.Format("yyyy-MM"));
+        $$('#table_clockDetail').hide();
+        function prearrowDay() {
+            var tempDay = DateAdd('m', -1, new Date(selectYear, selectMonth, selectDay))
+                selectDay = 1;//控件选择的日期
+                selectYear = tempDay.getFullYear();//控件选择的年份
+                selectMonth = tempDay.getMonth();//控件选择的月份 0开始
+                $$('#lib_month').text(tempDay.Format("yyyy-MM"));
+                selectMonthStr = tempDay.Format("yyyyMM");
+                getClockData()
+        }
+        function nextDay() {
+            var tempDay = DateAdd('m', 1, new Date(selectYear, selectMonth, selectDay))
+            selectDay = 1;//控件选择的日期
+            selectYear = tempDay.getFullYear();//控件选择的年份
+            selectMonth = tempDay.getMonth();//控件选择的月份 0开始
+            $$('#lib_month').text(tempDay.Format("yyyy-MM"));
+            selectMonthStr = tempDay.Format("yyyyMM");
+            getClockData();
+        }
+        function getClockData() {
+            var url = 'getClockDetail?userId=' + '@userId' + '&month=' + selectMonthStr;
+            //alert(url);
+            myApp.request.json(url,
+                      null,
+                        function (data) {
+                            //alert(data);
+                            $$('#lab_data_1').text(data.userName);
+                            $$('#lab_data_2').text(data.OrgName);
+                            $$('#lib_LeveData1').text(data.YearQJDays_1);
+                            $$('#lib_LeveData2').text(data.YearQJDays_2);
+                            $$('#lib_LeveData3').text(data.YearQJDays_3);
+                            $$('#lib_LeveData4').text(data.YearQJDays_4);
+                            $$('#lib_LeveData5').text(data.YearQJDays_5);
+                            $$('#lib_LeveData6').text(data.YearQJDays_6);
+                            $$('#lib_LeveData7').text(data.YearQJDays_7);
+                            $$('#lib_LeveData8').text(data.YearQJDays_8);
+
+                            
+                            CreateDataTable(data);
+                        });
+        }
+        function CreateDataTable(data) {
+            //tableDataRows
+            var rowsHtml = "";
+            for (var i = 0; i < data.data.length; i++) {
+                var row = data.data[i];
+               
+                rowsHtml = rowsHtml + '<tr>'
+                                + '<td style="font-size: 9pt;width:20%">'+ row.day + '</td>';
+                if (row.workIn == "Y")
+                {
+                    rowsHtml = rowsHtml + '<td style="font-size: 9pt;width:20%"><img style="height:9pt; width:9pt;" src="/Content/Img/img_datecheck.png" /></td>'
+                }
+                else
+                {
+                    rowsHtml = rowsHtml + '<td style="font-size: 9pt;width:20%"></td>'
+
+                }
+                if (row.workOut == "Y") {
+                    rowsHtml = rowsHtml + '<td style="font-size: 9pt;width:20%"><img style="height:9pt; width:9pt;" src="/Content/Img/img_datecheck.png" /></td>'
+                }
+                else {
+                    rowsHtml = rowsHtml + '<td style="font-size: 9pt;width:20%"></td>'
+
+                }
+                if (row.leave == "Y") {
+                    rowsHtml = rowsHtml + '<td style="font-size: 9pt;width:20%"><img style="height:9pt; width:9pt;" src="/Content/Img/img_datecheck.png" /></td>'
+                }
+                else {
+                    rowsHtml = rowsHtml + '<td style="font-size: 9pt;width:20%"></td>'
+
+                }
+                if (row.state == "1") {
+                    rowsHtml = rowsHtml + '<td style="font-size: 9pt;width:20%;color:#24acca;">正常</td>'
+                }
+                else {
+                    rowsHtml = rowsHtml + '<td style="font-size: 9pt;width:20%;color:#ff7200;">异常</td>'
+                }
+                               
+                             
+                rowsHtml = rowsHtml +'</tr>';
+                   
+                
+            }
+            $$('#tableDataRows1').html(rowsHtml);
+            var rowsHtm2 = "";
+            for (var i = 0; i < data.ClockData.length; i++) {
+                var row = data.ClockData[i];
+                rowsHtm2 = rowsHtm2 + '<tr>'
+                                + '<td style="font-size: 9pt;width:50%">'+row.datetime+'</td>'
+                               + ' <td style="font-size: 9pt;width:25%">'+row.type+'</td>'
+                               + ' <td style="font-size: 9pt;width:25%">'+row.type2+'</td>'
+                            + '</tr>';
+               
+            }
+            $$('#tableDataRows2').html(rowsHtm2);
+        }
+        getClockData();
+    </script>
+
+
+    <!-- Path to your app js-->
+
+
+
+</body>
+</html>

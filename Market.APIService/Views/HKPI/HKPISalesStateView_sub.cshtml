@@ -1,0 +1,234 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+
+
+
+    <link href="https://iretailerapp.flnet.com/Content/framework7.css" rel="stylesheet">
+
+    <title>仪表盘</title>
+
+    <script type="text/javascript" src="https://iretailerapp.flnet.com/Scripts/framework7.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+    <style>
+        .buttonNoSelect {
+            background-color: white;
+            color: rgb(36,172,202);
+            font-size: 16px;
+            height: 30px;
+            border: 1px solid rgb(36,172,202); /* Green */
+        }
+
+        .buttonSelect {
+            background-color: rgb(36,172,202);
+            color: white;
+            font-size: 16px;
+            height: 30px;
+            border: 1px solid rgb(36,172,202); /* Green */
+        }
+    </style>
+</head>
+<body>
+
+    @{
+        string empCode = (string)ViewData["empCode"];
+        string shopCode = (string)ViewData["shopCode"];
+        
+        //List<Market.APIService.Controllers.CusModel> Vdata = (List < Market.APIService.Controllers.CusModel>) ViewData["vModel"];
+    }
+    <div id="app" style="background-color:rgb(247,247,247);">
+        <div class="view view-main">
+
+            <div id="Dview" class="page-content">
+
+                <div style="width: 100%; height: 190px; text-align: center;background:url('/Content/Img/bg_employee.png');background-size:100% 190px;background-repeat:no-repeat;">
+                    <div style="width:100%;height:10px"></div>
+                    <div style="width:100%;height:104px">
+                        <img src="~/Content/Img/tab_user_active.png" style="width:104px;height:104px;" />
+                     </div>
+                    <div style="width:100%;height:10px"></div>
+                    <div id="lab_data1" style="width:100%;height:25px;color:rgb(252,249,255);font-size:17px;line-height:25px">
+                        XXX
+                    </div>
+                    <div id="lab_data2" style="width:100%;height:20px;color:rgb(252,249,255);font-size:14px;line-height:20px">
+                        
+                    </div>
+
+                </div>
+                <div style="width:auto; height: 6px; text-align:center;margin-left:10px;margin-right:10px">
+
+                </div>
+                <div style="width:auto; height: 88px; text-align:center;background-color:white;margin-left:10px;margin-right:10px">
+                    <div style="width:33%;height: 88px;float:left">
+                        <div style="width:100%;height:20px;">
+                        </div>
+                        <div id="lab_data3" style="width:100%;height:25px;font-size:25px;line-height:25px;color:rgb(51,51,51);">
+                            0
+                         </div>
+                        <div style="width:100%;height:10px;">
+                        </div>
+                        <div style="width:100%;height:14px;font-size:14px;line-height:14px;color:rgb(186,186,186);border:solid;border-color:rgb(186,186,186); border-width:1px;border-bottom:none;border-top:none;border-left:none;">
+                            昨日销售额
+                        </div>
+                    </div>
+                    <div style="width:33%;height: 88px;float:left">
+                        <div style="width:100%;height:20px;">
+                        </div>
+                        <div id="lab_data4" style="width:100%;height:25px;font-size:25px;line-height:25px;color:rgb(51,51,51);">
+                            0
+                        </div>
+                        <div style="width:100%;height:10px;">
+                        </div>
+                        <div style="width:100%;height:14px;font-size:14px;line-height:14px;color:rgb(186,186,186);border:solid;border-color:rgb(186,186,186); border-width:1px;border-bottom:none;border-top:none;border-left:none;">
+                            本月销售额
+                        </div>
+                    </div>
+                    <div style="width:33%;height: 88px;float:left">
+                        <div style="width:100%;height:20px;">
+                        </div>
+                        <div id="lab_data5" style="width:100%;height:25px;font-size:25px;line-height:25px;color:rgb(51,51,51);">
+                            40K
+                        </div>
+                        <div style="width:100%;height:10px;">
+                        </div>
+                        <div style="width:100%;height:14px;font-size:14px;line-height:14px;color:rgb(186,186,186);">
+                            上月销售额
+                        </div>
+                    </div>
+                </div>
+                <div style="width:auto; height: 6px; text-align:center;margin-left:10px;margin-right:10px">
+
+                </div>
+                <div style="width:auto;  height: 88px; text-align:center;margin-left:10px;margin-right:10px;display:flex;">
+                    <div style="flex:0.5;height:88px;float:left;background-color:white">
+                        <div style="width:100%;height:20px;">
+                        </div>
+                        <div id="lab_data6" style="width:100%;height:25px;font-size:25px;line-height:25px;color:rgb(51,51,51);">
+                            0
+                        </div>
+                        <div style="width:100%;height:10px;">
+                        </div>
+                        <div style="width:100%;height:14px;font-size:14px;line-height:14px;color:rgb(186,186,186);">
+                            本月生产销售额
+                        </div>
+                    </div>
+                    <div style="width:6px;height:88px;float:left"></div>
+                    <div style="flex:0.5;height:88px;float:left;background-color:white">
+                        <div style="width:100%;height:20px;">
+                        </div>
+                        <div id="lab_data7" style="width:100%;height:25px;font-size:25px;line-height:25px;color:rgb(51,51,51);">
+                            0
+                        </div>
+                        <div style="width:100%;height:10px;">
+                        </div>
+                        <div style="width:100%;height:14px;font-size:14px;line-height:14px;color:rgb(186,186,186);">
+                            本月月均订单数
+                        </div>
+                    </div>
+                </div>
+                <div style="width:auto; height: 6px; text-align:center;margin-left:10px;margin-right:10px">
+
+                </div>
+                <div style="width:auto;  height: 88px; text-align:center;margin-left:10px;margin-right:10px;display:flex;">
+                    <div style="flex:0.5;height:88px;float:left;background-color:white">
+                        <div style="width:100%;height:20px;">
+                        </div>
+                        <div id="lab_data8" style="width:100%;height:25px;font-size:25px;line-height:25px;color:rgb(51,51,51);">
+                           0
+                        </div>
+                        <div style="width:100%;height:10px;">
+                        </div>
+                        <div style="width:100%;height:14px;font-size:14px;line-height:14px;color:rgb(186,186,186)">
+                            本月客单价
+                        </div>
+                    </div>
+                    <div style="width:6px;height:88px;float:left"></div>
+                    <div style="flex:0.5;height:88px;float:left;background-color:white">
+                        <div style="width:100%;height:20px;">
+                        </div>
+                        <div id="lab_data9" style="width:100%;height:25px;font-size:25px;line-height:25px;color:rgb(51,51,51);">
+                            100%
+                        </div>
+                        <div style="width:100%;height:10px;">
+                        </div>
+                        <div style="width:100%;height:14px;font-size:14px;line-height:14px;color:rgb(186,186,186)">
+                            本月成交单
+                        </div>
+                    </div>
+                </div>
+
+</div>
+
+
+
+
+</div>
+
+    </div>
+
+
+    <script>
+
+
+        var myApp = new Framework7({
+            // App root element
+            root: '#app',
+            // App Name
+            name: 'My App',
+            // App id
+            id: 'com.myapp.test',
+            // Enable swipe panel
+            panel: {
+                swipe: 'left',
+            },
+            // Add default routes
+            routes: [
+              {
+                  path: '/about/',
+                  url: 'about.html',
+              },
+            ],
+            // ... other parameters
+        });
+        var $$ = Framework7.$;
+        var url = 'GetSalesStateSubQueryData?shopCode=' + '@shopCode' + '&empCode='+'@empCode';
+
+        myApp.request.json(url,
+                  null,
+                    function (data) {
+                        
+                        $$('#lab_data1').text(data.data1);
+                        $$('#lab_data2').text(data.data2);
+                        $$('#lab_data3').text(data.data3.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                        $$('#lab_data4').text(data.data4.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                        $$('#lab_data5').text(data.data5.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                        $$('#lab_data6').text(data.data6.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                        if (data.data7 < 1) {
+                            $$('#lab_data7').text(data.data7.toFixed(1).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                        }
+                        else {
+                            $$('#lab_data7').text(data.data7.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                        }
+                        
+                        $$('#lab_data8').text(data.data8.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                        $$('#lab_data9').text((data.data9 * 100).toFixed(0) + "%");
+                    });
+    </script>
+
+
+    <!-- Path to your app js-->
+
+
+
+</body>
+</html>

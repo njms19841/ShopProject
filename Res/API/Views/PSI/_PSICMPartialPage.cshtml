@@ -1,0 +1,172 @@
+﻿@model Market.APIService.Controllers.VModel
+
+
+
+
+<div>
+    <div style="width:100%;background-color:white;font-size:15px;line-height:40px;height:40px;border-bottom:1px solid gray;">
+                <div style="width:49%;float:left;">
+                    <label style="padding-left:10px;">
+                        目标月份:
+                    </label>
+                    <label style="color:cornflowerblue;padding-left:5px;">@Model.MonthName</label>
+                </div>
+                <div style="width:49%;float:left;">
+                    品牌:
+                    <label style="color:cornflowerblue;padding-left:5px;">@Model.BrandName</label>
+                </div>
+    </div>
+    <div style="width:100%;background-color:white;font-size:15px;line-height:40px;height:40px;border-bottom:1px solid gray;">
+        <div style="width:49%;float:left;">
+            <label style="padding-left:10px;">
+                城市:
+            </label>
+
+            <label style="color:cornflowerblue;padding-left:5px;">@Model.OrgName</label>
+        </div><div style="width:49%;float:left;">
+            产品分类:
+            <label style="color:cornflowerblue;padding-left:5px;">@Model.ProdectName</label>
+        </div>
+    </div>
+    <div style="width:100%;background-color:white;font-size:15px;line-height:40px;height:40px;border-bottom:1px solid gray;">
+        <div style="width:49%;float:left;">
+            <label style="padding-left:10px;">
+                战区目标台数:
+            </label>
+            <label style="color:cornflowerblue;padding-left:5px;">@Model.TotalTagQty </ label >
+</div><div style="width:49%;float:left;">
+            已被认领总台数:
+        
+                <label style="color:cornflowerblue;padding-left:5px;">@Model.TotalCQty</label>
+            
+        </div>
+    </div>
+    <div style="width:100%;background-color:white;font-size:15px;line-height:40px;height:40px;border-bottom:1px solid gray;">
+        <div style="width:49%;float:left;">
+            <label style="padding-left:10px;">
+                战区分配台数:
+            </label>
+            <label style="color:cornflowerblue;padding-left:5px;">@Model.SelfTotalTagQty</label>
+        </div>
+        <div style="width:49%;float:left;">
+            
+                已认领台数:
+           
+            <label style="color:cornflowerblue;padding-left:5px;">@Model.SelfTotalCQty</label>
+        </div>
+
+</div>
+    @{
+        foreach (var ent in Model.cQtyModel)
+        {
+            <div class="card">
+                <div class="card-header">@ent.day</div>
+                <div class="card-content">
+                    <div class="card-content-inner">
+                        <div class="list-block">
+                            <ul>
+                                <!-- Text inputs -->
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon icon-form-name"></i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title label">当日认领数量</div>
+                                            <div class="item-input">
+                                                @{
+                                                    if (ent.isClose ==1)
+                                                    {
+                                                        <input type="number" pattern="[0-9]*" id="value_@ent.day" disabled="disabled" placeholder="点击输入" value="@ent.value">
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="number" pattern="[0-9]*" id="value_@ent.day"  placeholder="点击输入" value="@ent.value">
+                                                    }
+                                                }
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon icon-form-email"></i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title label">审核状态</div>
+                                            <div class="item-input">
+                                                @{
+                                                    if (ent.status == 0)
+                                                    {
+                                                        <label style="color:black;">未审核</label>
+                                                    }
+                                                    else if (ent.status == 1)
+                                                    {
+                                                        <label style="color:green;">审核通过</label>
+                                                    }
+                                                    else if (ent.status == 2)
+                                                    {
+                                                        <label style="color:red;">审核被拒绝</label>
+                                                    }
+                                                }
+                                                
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                @{
+                    if (ent.isClose == 1)
+                    {
+                        
+                    }
+                    else
+                    {
+                        <div class="card-footer">
+                            <button class="buttonstyBlue" type="button" onclick="ChecksubShButton('value_@ent.day','@ent.day')" style="width:50%;">保存&提交</button>
+                        </div>
+                        
+                    }
+                }
+                
+            </div>
+                                                    }
+    }
+       
+    </div>
+<script>
+    function ChecksubShButton(qtyid,day) {
+        var r = "cmQty";
+        var qty = $("#" + qtyid).val();
+        if (!qty) qty = 0;
+        // alert(r);
+        $.ajax({
+            url: r,
+            type: "Post",
+            data: {
+                month: '@Model.Month',
+                userid: '@Model.UserId',
+                prodect: '@Model.Prodect',
+
+                orgId: '@Model.OrgId',
+                qty: qty,
+                day:day,
+                type: 2
+            },
+            success: function (data) {
+                $.toast(data);
+            },
+
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.toast("操作失败");
+
+            }
+        });
+    }
+    </script>
+
+

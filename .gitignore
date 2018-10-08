@@ -243,3 +243,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/ConsoleApplication2/
+/DataSolution/
+/ConsoleApplication1/

@@ -1,0 +1,295 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>考勤管理</title>
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.css">
+    <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.js' charset='utf-8'></script>
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
+    <!--如果你用到了拓展包中的组件，还需要引用下面两个-->
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css">
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
+
+    <style>
+        .buttonstyBlue {
+            background-color: steelblue; /* Green  #008CBA*/
+            border: none;
+            color: white;
+            padding: 5px 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .buttonstyRead {
+            background-color: #f44336; /* Green  #008CBA*/
+            border: none;
+            color: white;
+            padding: 5px 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .buttonstyGray {
+            background-color: #e7e7e7;
+            border: none;
+            color: black;
+            padding: 5px 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .buttonselect {
+            background-color: #e7e7e7;
+            border: none;
+            color: black;
+            padding: 2px 2px 2px 2px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .buttonselected {
+            background-color: white;
+            color: black;
+            border: 0.5px solid #f44336;
+            color: #f44336;
+            padding: 2px 2px 2px 2px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .divgridDay {
+            width: 100%;
+            background-color: white;
+            font-size: 16px;
+            height: 30px;
+            border-left: 1px solid gray;
+            border-right: 1px solid gray;
+            border-bottom: 1px solid gray;
+        }
+    </style>
+</head>
+<body style="padding-top:0px;">
+    @{
+        Market.APIService.Controllers.PModel Pdata = (Market.APIService.Controllers.PModel)ViewData["PModel"];
+        List<Market.APIService.Controllers.popModel> Vdata = (List < Market.APIService.Controllers.popModel >) ViewData["VModel"];
+    }
+    <div class="page">
+        <header class="bar bar-nav">
+           
+            <a href="#" style="width:100%;" ><h1 class="title" style="background-color:steelblue;">
+                                                 
+           <label class="pull-left" id="backButton" hidden style="color:white" onclick="CheckbackButton()" >&nbsp;&nbsp; 返回</label>
+                <label style="color:white" onclick="CheckNavBar()" >考勤查询</label>
+                                                                                             @{
+
+                                                                                                 foreach (var m in Pdata.Month)
+                                                                                                 {
+                                                                                                     if (m.isSelected)
+                                                                                                     {
+                                                                                                        <label id="title_Month" onclick="CheckNavBar()" style="color:white">(@m.key)</label>
+
+                                                                                                     }
+                                                                                                     else
+                                                                                                     {
+
+                                                                                                     }
+                                                                                                 }
+                                                                                            }
+                                                                                            
+                &nbsp;<img hidden id="queryImg" onclick="CheckNavBar()" style="height:20px; vertical-align:middle;" src="https://iretailerapp.flnet.com/Content/Img/sach-btn.png" /></h1>
+            </a>
+</header>
+      
+        <div id="Dview" class="content" style="padding-top:0px;">
+           
+           @Html.Partial("_KaoQinPopPartialPage", Vdata)
+            
+            
+        </div>
+        <div class="panel panel-right panel-cover" style="background-color: aliceblue;" id='panel-right'>
+            <div style="width:100%;">
+                <p style="padding-left:10px; color:black; font-size:18px;">
+                    月份
+                </p>
+                <div style="width:100%; padding-left:20px;">
+                    
+                    @{
+
+                        foreach (var m in Pdata.Month)
+                        {
+                            if (m.isSelected)
+                            {
+
+                                <button id="btn_Month_@m.key" type="button" name="btn_Month" class="buttonselect buttonselected" onclick="CheckMonthButton('btn_Month_@m.key','@m.key')" value="@m.key">@m.keyValue</button>
+                                <input type="hidden" id="MonthValue" name="MonthValue" value="@m.key" />
+                                        <input type="hidden" id="MonthValue_def" name="MonthValue" value="@m.key" />
+                                        
+                            }
+                            else
+                            {
+                                <button id="btn_Month_@m.key" type="button" name="btn_Month" class="buttonselect" onclick="CheckMonthButton('btn_Month_@m.key','@m.key')" value="@m.key">@m.keyValue</button>
+                            }
+                        }
+                    }
+                    <script>
+                                function CheckMonthButton(id, value) {
+                                    $("button[name='btn_Month']").removeClass("buttonselected");
+                                    $("#" + id).addClass("buttonselected");
+                                    $("#MonthValue").val(value);
+
+                                }
+                    </script>
+
+
+                </div>
+            </div>
+           
+            <p />
+            <div style="width:100%;padding-left:10px;">
+                <button class="buttonstyGray close-panel" type="button" onclick="CheckCancelButton()" style="width:40%;">取消</button>
+                <script>
+                            function CheckCancelButton() {
+                               
+                                $("button[name='btn_Month']").removeClass("buttonselected");
+                               
+                                $("#" + "btn_Month_" + $("#MonthValue_def").val()).addClass("buttonselected");
+                               
+                                $("#MonthValue").val($("#MonthValue_def").val());
+                              
+
+                            }
+                </script>
+                
+                        <button class="buttonstyBlue close-panel" type="button" onclick="CheckOkButton()" style="width:44%;">确定</button>
+               
+
+                <script>
+                    function CheckItem(userId)
+                    {
+                       
+                        selectUserId = userId;
+
+                        var r = "KaoQinQueryView?userId=" + selectUserId + "&month=" + $("#MonthValue").val();
+                        $.ajax({
+                            url: r,
+                            type: "Get",
+                            success: function (data) {
+
+                                //TODO:处理添加新问卷成功后的事件
+
+                                $("#Dview").html(data);
+                                isDet = '1';
+                                $('#queryImg').show();
+                                $('#backButton').show();
+
+                            },
+
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                $.toast("操作失败");
+
+                            }
+                        });
+
+                        $("#MonthValue_def").val($("#MonthValue").val());
+                        $("#title_Month").text("(" + $("#MonthValue").val() + ")");
+
+                    }
+
+                    var isDet = '0';
+                    var selectUserId = '';
+                    function CheckNavBar()
+                    {
+                        if (isDet == "1") {
+                            $.openPanel("#panel-right");
+                        }
+                    }
+                    function CheckbackButton() {
+                        //$.showPreloader();
+
+                        var r = "KaoQinPopView?userId=" + '@Pdata.UserId';
+                        $.ajax({
+                            url: r,
+                            type: "Get",
+                            success: function (data) {
+
+                                //TODO:处理添加新问卷成功后的事件
+
+                                $("#Dview").html(data);
+                                isDet = '0';
+                                $('#queryImg').hide();
+                                $('#backButton').hide();
+                               // $.hidePreloader();
+
+                            },
+
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                $.hidePreloader();
+
+                                $.toast("操作失败");
+
+                            }
+                        });
+                    }
+                        function CheckOkButton() {
+
+                            var r = "KaoQinQueryView?userId=" + selectUserId + "&month=" + $("#MonthValue").val();
+                            $.ajax({
+                                url: r,
+                                type: "Get",
+                                success: function (data) {
+
+                                    //TODO:处理添加新问卷成功后的事件
+
+                                    $("#Dview").html(data);
+
+                                },
+
+                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                    $.toast("操作失败");
+
+                                }
+                            });
+
+                            $("#MonthValue_def").val($("#MonthValue").val());
+                            $("#title_Month").text("(" + $("#MonthValue").val() + ")");
+
+
+                        }
+
+                </script>
+            </div>
+
+        </div>
+    </div>
+    
+</body>
+</html>

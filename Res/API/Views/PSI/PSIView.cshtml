@@ -1,0 +1,356 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>目标管理</title>
+    
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.css">
+    <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.js' charset='utf-8'></script>
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
+    <!--如果你用到了拓展包中的组件，还需要引用下面两个-->
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css">
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
+
+    <style>
+.buttonstyBlue  {
+    background-color:steelblue; /* Green  #008CBA*/
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.buttonstyRead  {
+    background-color:#f44336; /* Green  #008CBA*/
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.buttonstyGray  {
+    background-color: #e7e7e7; 
+    border: none;
+    color: black;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.buttonselect {
+    background-color: #e7e7e7; 
+    border: none;
+    color: black;
+    padding: 2px 2px 2px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.buttonselected {
+    background-color: white; 
+    color: black; 
+    border: 0.5px solid #f44336;
+    color: #f44336;
+    padding: 2px 2px 2px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    cursor: pointer; 
+    border-radius: 4px;
+}
+        .divgridDay {
+            width:100%;background-color:white;font-size:16px;height:30px;border-left:1px solid gray; border-right:1px solid gray;border-bottom:1px solid gray;
+        }
+
+
+</style>
+</head>
+<body style="padding-top:0px;">
+        @{
+            Market.APIService.Controllers.PModel Pdata = (Market.APIService.Controllers.PModel)ViewData["PModel"];
+            Market.APIService.Controllers.VModel Vdata = (Market.APIService.Controllers.VModel)ViewData["VModel"];
+        }
+    <div class="page" >
+        <header class="bar bar-nav">
+            <a href="#" class="open-panel" style="width:100%;" data-panel='#panel-right'><h1 class="title" style="background-color:steelblue;"><label style="color:white">筛选条件</label>&nbsp;<img style="height:20px; vertical-align:middle;" src="https://iretailerapp.flnet.com/APPQC/Content/Img/sach-btn.png"/></h1></a>
+        </header>
+        <div id="Dview" class="content" style="padding-top:0px;">
+            @{
+                if (Vdata.type == 2)
+                {
+                    @Html.Partial("_PSICMPartialPage", Vdata);
+                }
+                else
+                {
+                    @Html.Partial("_PSIPartialPage", Vdata);
+                }
+
+            }
+            
+        </div>
+            
+                <div class="panel panel-right panel-cover" style="background-color: aliceblue;" id='panel-right'>
+                    <div style="width:100%;">
+                        <p style="padding-left:10px; color:black; font-size:18px;">
+                            月份
+                        </p>
+                        <div style="width:100%; padding-left:20px;">
+                            <input type="hidden" id="uuid" name="MonthValue" value="@Pdata.UserId" />
+                            <input type="hidden" id="SalesNo" name="MonthValue" value="@Pdata.salesCode" />
+                            @{
+
+                                foreach (var m in Pdata.Month)
+                                {
+                                    if (m.isSelected)
+                                    {
+
+                                        <button id="btn_Month_@m.key" type="button" name="btn_Month" class="buttonselect buttonselected" onclick="CheckMonthButton('btn_Month_@m.key','@m.key')" value="@m.key">@m.keyValue</button>
+                                        <input type="hidden" id="MonthValue" name="MonthValue" value="@m.key" />
+                                        <input type="hidden" id="MonthValue_def" name="MonthValue" value="@m.key" />
+                                    }
+                                    else
+                                    {
+                                        <button id="btn_Month_@m.key" type="button" name="btn_Month" class="buttonselect" onclick="CheckMonthButton('btn_Month_@m.key','@m.key')" value="@m.key">@m.keyValue</button>
+                                    }
+                                }
+                            }
+                            <script>
+                                function CheckMonthButton(id, value) {
+                                    $("button[name='btn_Month']").removeClass("buttonselected");
+                                    $("#" + id).addClass("buttonselected");
+                                    $("#MonthValue").val(value);
+
+                                }
+                            </script>
+
+
+                        </div>
+                    </div>
+                    <div style="width:100%;">
+
+                        <p style="padding-left:10px; color:black; font-size:18px;">
+                            组织
+                        </p>
+                        <div style="width:100%; padding-left:20px;">
+                            @{
+                                var OrgList = Pdata.OrgList;
+                                if (Pdata.type == 1)
+                                {
+                                    OrgList = Pdata.OrgList;
+                                }
+                                else
+                                {
+                                    OrgList = Pdata.CityList;
+                                }
+                                foreach (var m in OrgList)
+                                {
+                                    if (m.isSelected)
+                                    {
+
+                                        <button id="btn_Org_@m.key" type="button" name="btn_Org" class="buttonselect buttonselected" onclick="CheckOrgButton('btn_Org_@m.key','@m.key')" value="@m.key">@m.keyValue</button>
+                                        <input type="hidden" id="OrgValue" name="OrgValue" value="@m.key" />
+                                        <input type="hidden" id="OrgValue_def" value="@m.key" />
+                                        }
+                                        else
+                                        {
+                                        <button id="btn_Org_@m.key" type="button" name="btn_Org" class="buttonselect" onclick="CheckOrgButton('btn_Org_@m.key','@m.key')" value="@m.key">@m.keyValue</button>
+                                }
+                                    }
+                               
+                                }
+                            <script>
+                                function CheckOrgButton(id, value) {
+                                    $("button[name='btn_Org']").removeClass("buttonselected");
+                                    $("#" + id).addClass("buttonselected");
+                                    $("#OrgValue").val(value);
+
+                                }
+                            </script>
+
+
+                        </div>
+                    </div>
+                    <div style="width:100%;">
+
+                        <p style="padding-left:10px; color:black; font-size:18px;">
+                            品牌
+                        </p>
+                        <div style="width:100%; padding-left:20px;">
+                            @{
+                                foreach (var m in Pdata.Brand)
+                                {
+                                    if (m.isSelected)
+                                    {
+
+                                        <button id="btn_Brand_@m.key" type="button" name="btn_Brand" class="buttonselect buttonselected" onclick="CheckBrandButton('btn_Brand_@m.key','@m.key')" value="@m.key">@m.keyValue</button>
+                                        <input type="hidden" id="BrandValue" name="BrandValue" value="@m.key" />
+                                        <input type="hidden" id="BrandValue_def" value="@m.key" />
+                                    }
+                                    else
+                                    {
+                                        <button id="btn_Brand_@m.key" type="button" name="btn_Brand" class="buttonselect" onclick="CheckBrandButton('btn_Brand_@m.key','@m.key')" value="@m.key">@m.keyValue</button>
+                                    }
+                                }
+                            }
+                            <script>
+                                function CheckBrandButton(id, value) {
+                                    $("button[name='btn_Brand']").removeClass("buttonselected");
+                                    $("#" + id).addClass("buttonselected");
+                                    $("#BrandValue").val(value);
+
+                                }
+                            </script>
+
+
+                        </div>
+                    </div>
+                    <div style="width:100%;">
+                        <p style="padding-left:10px; color:black; font-size:18px;">
+                            产品分类
+                        </p>
+                        <div style="width:100%; padding-left:20px;">
+                            @{
+                                foreach (var m in Pdata.Prodect)
+                                {
+                                    if (m.isSelected)
+                                    {
+
+                                        <button id="btn_Prodect_@m.key" type="button" name="btn_Prodect" class="buttonselect buttonselected" onclick="CheckProdectButton('btn_Prodect_@m.key','@m.key')" value="@m.key">@m.keyValue</button>
+                                        <input type="hidden" id="ProdectValue" name="ProdectValue" value="@m.key" />
+                                        <input type="hidden" id="ProdectValue_def" value="@m.key" />
+                                    }
+                                    else
+                                    {
+                                        <button id="btn_Prodect_@m.key" type="button" name="btn_Prodect" class="buttonselect" onclick="CheckProdectButton('btn_Prodect_@m.key','@m.key')" value="@m.key">@m.keyValue</button>
+                                    }
+                                }
+                            }
+                            <script>
+                                function CheckProdectButton(id, value) {
+                                    $("button[name='btn_Prodect']").removeClass("buttonselected");
+                                    $("#" + id).addClass("buttonselected");
+                                    $("#ProdectValue").val(value);
+
+                                }
+                            </script>
+                        </div>
+                    </div>
+                    <p />
+                    <div style="width:100%;padding-left:10px;">
+                        <button class="buttonstyGray close-panel" type="button" onclick="CheckCancelButton()" style="width:40%;">取消</button>
+                        <script>
+                            function CheckCancelButton() {
+                                $("button[name='btn_Prodect']").removeClass("buttonselected");
+                                $("button[name='btn_Brand']").removeClass("buttonselected");
+                                $("button[name='btn_Month']").removeClass("buttonselected");
+                                $("button[name='btn_Org']").removeClass("buttonselected");
+                                $("#" + "btn_Prodect_" + $("#ProdectValue_def").val()).addClass("buttonselected");
+                                $("#" + "btn_Brand_" + $("#BrandValue_def").val()).addClass("buttonselected");
+                                $("#" + "btn_Month_" + $("#MonthValue_def").val()).addClass("buttonselected");
+                                $("#" + "btn_Org_" + $("#OrgValue_def").val()).addClass("buttonselected");
+                                $("#BrandValue").val($("#BrandValue_def").val());
+                                $("#ProdectValue").val($("#ProdectValue_def").val());
+                                $("#MonthValue").val($("#MonthValue_def").val());
+                                $("#OrgValue").val($("#OrgValue_def").val());
+
+                            }
+                        </script>
+                        @{
+                            if (Pdata.type == 2)
+                            {
+                                <button class="buttonstyBlue close-panel" type="button" onclick="CheckOkButtonType2()" style="width:44%;">确定</button>
+                            }
+                            else
+                            {
+                                <button class="buttonstyBlue close-panel" type="button" onclick="CheckOkButton()" style="width:44%;">确定</button>
+                            }
+                        }
+                        
+                        <script>
+                            function CheckOkButton() {
+                                var r = "QueryData?BrandValue=" + $("#BrandValue").val() + "&ProdectValue=" + $("#ProdectValue").val() + "&MonthValue="
+                                    + $("#MonthValue").val() + "&UserId=" + $("#uuid").val() + "&SalesNo=" + $("#SalesNo").val() + "&OrgCode=" + $("#OrgValue").val();
+                               // alert(r);
+                                $.ajax({
+                                    url: r,
+                                    type: "Get",
+                                    success: function (data) {
+
+                                        //TODO:处理添加新问卷成功后的事件
+
+                                        $("#Dview").html(data);
+
+                                    },
+
+                                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                        $.toast("操作失败");
+
+                                    }
+                                });
+                                $("#BrandValue_def").val($("#BrandValue").val());
+                                $("#ProdectValue_def").val($("#ProdectValue").val());
+                                $("#MonthValue_def").val($("#MonthValue").val());
+                                $("#OrgValue_def").val($("#OrgValue").val());
+
+                            }
+                            function CheckOkButtonType2() {
+                                var r = "QueryCData?BrandValue=" + $("#BrandValue").val() + "&ProdectValue=" + $("#ProdectValue").val() + "&MonthValue="
+                                    + $("#MonthValue").val() + "&UserId=" + $("#uuid").val() + "&SalesNo=" + $("#SalesNo").val() + "&OrgCode=" + $("#OrgValue").val();
+                                // alert(r);
+                                $.ajax({
+                                    url: r,
+                                    type: "Get",
+                                    success: function (data) {
+
+                                        //TODO:处理添加新问卷成功后的事件
+
+                                        $("#Dview").html(data);
+
+                                    },
+
+                                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                        $.toast("操作失败");
+
+                                    }
+                                });
+                                $("#BrandValue_def").val($("#BrandValue").val());
+                                $("#ProdectValue_def").val($("#ProdectValue").val());
+                                $("#MonthValue_def").val($("#MonthValue").val());
+                                $("#OrgValue_def").val($("#OrgValue").val());
+
+                            }
+                        </script>
+                    </div>
+
+                </div>
+        <div class="panel panel-right panel-cover" style="background-color: aliceblue;" id='panel-right-day'>
+            </div>
+
+        </div>
+    
+</body>
+</html>

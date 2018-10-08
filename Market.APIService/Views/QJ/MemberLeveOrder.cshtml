@@ -1,0 +1,403 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+
+
+
+    <link href="https://iretailerapp.flnet.com/Content/framework7.css" rel="stylesheet">
+
+    <title>请假明细</title>
+
+    <script type="text/javascript" src="https://iretailerapp.flnet.com/Scripts/framework7.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+    <style>
+        .tabNoSelect {
+             width:33%; height: 41px;float:left; text-align:center;font-size:15px;line-height:43px;color:#acacac;background-color:#ffffff;
+        }
+
+        .tabSelect {
+           width:33%; height: 41px;float:left; text-align:center;font-size:15px;line-height:43px;color:#24acca;border-bottom:solid;border-color:#24acca;border-width:2px;background-color:#ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    @{
+        string userId = (string)ViewData["userId"];
+
+        string userName = (string)ViewData["userName"];
+        string empCode = (string)ViewData["empCode"];
+        
+        string aUserId = null;
+        if (ViewData["aUserId"] != null)
+        {
+            aUserId = (string)ViewData["aUserId"];
+        }
+        Market.APIService.Controllers.MemberLeveDataModel data = (Market.APIService.Controllers.MemberLeveDataModel)ViewData["data"];
+        //List<Market.APIService.Controllers.CusModel> Vdata = (List < Market.APIService.Controllers.CusModel>) ViewData["vModel"];
+    }
+    <div id="app" style="background-color:rgb(247,247,247);">
+        <div id="mView" class="view view-main">
+
+            <div id="Dview" style="padding-top:0px;padding-left:0px;padding-right:0px;" class="page-content">
+                <div style="width:100%;height:10px;display:flex;">
+                </div>
+                <div style="width: 100%; height: 50px; text-align: left; display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">姓名</div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333"></div>
+                    <div id="lab_data_1" style="width:100px; height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                        @userName
+                    </div>
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+
+                </div>
+                <div style="width: 100%; height: 50px; text-align: left; display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">工号</div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333"></div>
+                    <div id="lab_data_1" style="width:100px; height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                        @empCode
+                    </div>
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+
+                </div>
+                <div style="width: 100%; height: 50px; text-align: left; display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">请假类型</div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333"></div>
+                    <div id="lab_data_1" style="width:50px; height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                       @data.leaveType
+                    </div>
+                    <div style="width: 10px; height: 100px;float:left;"> </div>
+                    
+                </div>
+                <div style="width: 100%; height: 50px; text-align: left; display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">开始日期/时间</div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333"></div>
+                    <div id="lab_data_1" style="width:100px; height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                       @data.startDay
+                    </div>
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+
+                </div>
+                <div style="width: 100%; height: 50px; text-align: left; display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">结束日期/时间</div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333"></div>
+                    <div id="lab_data_1" style="width:100px; height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                        @data.endDay
+                    </div>
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+
+                </div>
+               
+               
+                <div style="width: 100%; height: 50px; text-align: left; display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                    <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">请假时间</div>
+                    <div id="lib_days" style="height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                            @data.leaveDays
+                    </div>
+                    <div style="width:10px; height: 50px;float:left;"> </div>
+                   
+                </div>
+                <div style="width: 100%; height: 50px; text-align: left;display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">备注</div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333"></div>
+                    <div id="lab_data_1" style="width:200px; height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                        @data.desc 
+                    </div>
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+
+                </div>
+                <div style="width: 100%; height: 50px; text-align: left;display:flex; border-color:#d4d4d8;">
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                    <div style="flex:0.2; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">附件</div>
+                    <div id="images_view" style="flex:0.8; height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                        @{
+                            foreach (var img in data.imgs)
+                            {
+                                
+                                <div style="width:45px;height:50px;float:left;">
+                           <div style="width:100%;height:5px;display:flex;">
+                           </div>
+                            <img  src="@img.url" onclick="openImage('@img.url')" style="height:40px;width:40px;" />
+                            </div>
+                            }
+                        }
+                    </div>
+                   
+                    <div style="width:10px; height: 50px;float:left;"> </div>
+                   
+                </div>
+                <div style="width: 100%; height: 38px; text-align: left;display:flex; background-color:white;color:#24acca">
+                    <div style="width: 10px; height: 38px;float:left;"> </div>
+                    <div style="flex:0.5; height: 38px;float:left;text-align:left;font-size:14px;line-height:38px;color:#24acca">签核</div>
+                    <div style="flex:0.5; height: 38px;float:left;text-align:left;font-size:14px;line-height:38px;color:#333333"></div>
+                    <div id="lab_data_1" style="width:38px; height: 38px;float:left;text-align:right;font-size:14px;line-height:38px;color:#333333">
+                      
+                    </div>
+                    <div style="width: 10px; height: 100px;float:left;"> </div>
+                </div>
+                
+
+                
+               
+                @{
+                    if (aUserId != null && !data.state.Equals("2") && !data.state.Equals("2"))
+                    {
+                        <div style="width: 100%; height: 50px; text-align: left; display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                            <div style="width: 10px; height: 50px;float:left;"> </div>
+                            <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">签核状态</div>
+                            <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333"></div>
+                            <div id="lab_data_1" style="width:50px; height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                                <div style="width:100%;height:17px;display:flex;">
+                                </div>
+                                <select id="stateType" style="width:50px;text-align:right; ">
+                                    <option value="1" selected="selected">签核中</option>
+                                    <option value="2" >同意</option>
+                                    <option value="3">拒绝</option>
+                                </select>
+                            </div>
+                            <div style="width: 2px; height: 50px;float:left;"> </div>
+                            <div style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                                <div style="width:100%;height:18px;display:flex;">
+                                </div>
+                                <div style="width:15px; height:15px;">
+                                    <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 100%; height: 50px; text-align: left; display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                            <div style="width: 10px; height: 50px;float:left;"> </div>
+                            <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">备注</div>
+                            <div style="height: 50px;float:left;text-align:right;font-size:14px;color:#333333">
+                                <div style="width:100%;height:17px;display:flex;">
+                                </div>
+                                <div style="width:100%;display:flex;">
+                                    <textarea id="adesc" placeholder="请填写备注" maxlength="100"></textarea>
+                                </div>
+                            </div>
+
+                            <div style="width: 2px; height: 50px;float:left;"> </div>
+                            <div style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                                <div style="width:100%;height:18px;display:flex;">
+                                </div>
+                                <div style="width:15px; height:15px;">
+                                    <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width:100%; height: 50px;float:left;"> </div>
+                        <div style="width:100%; height: 50px;float:left;display:flex;">
+                            <div style="width:10px; height: 50px;float:left;"> </div>
+                            <div onclick="SaveData();" style="flex:1;width:100%; height: 50px;float:left; line-height:50px; font-size:15px; text-align:center;border:solid;border-width:1px;">
+                                保存
+                            </div>
+                            <div style="width:10px; height: 50px;float:left;"> </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="width: 100%; height: 50px; text-align: left; display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                            <div style="width: 10px; height: 50px;float:left;"> </div>
+                            <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">签核状态</div>
+                            <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333"></div>
+                            
+                               @{
+                                   if (data.state.Equals("1"))
+                                   {
+                                    <div id="lab_data_1" style="width:50px; height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                                        签核中
+                                    </div>
+                                   }
+                                   else if (data.state.Equals("2"))
+                                    {
+                                    <div id="lab_data_1" style="width:50px; height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                                      已签核
+                                    </div>
+                                   }
+                                   else if (data.state.Equals("3"))
+                                   {
+                                    <div id="lab_data_1" style="width:50px; height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                                        已拒绝
+                                    </div>
+                                   }
+                            }
+                                   
+                            <div style="width: 10px; height: 100px;float:left;"> </div>
+
+                        </div>
+                        <div style="width: 100%; height: 50px; text-align: left;display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                            <div style="width: 10px; height: 50px;float:left;"> </div>
+                            <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">备注</div>
+                            <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333"></div>
+                            <div id="lab_data_1" style="width:200px; height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                                @data.adesc
+                            </div>
+                            <div style="width: 10px; height: 50px;float:left;"> </div>
+
+                        </div>
+                    }
+                }
+                
+                <div hidden="hidden">
+                    <div style="width:256px;display:block;border-radius:2px;background-color:white; left:50%;margin-left:-128px;" class="dialog dialog-no-buttons" id="dig_clockInfo_Ok">
+                        <div style="width:100%;height:10.5px;font-size:10.5px;color:black; display:flex;flex-flow:row;text-align:center;">
+                        </div>
+                        <div style="width:100%;font-size:11px;color:black; display:flex;flex-flow:row;text-align:center;">
+                            <div style="flex:0.5;"></div><img src="~/Content/Img/img_success.png" style="width:90px;height:90px;" />
+                            <div style="flex:0.5;"></div>
+                        </div>
+                        <div style="width:100%;font-size:11px;color:black; display:flex;flex-flow:row;text-align:center;">
+                            <div style="flex:0.5;"></div>
+                            <div>
+                                签核成功
+                            </div>
+                            <div style="flex:0.5;"></div>
+                        </div>
+
+                        <div onclick="javascript: InfoDialog.close();" style="width:100%;height:44px;float:left;text-align:center; line-height:44px;font-size:11px;border:solid;border-width:1px;border-left:none; border-right:none; border-bottom:none;border-color:#b1b1b1;color:#36b8d5;">
+                            确定
+                        </div>
+                    </div>
+                    <div style="width:256px; display:block;border-radius:2px;background-color:white; left:50%;margin-left:-128px;" class="dialog dialog-no-buttons" id="dig_clockInfo_fail">
+                        <div style="width:100%;height:10.5px;font-size:10.5px;color:black; display:flex;flex-flow:row;text-align:center;">
+                        </div>
+                        <div style="width:100%;font-size:10.5px;color:black; display:flex;flex-flow:row;text-align:center;">
+                            <div style="flex:0.5;"></div><img src="~/Content/Img/img_fail.png" style="width:90px;height:90px;" />
+                            <div style="flex:0.5;"></div>
+                        </div>
+                        <div style="width:100%;font-size:11px;color:black; display:flex;flex-flow:row;text-align:center;">
+                            <div style="flex:0.5;"></div>
+                            <div id="lib_info">
+                                签核失败
+                            </div>
+                            <div style="flex:0.5;"></div>
+                        </div>
+                        <div onclick="javascript: InfoDialog.close();" style="width:100%;height:44px;float:left;text-align:center; line-height:44px;font-size:11px;border:solid;border-width:1px;border-left:none; border-right:none; border-bottom:none;border-color:#b1b1b1;color:#36b8d5;">
+                            确定
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+
+
+
+
+    </div>
+</div>
+
+    <script>
+        var isSelectImage = false;
+        var InfoDialog;
+
+       
+       
+        var myApp = new Framework7({
+            // App root element
+            root: '#app',
+            // App Name
+            name: 'My App',
+            // App id
+            id: 'com.myapp.test',
+            // Enable swipe panel
+            panel: {
+                swipe: 'left',
+            },
+            photoBrowser: {
+                type: 'popup',
+            },
+            // Add default routes
+            routes: [
+              {
+                  path: '/about/',
+                  url: 'about.html',
+              },
+            ],
+            // ... other parameters
+        });
+        var $$ = Framework7.$;
+        var InfoDialog;
+        var myPhotoBrowserPopupDark = myApp.photoBrowser.create({
+            photos: [
+                'http://lorempixel.com/1024/1024/sports/1/',
+                'http://lorempixel.com/1024/1024/sports/2/',
+                'http://lorempixel.com/1024/1024/sports/3/',
+            ],
+            theme: 'dark',
+            type: 'popup',
+            
+
+        });
+
+        function openImage(url)
+        {
+            myPhotoBrowserPopupDark.open();
+            var myPhotoBrowserStandalone = myApp.photoBrowser.create({
+                photos: [
+                    url
+                ]
+            });
+            myPhotoBrowserStandalone.open();
+        }
+        function SaveData()
+        {
+            var r = "AllowLeaveV2?userId=" + "@aUserId" + "&id=" + '@data.id' + "&state=" + $$("#stateType").val() + "&desc=" + $$("#adesc").val();
+
+            myApp.request.post(
+                r, {},
+                function (data) {
+                    myApp.dialog.close();
+                    if (data == '1') {
+                        InfoDialog = myApp.dialog.create({
+                            text: "",
+                            el: '#dig_clockInfo_Ok',
+                            buttons: [
+
+                            ]
+                        });
+                        InfoDialog.open();
+                    }
+                    else {
+                        InfoDialog = myApp.dialog.create({
+                            text: "",
+                            el: '#dig_clockInfo_fail',
+                            buttons: [
+
+                            ]
+                        });
+                        $$('#lib_info').text(data);
+                        InfoDialog.open();
+                    }
+                }
+
+            );
+        }
+        
+        
+        
+    </script>
+
+
+    <!-- Path to your app js-->
+
+
+
+</body>
+</html>

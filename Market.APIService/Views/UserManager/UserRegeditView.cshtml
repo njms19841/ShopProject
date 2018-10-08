@@ -1,0 +1,211 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+
+
+
+    <link href="https://iretailerapp.flnet.com/Content/framework7.css" rel="stylesheet">
+
+    <title>注册</title>
+
+    <script type="text/javascript" src="https://iretailerapp.flnet.com/Scripts/framework7.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+    <style>
+       
+    </style>
+</head>
+<body>
+
+    @{
+        //string userId = (string)ViewData["userId"];
+
+        
+        
+        //List<Market.APIService.Controllers.CusModel> Vdata = (List < Market.APIService.Controllers.CusModel>) ViewData["vModel"];
+    }
+    <div id="app" style="background-color:rgb(247,247,247);">
+        <div class="navbar" style="height:60px">
+            <div class="navbar-inner" style="height:60px;background:url('/Content/Img/bg_navbar.png');background-size:100% 60px;background-repeat:no-repeat;display:flex;">
+                <div style="width:10px;float:left;"></div>
+                <div class="left" style="width:30px;" onclick="breakMenu();">
+                    <img style="height:25px; width:15px;" src="~/Content/Img/btn_back.png" />
+                </div>
+                <div class="title" style="flex:1;text-align:center;color:white;" id="main_title">注册</div>
+
+                <div style="width:10px;float:left;"></div>
+            </div>
+        </div>
+        <div class="view view-main">
+            
+            <div id="Dview" style="padding-top:0px;padding-left:0px;padding-right:0px;background-color:white;" class="page-content">
+                <div style="width:100%;height:5px;"></div>
+                <div style="width: 100%; height: 50px; text-align: left;display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                    <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">姓名</div>
+                    <div style="height: 50px;float:left;text-align:right;font-size:14px;color:#333333">
+                        <div style="width:100%;height:17px;display:flex;">
+                        </div>
+                        <div style="width:100%;display:flex;">
+                            <input id="name"  style="text-align:right; border:none;" placeholder="请输入真实姓名"/>
+                        </div>
+
+                    </div>
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                   
+                </div>
+                <div style="width: 100%; height: 50px; text-align: left;display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                    <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">手机号码</div>
+                    <div style="height: 50px;float:left;text-align:right;font-size:14px;color:#333333">
+                        <div style="width:100%;height:17px;display:flex;">
+                        </div>
+                        <div style="width:100%;display:flex;">
+                            <input type="number" id="phoneNumber" style="text-align:right; border:none;" placeholder="该手机号为登陆账号" />
+                        </div>
+
+                    </div>
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+
+                </div>
+                <div style="width: 100%; height: 50px; text-align: left; display:flex; border-color:#e3e3e4; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">公司名称</div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333"></div>
+                    <div style="width:50px; height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                        <div style="width:100%;height:17px;display:flex;">
+                        </div>
+                        <select id="leaveType" style="width:50px;text-align:right; ">
+                            <option value="1" selected="selected">公司</option>
+                        </select>
+                    </div>
+                    <div style="width: 2px; height: 50px;float:left;"> </div>
+                    <div style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                        <div style="width:100%;height:18px;display:flex;">
+                        </div>
+                        <div style="width:15px; height:15px;">
+                            <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 100%; height: 50px; text-align: left; display:flex; border-color:#e3e3e4; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">门店编号</div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333"></div>
+                    <div style="width:50px; height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                        <div style="width:100%;height:17px;display:flex;">
+                        </div>
+                        <select id="leaveType" style="width:50px;text-align:right; ">
+                            <option value="1" selected="selected">门店1</option>
+                        </select>
+                    </div>
+                    <div style="width: 2px; height: 50px;float:left;"> </div>
+                    <div style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                        <div style="width:100%;height:18px;display:flex;">
+                        </div>
+                        <div style="width:15px; height:15px;">
+                            <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 100%; height: 50px; text-align: left; display:flex; border-color:#e3e3e4; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">管理员</div>
+                    <div style="flex:0.5; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333"></div>
+                    <div style="width:50px; height: 50px;float:left;text-align:right;font-size:14px;line-height:50px;color:#333333">
+                        <div style="width:100%;height:17px;display:flex;">
+                        </div>
+                        <select id="leaveType" style="width:50px;text-align:right; ">
+                            <option value="1" selected="selected">门店1</option>
+                        </select>
+                    </div>
+                    <div style="width: 2px; height: 50px;float:left;"> </div>
+                    <div style="width:25px;height:50px;float:left;color:#000000;font-size:14px;">
+                        <div style="width:100%;height:18px;display:flex;">
+                        </div>
+                        <div style="width:15px; height:15px;">
+                            <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 100%; height: 50px; text-align: left;display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                    <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">工号</div>
+                    <div style="height: 50px;float:left;text-align:right;font-size:14px;color:#333333">
+                        <div style="width:100%;height:17px;display:flex;">
+                        </div>
+                        <div style="width:100%;display:flex;">
+                            <input  id="phoneNumber" style="text-align:right; border:none;" placeholder="请输入本公司员工编号" />
+                        </div>
+
+                    </div>
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+
+                </div>
+                <div style="width: 100%; height: 50px; text-align: left;display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+                    <div style="flex:1; height: 50px;float:left;text-align:left;font-size:14px;line-height:50px;color:#333333">密码</div>
+                    <div style="height: 50px;float:left;text-align:right;font-size:14px;color:#333333">
+                        <div style="width:100%;height:17px;display:flex;">
+                        </div>
+                        <div style="width:100%;display:flex;">
+                            <input type="password" id="phoneNumber" style="text-align:right; border:none;" placeholder="请输入密码" />
+                        </div>
+
+                    </div>
+                    <div style="width: 10px; height: 50px;float:left;"> </div>
+
+                </div>
+            </div>
+
+
+
+
+
+    </div>
+</div>
+
+    <script>
+       
+        var myApp = new Framework7({
+            // App root element
+            root: '#app',
+            // App Name
+            name: 'My App',
+            // App id
+            id: 'com.myapp.test',
+            // Enable swipe panel
+            panel: {
+                swipe: 'left',
+            },
+            // Add default routes
+            routes: [
+              {
+                  path: '/about/',
+                  url: 'about.html',
+              },
+            ],
+            // ... other parameters
+        });
+        var $$ = Framework7.$;
+        function breakMenu() {
+                window.postMessage('Back');
+        }
+    </script>
+
+
+    <!-- Path to your app js-->
+
+
+
+</body>
+</html>

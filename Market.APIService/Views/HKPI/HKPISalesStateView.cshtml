@@ -1,0 +1,297 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+
+
+
+    <link href="https://iretailerapp.flnet.com/Content/framework7.css" rel="stylesheet">
+
+    <title>仪表盘</title>
+
+    <script type="text/javascript" src="https://iretailerapp.flnet.com/Scripts/framework7.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+    <style>
+        .buttonNoSelect {
+            background-color: white;
+            color: rgb(36,172,202);
+            font-size: 16px;
+            height: 30px;
+            border: 1px solid rgb(36,172,202); /* Green */
+        }
+
+        .buttonSelect {
+            background-color: rgb(36,172,202);
+            color: white;
+            font-size: 16px;
+            height: 30px;
+            border: 1px solid rgb(36,172,202); /* Green */
+        }
+    </style>
+</head>
+<body>
+
+    @{
+        string userId = (string)ViewData["userId"];
+        string shopCode = (string)ViewData["shopCode"];
+        
+        //List<Market.APIService.Controllers.CusModel> Vdata = (List < Market.APIService.Controllers.CusModel>) ViewData["vModel"];
+    }
+    <div id="app" style="background-color:rgb(247,247,247);">
+        <div class="view view-main">
+
+            <div id="Dview" style="padding-top:6pt;padding-left:6px;padding-right:6px;" class="page-content">
+
+                <div style="border-radius: 5px; width: 100%; height: 85px; text-align: center; padding-top: 10px; background-color: white;">
+                    <div style="width: 100%; height: 80px; ">
+                        <div style="width: 30%; height: 80px;float:left">
+                            <div id="lab_data1" style="width: 100%; height: 50px;font-size:23pt;color:rgb(51, 51, 51);  ">
+                                400
+                            </div>
+                            <div id="lab_tile_data1" style="border-image: none; width: 100%; height: 22px; color: rgb(186, 186, 186); line-height: 20px; font-size: 12pt; border-right-width: 1px; border-right-style: solid;">
+                                本日进店数
+                            </div>
+                        </div>
+                        <div style="width: 40%; height: 80px;float:left; ">
+                            <div id="lab_data2" style="width: 100%; height: 50px;font-size:23pt;color:rgb(51, 51, 51);  ">
+                                400
+                            </div>
+                            <div id="lab_tile_data2" style="border-image: none; width: 100%; height: 22px; color: rgb(186, 186, 186); line-height: 20px; font-size: 12pt; border-right-width: 1px; border-right-style: solid;">
+                                已接待人数
+                            </div>
+                        </div>
+                        <div style="width: 30%; height: 80px;float:left; ">
+                            <div id="lab_data3" style="width: 100%; height: 50px;font-size:23pt;color:rgb(51, 51, 51);  ">
+                                +10%
+                            </div>
+                            <div style="border-image: none; width: 100%; height: 22px; color: rgb(186, 186, 186); line-height: 20px; font-size: 12pt;">
+                                接待比率
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 100%; height: 10pt; opacity:0.4; text-align: center;background:url('/Content/Img/imb_shadow.png');background-size:100% 10pt;background-repeat:no-repeat;">
+                </div>
+                <div style="width:100%;height:7px;"></div>
+                
+
+                <div id="tableRows" style="border-radius: 5px; width: 100%;text-align: center; padding-top: 10px;">
+                        <div  style="width: 95%;display:flex; height:1px;font-size:20px;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none; border-top:none; "></div>
+                        <div onclick="window.location = 'HKPISalesStateSubIndex?empCode=@shopCode&empCode=CX12345'" style="width: 95%;display:flex; height: 92px;font-size:20px;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none; border-top:none; ">
+                            <div style="width:68px; height:100px;line-height:100px; vertical-align:middle;position:relative; float:left;">
+                                <div style="width:68px; height:68px;position:absolute; top:12px; ">
+                                    <img src="~/Content/Img/tab_user_active.png" style="width:68px; height:68px;" />
+                                </div>
+                            </div>
+                            <div style="height:100px;float:left;flex:1">
+                                <div style="width:100%; height:35px;color:rgb(36,172,202);font-size:15px;line-height:30px; text-align:left; padding-left:6px;padding-top:6px;">
+                                    王云云(CX12345)
+                                </div>
+                                <div style="width:100%; height:60px; text-align:left;">
+                                    <div style="width:25%; height:60px;float:left;">
+                                        <div style="width:100%; height:60px;text-align:center;">
+                                            <div id="lab_data11" style="width: 100%; height: 23px; font-size:17px;color:rgb(51, 51, 51);  ">
+
+                                                400
+
+                                            </div>
+                                            <div id="lab_tile_data1" style="width: 100%; line-height:20px; height: 20px;color: rgb(186, 186, 186); font-size: 12px;border: solid; border-color:rgb(166,166,166); border-width:1px;border-bottom:none;border-top:none;border-left:none;">
+
+                                                客户数量
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="width:25%; height:60px;float:left;">
+                                        <div style="width:100%; height:60px;text-align:center;">
+                                            <div id="lab_data11" style="width: 100%; height: 23px; font-size:17px;color:rgb(51, 51, 51);  ">
+
+                                                400
+
+                                            </div>
+                                            <div id="lab_tile_data1" style="width: 100%; line-height:18px; height: 18px;color: rgb(186, 186, 186); font-size: 12px;border: solid; border-color:rgb(166,166,166); border-width:1px;border-bottom:none;border-top:none;border-left:none;">
+
+                                                业绩目标
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="width:25%; height:60px;float:left;">
+                                        <div style="width:100%; height:60px;text-align:center;">
+                                            <div id="lab_data11" style="width: 100%; height: 23px; font-size:17px;color:rgb(51, 51, 51);  ">
+
+                                                400
+
+                                            </div>
+                                            <div id="lab_tile_data1" style="width: 100%; line-height:18px; height: 18px;color: rgb(186, 186, 186); font-size: 12px;border: solid; border-color:rgb(166,166,166); border-width:1px;border-bottom:none;border-top:none;border-left:none;">
+
+                                                销售额
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="width:25%; height:60px;float:left;">
+                                        <div style="width:100%; height:60px;text-align:center;">
+                                            <div id="lab_data11" style="width: 100%; height: 23px; font-size:17px;color:rgb(51, 51, 51);  ">
+
+                                                400
+
+                                            </div>
+                                            <div id="lab_tile_data1" style="width: 100%; line-height:18px; height: 18px;color: rgb(186, 186, 186); font-size: 12px;border: solid; border-color:rgb(166,166,166); border-width:1px;border-bottom:none;border-top:none;border-left:none; border-right:none;">
+
+                                                订单数
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:15px; height:100px;line-height:100px; vertical-align:middle;position:relative; float:left; ">
+                                <div style="width:15px; height:15px;position:absolute;right:0px; ">
+                                    <img src="~/Content/Img/img_next.png" style="width:15px; height:15px; " />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+
+        var myApp = new Framework7({
+            // App root element
+            root: '#app',
+            // App Name
+            name: 'My App',
+            // App id
+            id: 'com.myapp.test',
+            // Enable swipe panel
+            panel: {
+                swipe: 'left',
+            },
+            // Add default routes
+            routes: [
+              {
+                  path: '/about/',
+                  url: 'about.html',
+              },
+            ],
+            // ... other parameters
+        });
+        var $$ = Framework7.$;
+        var url = 'GetSalesStateQueryData?shopCode=' + '@shopCode';
+
+        myApp.request.json(url,
+                  null,
+                    function (data) {
+
+                        $$('#lab_data1').text(data.data1.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                        $$('#lab_data2').text(data.data2.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                        $$('#lab_data3').text((data.data3 * 100).toFixed(0) + "%");
+                        CreateDataTable(data);
+                    });
+        function CreateDataTable(data) {
+            //tableDataRows
+            var rowsHtml = '<div  style="width: 95%;display:flex; height:1px;font-size:20px;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none; border-top:none; "></div>';
+            for (var i = 0; i < data.data4.length; i++) {
+                var row =data.data4[i];
+                rowsHtml = rowsHtml
+                    +  '<div onclick="window.location = \'HKPISalesStateSubIndex?shopCode='+'@shopCode'+'&empCode='+row.empCode+'\'" style="width: 95%;display:flex; height: 92px;font-size:20px;border: solid; border-color:rgb(166,166,166); border-width:1px; border-left:none; border-right:none; border-top:none; ">'
+                     +'       <div style="width:68px; height:100px;line-height:100px; vertical-align:middle;position:relative; float:left;">'
+                       + '               <div style="width:68px; height:68px;position:absolute; top:12px; ">'
+                        + '                  <img src="https://iretailerapp.flnet.com/Content/Img/tab_user_active.png" style="width:68px; height:68px;" />'
+                        +'              </div>'
+                         +'         </div>'
+                         +'         <div style="height:100px;float:left;flex:1">'
+                          +'            <div style="width:100%; height:35px;color:rgb(36,172,202);font-size:15px;line-height:30px; text-align:left; padding-left:6px;padding-top:6px;">'
+                           + '               ' + row.empName + '('+row.empCode+')'
+                           +'           </div>'
+                           +'           <div style="width:100%; height:60px; text-align:left;">'
+                            +'              <div style="width:25%; height:60px;float:left;">'
+                            +'                  <div style="width:100%; height:60px;text-align:center;">'
+                             +'                     <div id="lab_data11" style="width: 100%; height: 23px; font-size:17px;color:rgb(51, 51, 51);  ">'
+                                 + row.data1.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,')
+                                    +'              </div>'
+                                      +'            <div id="lab_tile_data1" style="width: 100%; line-height:20px; height: 20px;color: rgb(186, 186, 186); font-size: 12px;border: solid; border-color:rgb(166,166,166); border-width:1px;border-bottom:none;border-top:none;border-left:none;">'
+                                        +'              客户数量'
+                                         +'         </div>'
+                                         +'     </div>'
+                                     +'     </div>'
+                                     +'     <div style="width:25%; height:60px;float:left;">'
+                                        +'      <div style="width:100%; height:60px;text-align:center;">'
+                                         +'         <div id="lab_data11" style="width: 100%; height: 23px; font-size:17px;color:rgb(51, 51, 51);  ">'
+                                           + row.data2.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,')
+                                             +'     </div>'
+                                             +'     <div id="lab_tile_data1" style="width: 100%; line-height:18px; height: 18px;color: rgb(186, 186, 186); font-size: 12px;border: solid; border-color:rgb(166,166,166); border-width:1px;border-bottom:none;border-top:none;border-left:none;">'
+                                               +'       业绩目标'
+                                            +'      </div>'
+                                        +'      </div>'
+                                     +'     </div>'
+                                     +'     <div style="width:25%; height:60px;float:left;">'
+                                      +'        <div style="width:100%; height:60px;text-align:center;">'
+                                       +'           <div id="lab_data11" style="width: 100%; height: 23px; font-size:17px;color:rgb(51, 51, 51);  ">'
+                                         + row.data3.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,')
+                                           +'       </div>'
+                                             +'     <div id="lab_tile_data1" style="width: 100%; line-height:18px; height: 18px;color: rgb(186, 186, 186); font-size: 12px;border: solid; border-color:rgb(166,166,166); border-width:1px;border-bottom:none;border-top:none;border-left:none;">'
+                                               +'       销售额'
+                                            +'      </div>'
+                                         +'     </div>'
+                                     +'     </div>'
+                                    +'      <div style="width:25%; height:60px;float:left;">'
+                                       +'       <div style="width:100%; height:60px;text-align:center;">'
+                                        +'          <div id="lab_data11" style="width: 100%; height: 23px; font-size:17px;color:rgb(51, 51, 51);  ">'
+                                           + row.data4.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,')
+                                           +'       </div>'
+                                            +'      <div id="lab_tile_data1" style="width: 100%; line-height:18px; height: 18px;color: rgb(186, 186, 186); font-size: 12px;border: solid; border-color:rgb(166,166,166); border-width:1px;border-bottom:none;border-top:none;border-left:none; border-right:none;">'
+                                               +'       订单数'
+                                            +'      </div>'
+                                         +'     </div>'
+                                     +'     </div>'
+                                +'      </div>'
+                             +'     </div>'
+                             +'     <div style="width:15px; height:100px;line-height:100px; vertical-align:middle;position:relative; float:left; ">'
+                              +'        <div style="width:15px; height:15px;position:absolute;right:0px; ">'
+                                 + '         <img src="https://iretailerapp.flnet.com/Content/Img/img_next.png" style="width:15px; height:15px; " />'
+                                +'      </div>'
+                             +'     </div>'
+                         +'     </div>'
+                +''
+
+                }
+
+            $$('#tableRows').html(rowsHtml);
+        }
+
+
+
+
+
+
+    </script>
+
+
+    <!-- Path to your app js-->
+
+
+
+</body>
+</html>

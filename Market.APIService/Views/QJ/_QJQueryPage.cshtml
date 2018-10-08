@@ -1,0 +1,68 @@
+﻿@model Market.APIService.Controllers.QJQueryModel
+<div class="content-block-title">请假历史记录</div>
+<div class="list-block">
+    <ul>
+        @{
+            foreach (var item in Model.data)
+            {
+                <li class="item-content">
+                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title label">@item.day</div>
+                        @{
+                            string type = "";
+                            if (item.leaveType.Equals("1"))
+                            {
+                                type = "产假";
+                            }
+                            else if (item.leaveType.Equals("2"))
+                            {
+                                type = "病假";
+                            }
+                            else if (item.leaveType.Equals("3"))
+                            {
+                                type = "事假";
+                            }
+                            else if (item.leaveType.Equals("4"))
+                            {
+                                type = "婚假";
+                            }
+                            else if (item.leaveType.Equals("5"))
+                            {
+                                type = "丧假";
+                            }
+                            else if (item.leaveType.Equals("6"))
+                            {
+                                type = "护理假";
+                            }
+                            else if (item.leaveType.Equals("7"))
+                            {
+                                type = "年休假";
+                            }
+                            else if (item.leaveType.Equals("8"))
+                            {
+                                type = "休息";
+                            }
+                                }
+                        <div class="item-input">@type</div>
+                        @{
+                            if (item.state.Equals("1"))
+                            {
+                                <div class="item-after" >未确认</div>
+                            }
+                           else if (item.state.Equals("2"))
+                            {
+                                <div class="item-after" style="color:green;">已确认</div>
+                            }
+                            else if (item.state.Equals("3"))
+                            {
+                                <div class="item-after" style="color:red;">已拒绝</div>
+                            }
+
+                        }
+                    </div>
+                </li>
+                            }
+        }
+    </ul>
+</div>

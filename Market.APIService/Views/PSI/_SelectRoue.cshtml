@@ -1,0 +1,68 @@
+﻿
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>目标管理</title>
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.css">
+    <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.js' charset='utf-8'></script>
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
+    <!--如果你用到了拓展包中的组件，还需要引用下面两个-->
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css">
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
+    <style>
+        .buttonstyBlue {
+            background-color: steelblue; /* Green  #008CBA*/
+            border: none;
+            color: white;
+            padding: 5px 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body style="padding-top:0px;">
+   
+    <div class="page">
+        <header class="bar bar-nav">
+            <a href="#" style="width:100%;" ><h1 class="title" style="background-color:steelblue;"><label style="color:white">请选择角色</label></h1></a>
+        </header>
+        <div id="Dview" class="content" >
+            @{
+                Market.APIService.Controllers.userInfo user = (Market.APIService.Controllers.userInfo)ViewData["userInfo"];
+            }
+            <form action="Index2" method="post">
+                <div>
+                    <div style="width:100%;background-color:white;font-size:20px;line-height:40px;height:40px;border-bottom:1px solid gray;">
+                        <div style="width:100%;text-align:center;height:75px;">
+                            角色：<select id="type" name="type">
+                                <option selected="selected" value="1">战区长</option>
+                                <option value="2">城市经理</option>
+                            </select>
+                            <input type="hidden" id="userId" name="userId" value="@user.userId"> 
+                            <input type="hidden" id="SalesNo" name="SalesNo" value="@user.salesCode"> 
+                        </div>
+                        <div style="width:100%;text-align:center;height:40px;">
+                            <button class="buttonstyBlue"  style="width:44%;">确定</button>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
+    <script>
+    </script>
+</body>
+</html>

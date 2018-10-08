@@ -1,0 +1,24 @@
+﻿@model List<Market.APIService.Controllers.CusModel>
+<div class="content-block-title">客户列表</div>
+
+<div class="list-block media-list">
+    <ul>
+        @{
+            foreach (var item in Model)
+            {
+                <li>
+                    <a href="#" onclick="CheckItem('@item.CustomerCode','@item.CustomerName')" class="item-link item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title">@item.CustomerName</div>
+
+                            </div>
+                          
+
+                        </div>
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+</div>

@@ -1,0 +1,207 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+
+
+
+    <link href="https://iretailerapp.flnet.com/Content/framework7.css" rel="stylesheet">
+
+    <title>订单明细</title>
+
+    <script type="text/javascript" src="https://iretailerapp.flnet.com/Scripts/framework7.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+    <style>
+        .buttonNoSelect {
+            background-color: white;
+            color: rgb(36,172,202);
+            font-size: 16px;
+            height: 30px;
+            border: 1px solid rgb(36,172,202); /* Green */
+        }
+
+        .buttonSelect {
+            background-color: rgb(36,172,202);
+            color: white;
+            font-size: 16px;
+            height: 30px;
+            border: 1px solid rgb(36,172,202); /* Green */
+        }
+    </style>
+</head>
+<body>
+
+    @{
+        string order = (string)ViewData["order"];
+       
+        
+        //List<Market.APIService.Controllers.CusModel> Vdata = (List < Market.APIService.Controllers.CusModel>) ViewData["vModel"];
+    }
+    <div id="app" style="background-color:rgb(247,247,247);">
+        <div class="view view-main">
+
+            <div id="Dview" style="padding-top:0pt;padding-left:0pt;padding-right:0pt;" class="page-content">
+
+                <div style="width: 100%; height: 40pt; text-align: left; background-color: #e7e5e5;display:flex;">
+                    <div style="width: 10pt; height: 40pt;float:left;"> </div>
+                    <div style="flex:0.5; height: 40pt;float:left;text-align:left;font-size:13pt;line-height:40pt;color:#333333"> 订单信息</div>
+                    <div style="flex:0.5; height: 40pt;float:left;text-align:right;"> </div>
+                    <div style="width: 10pt; height: 40pt;float:left;"> </div>
+                </div>
+                <div style="width: 100%; height: 38pt; text-align: left; background-color:white;display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                    <div style="flex:0.5; height: 38pt;float:left;text-align:left;font-size:12pt;line-height:38pt;color:#333333"> 订单编号</div>
+                    <div id="lab_data_1" style="flex:0.5; height: 38pt;float:left;text-align:right;font-size:12pt;line-height:38pt;color:#333333"> </div>
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                </div>
+                <div style="width: 100%; height: 38pt; text-align: left; background-color:white;display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                    <div style="flex:0.5; height: 38pt;float:left;text-align:left;font-size:12pt;line-height:38pt;color:#333333"> 订单状态</div>
+                    <div id="lab_data_2" style="flex:0.5; height: 38pt;float:left;text-align:right;font-size:12pt;line-height:38pt;color:#333333"> </div>
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                </div>
+                <div style="width: 100%; height: 38pt; text-align: left; background-color:white;display:flex; border-color:#d4d4d8; border-bottom:solid;border-width:1px;">
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                    <div style="flex:0.5; height: 38pt;float:left;text-align:left;font-size:12pt;line-height:38pt;color:#333333"> 订单建立时间</div>
+                    <div id="lab_data_3" style="flex:0.5; height: 38pt;float:left;text-align:right;font-size:12pt;line-height:38pt;color:#333333"> </div>
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                </div>
+                <div style="width: 100%; height: 38pt; text-align: left; background-color:white;display:flex; ">
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                    <div style="flex:0.5; height: 38pt;float:left;text-align:left;font-size:12pt;line-height:38pt;color:#333333"> 取货码</div>
+                    <div id="lab_data_4" style="flex:0.5; height: 38pt;float:left;text-align:right;font-size:12pt;line-height:38pt;color:#333333"> </div>
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                </div>
+                <div style="width: 100%; height: 40pt; text-align: left; background-color: #e7e5e5;display:flex;">
+                    <div style="width: 10pt; height: 40pt;float:left;"> </div>
+                    <div style="flex:0.5; height: 40pt;float:left;text-align:left;font-size:13pt;line-height:40pt;color:#333333"> 订单内容</div>
+                    <div style="flex:0.5; height: 40pt;float:left;text-align:right;"> </div>
+                    <div style="width: 10pt; height: 40pt;float:left;"> </div>
+                </div>
+                <div style="width: 100%; height: 38pt; text-align: left; background-color:white;display:flex;border-color:#d4d4d8; border-bottom:solid;border-width:1px; ">
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                    <div style="flex:0.25; height: 38pt;float:left;text-align:left;font-size:10pt;line-height:38pt;color:#333333">项目</div>
+                    <div style="flex:0.25; height: 38pt;float:left;text-align:center;font-size:10pt;line-height:38pt;color:#333333"> 数量</div>
+                    <div style="flex:0.25; height: 38pt;float:left;text-align:center;font-size:10pt;line-height:38pt;color:#333333"> 单价</div>
+                    <div style="flex:0.25; height: 38pt;float:left;text-align:center;font-size:10pt;line-height:38pt;color:#333333"> 金额</div>
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                </div>
+                <div id="div_data_detail" style="width: 100%; text-align: left; background-color:white;border-color:#d4d4d8; border-bottom:solid;border-width:1px; ">
+                    
+                    
+                </div>
+                <div style="width: 100%; height: 38pt; text-align: left; background-color:white;display:flex;border-color:#d4d4d8; border-bottom:solid;border-width:1px; ">
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                    <div style="flex:0.5; height: 38pt;float:left;text-align:left;font-size:12pt;line-height:38pt;color:#333333"> 商品件数</div>
+                    <div id="lab_data_5" style="flex:0.5; height: 38pt;float:left;text-align:right;font-size:12pt;line-height:38pt;color:#333333"> </div>
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                </div>
+                <div style="width: 100%; height: 38pt; text-align: left; background-color:white;display:flex;">
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                    <div style="flex:0.5; height: 38pt;float:left;text-align:left;font-size:12pt;line-height:38pt;color:#333333"> 订单金额</div>
+                    <div id="lab_data_6" style="flex:0.5; height: 38pt;float:left;text-align:right;font-size:12pt;line-height:38pt;color:#333333"> </div>
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                </div>
+                <div style="width: 100%; height: 40pt; text-align: left; background-color: #e7e5e5;display:flex;">
+                    <div style="width: 10pt; height: 40pt;float:left;"> </div>
+                    <div style="flex:0.5; height: 40pt;float:left;text-align:left;font-size:13pt;line-height:40pt;color:#333333"> 联系人信息</div>
+                    <div style="flex:0.5; height: 40pt;float:left;text-align:right;"> </div>
+                    <div style="width: 10pt; height: 40pt;float:left;"> </div>
+                </div>
+                <div style="width: 100%; height: 38pt; text-align: left; background-color:white;display:flex;border-color:#d4d4d8; border-bottom:solid;border-width:1px; ">
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                    <div style="flex:0.5; height: 38pt;float:left;text-align:left;font-size:12pt;line-height:38pt;color:#333333"> 联系人姓名</div>
+                    <div id="lab_data_7" style="flex:0.5; height: 38pt;float:left;text-align:right;font-size:12pt;line-height:38pt;color:#333333"> </div>
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                </div>
+                <div style="width: 100%; height: 38pt; text-align: left; background-color:white;display:flex;border-color:#d4d4d8; border-bottom:solid;border-width:1px; ">
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                    <div style="flex:0.5; height: 38pt;float:left;text-align:left;font-size:12pt;line-height:38pt;color:#333333"> 联系人手机</div>
+                    <div id="lab_data_8" style="flex:0.5; height: 38pt;float:left;text-align:right;font-size:12pt;line-height:38pt;color:#333333"> </div>
+                    <div style="width: 10pt; height: 38pt;float:left;"> </div>
+                </div>
+                </div>
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+
+        var myApp = new Framework7({
+            // App root element
+            root: '#app',
+            // App Name
+            name: 'My App',
+            // App id
+            id: 'com.myapp.test',
+            // Enable swipe panel
+            panel: {
+                swipe: 'left',
+            },
+            // Add default routes
+            routes: [
+              {
+                  path: '/about/',
+                  url: 'about.html',
+              },
+            ],
+            // ... other parameters
+        });
+        var $$ = Framework7.$;
+        
+        var url = 'GetOrderDetail?orderNo=' + '@order';
+    
+        myApp.request.json(url,
+                  null,
+                    function (data) {
+                        $$('#lab_data_1').text(data.order.orderNo);
+                        $$('#lab_data_2').text(data.order.status);
+                        $$('#lab_data_3').text(data.order.orderDate);
+                        $$('#lab_data_4').text(data.order.landingCode);
+                        $$('#lab_data_5').text(data.order.pCount.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + '件');
+                        $$('#lab_data_6').text(data.order.amount.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'));
+                        $$('#lab_data_7').text(data.order.name);
+                        $$('#lab_data_8').text(data.order.phoneNumber);
+                        var ht = '';
+                        for (var i = 0; i < data.order.orderModelDetail.length; i++) {
+                            var row = data.order.orderModelDetail[i];
+                            ht = ht + '<div style="width: 100%; text-align: left;display:flex;">'
+                       +'<div style="width: 10pt; height: 25pt;float:left;"> </div>'
+                      + ' <div style="flex:0.25; height: auto;float:left;text-align:left;font-size:10pt;color:#333333;">' + row.pNmae + '</div>'
+                      + ' <div style="flex:0.25; height: 25pt;float:left;text-align:center;font-size:10pt;line-height:25pt;color:#333333">' + row.qty.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + '</div>'
+                       + '<div style="flex:0.25; height: 25pt;float:left;text-align:center;font-size:10pt;line-height:25pt;color:#333333"> ' + row.price.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + '</div>'
+                      + ' <div style="flex:0.25; height: 25pt;float:left;text-align:center;font-size:10pt;line-height:25pt;color:#333333"> ' + row.amount.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + '</div>'
+                       +'<div style="width: 10pt; height: 25pt;float:left;"> </div>'
+                   +'</div>';
+                        }
+                        $$('#div_data_detail').html(ht);
+                    });
+     
+     
+       
+
+
+    </script>
+
+
+    <!-- Path to your app js-->
+
+
+
+</body>
+</html>

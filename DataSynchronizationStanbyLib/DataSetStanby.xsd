@@ -1,0 +1,994 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSetStanby" targetNamespace="http://tempuri.org/DataSetStanby.xsd" xmlns:mstns="http://tempuri.org/DataSetStanby.xsd" xmlns="http://tempuri.org/DataSetStanby.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="HomeQueriesTableAdapter" GeneratorFunctionsComponentClassName="HomeQueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" UserFunctionsComponentName="HomeQueriesTableAdapter" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" ParameterPrefix=":" PropertyReference="ApplicationSettings.DataSynchronizationStanbyLib.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="Oracle.ManagedDataAccess.Client" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_SALES_TRANS_APP_QUERYTableAdapter" GeneratorDataComponentClassName="V_SALES_TRANS_APP_QUERYTableAdapter" Name="V_SALES_TRANS_APP_QUERY" UserDataComponentName="V_SALES_TRANS_APP_QUERYTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DbObjectType="View" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT  ID, TRANS_NO, EMPLOYEE_ID, CH_REPORT_NAME, JOB_CODE, SALES_DATE, MACHINE_MODEL_NO, SALES_QTY, SALES_PRICE, SALES_AMOUNT, 
+               T_TYPEID, T_TYPENAME, T_BUID, T_BUNAME, SHOP_CODE, SHOP_NAME, CUSTOMER_CODE, CUSTOMER_NAME, GOODS_TYPE_CODE, 
+               GOODS_TYPE_NAME, TRANS_TYPE_CODE, TRANS_TYPE_NAME, CREATOR_ID, CREATE_DATE, CONSUMER_NAME, CONSUMER_PHONE_NO, 
+               INVOICE_STATUS_NAME, INVOICE_STATUS_CODE, UNQUALIFIED_REASON_NAME, UNQUALIFIED_REASON_CODE, BOARD_FLAG, BRAND_CODE, 
+               TVSIZE, T_TVSIZEID, ACT_NO, ACT_NAME, SEX, SEX_NAME, AREA_ID, ADDR, AGE_PERIOD_ID, AGE_PERIOD_NAME, CH_NO, SN_NO, INVOICE_FLAG, 
+               BRAND_NAME, LOCK_TYPE_CODE, LOCK_TYPE_NAME
+FROM     HPSI10_QC.V_SALES_TRANS_APP_QUERY</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ID" DataSetColumn="ID" />
+              <Mapping SourceColumn="TRANS_NO" DataSetColumn="TRANS_NO" />
+              <Mapping SourceColumn="EMPLOYEE_ID" DataSetColumn="EMPLOYEE_ID" />
+              <Mapping SourceColumn="CH_REPORT_NAME" DataSetColumn="CH_REPORT_NAME" />
+              <Mapping SourceColumn="JOB_CODE" DataSetColumn="JOB_CODE" />
+              <Mapping SourceColumn="SALES_DATE" DataSetColumn="SALES_DATE" />
+              <Mapping SourceColumn="MACHINE_MODEL_NO" DataSetColumn="MACHINE_MODEL_NO" />
+              <Mapping SourceColumn="SALES_QTY" DataSetColumn="SALES_QTY" />
+              <Mapping SourceColumn="SALES_PRICE" DataSetColumn="SALES_PRICE" />
+              <Mapping SourceColumn="SALES_AMOUNT" DataSetColumn="SALES_AMOUNT" />
+              <Mapping SourceColumn="T_TYPEID" DataSetColumn="T_TYPEID" />
+              <Mapping SourceColumn="T_TYPENAME" DataSetColumn="T_TYPENAME" />
+              <Mapping SourceColumn="T_BUID" DataSetColumn="T_BUID" />
+              <Mapping SourceColumn="T_BUNAME" DataSetColumn="T_BUNAME" />
+              <Mapping SourceColumn="SHOP_CODE" DataSetColumn="SHOP_CODE" />
+              <Mapping SourceColumn="SHOP_NAME" DataSetColumn="SHOP_NAME" />
+              <Mapping SourceColumn="CUSTOMER_CODE" DataSetColumn="CUSTOMER_CODE" />
+              <Mapping SourceColumn="CUSTOMER_NAME" DataSetColumn="CUSTOMER_NAME" />
+              <Mapping SourceColumn="GOODS_TYPE_CODE" DataSetColumn="GOODS_TYPE_CODE" />
+              <Mapping SourceColumn="GOODS_TYPE_NAME" DataSetColumn="GOODS_TYPE_NAME" />
+              <Mapping SourceColumn="TRANS_TYPE_CODE" DataSetColumn="TRANS_TYPE_CODE" />
+              <Mapping SourceColumn="TRANS_TYPE_NAME" DataSetColumn="TRANS_TYPE_NAME" />
+              <Mapping SourceColumn="CREATOR_ID" DataSetColumn="CREATOR_ID" />
+              <Mapping SourceColumn="CREATE_DATE" DataSetColumn="CREATE_DATE" />
+              <Mapping SourceColumn="CONSUMER_NAME" DataSetColumn="CONSUMER_NAME" />
+              <Mapping SourceColumn="CONSUMER_PHONE_NO" DataSetColumn="CONSUMER_PHONE_NO" />
+              <Mapping SourceColumn="INVOICE_STATUS_NAME" DataSetColumn="INVOICE_STATUS_NAME" />
+              <Mapping SourceColumn="UNQUALIFIED_REASON_NAME" DataSetColumn="UNQUALIFIED_REASON_NAME" />
+              <Mapping SourceColumn="INVOICE_STATUS_CODE" DataSetColumn="INVOICE_STATUS_CODE" />
+              <Mapping SourceColumn="UNQUALIFIED_REASON_CODE" DataSetColumn="UNQUALIFIED_REASON_CODE" />
+              <Mapping SourceColumn="BOARD_FLAG" DataSetColumn="BOARD_FLAG" />
+              <Mapping SourceColumn="BRAND_CODE" DataSetColumn="BRAND_CODE" />
+              <Mapping SourceColumn="TVSIZE" DataSetColumn="TVSIZE" />
+              <Mapping SourceColumn="T_TVSIZEID" DataSetColumn="T_TVSIZEID" />
+              <Mapping SourceColumn="ACT_NO" DataSetColumn="ACT_NO" />
+              <Mapping SourceColumn="ACT_NAME" DataSetColumn="ACT_NAME" />
+              <Mapping SourceColumn="SEX" DataSetColumn="SEX" />
+              <Mapping SourceColumn="SEX_NAME" DataSetColumn="SEX_NAME" />
+              <Mapping SourceColumn="AREA_ID" DataSetColumn="AREA_ID" />
+              <Mapping SourceColumn="ADDR" DataSetColumn="ADDR" />
+              <Mapping SourceColumn="AGE_PERIOD_ID" DataSetColumn="AGE_PERIOD_ID" />
+              <Mapping SourceColumn="AGE_PERIOD_NAME" DataSetColumn="AGE_PERIOD_NAME" />
+              <Mapping SourceColumn="CH_NO" DataSetColumn="CH_NO" />
+              <Mapping SourceColumn="SN_NO" DataSetColumn="SN_NO" />
+              <Mapping SourceColumn="INVOICE_FLAG" DataSetColumn="INVOICE_FLAG" />
+              <Mapping SourceColumn="BRAND_NAME" DataSetColumn="BRAND_NAME" />
+              <Mapping SourceColumn="LOCK_TYPE_CODE" DataSetColumn="LOCK_TYPE_CODE" />
+              <Mapping SourceColumn="LOCK_TYPE_NAME" DataSetColumn="LOCK_TYPE_NAME" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT  ID, TRANS_NO, EMPLOYEE_ID, CH_REPORT_NAME, JOB_CODE, SALES_DATE, MACHINE_MODEL_NO, SALES_QTY, SALES_PRICE, SALES_AMOUNT, 
+               T_TYPEID, T_TYPENAME, T_BUID, T_BUNAME, SHOP_CODE, SHOP_NAME, CUSTOMER_CODE, CUSTOMER_NAME, GOODS_TYPE_CODE, 
+               GOODS_TYPE_NAME, TRANS_TYPE_CODE, TRANS_TYPE_NAME, CREATOR_ID, CREATE_DATE, CONSUMER_NAME, CONSUMER_PHONE_NO, 
+               INVOICE_STATUS_NAME, INVOICE_STATUS_CODE, UNQUALIFIED_REASON_NAME, UNQUALIFIED_REASON_CODE, BOARD_FLAG, BRAND_CODE, 
+               TVSIZE, T_TVSIZEID, ACT_NO, ACT_NAME, SEX, SEX_NAME, AREA_ID, ADDR, AGE_PERIOD_ID, AGE_PERIOD_NAME, CH_NO, SN_NO, INVOICE_FLAG, 
+               BRAND_NAME, LOCK_TYPE_CODE, LOCK_TYPE_NAME FROM HPSI10_QC.V_SALES_TRANS_APP_QUERY WHERE (SALES_DATE &gt;= :startDate) AND (SALES_DATE &lt;= :endDate) AND (GOODS_TYPE_CODE = :GOODS_TYPE_CODE) AND (EMPLOYEE_ID = :EMPLOYEE_ID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="startDate" ColumnName="SALES_DATE" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="DATE(8)" DbType="Date" Direction="Input" ParameterName=":startDate" Precision="0" ProviderType="Date" Scale="0" Size="8" SourceColumn="SALES_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="endDate" ColumnName="SALES_DATE" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="DATE(8)" DbType="Date" Direction="Input" ParameterName=":endDate" Precision="0" ProviderType="Date" Scale="0" Size="8" SourceColumn="SALES_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="GOODS_TYPE_CODE" ColumnName="GOODS_TYPE_CODE" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="VARCHAR2(50)" DbType="String" Direction="Input" ParameterName=":GOODS_TYPE_CODE" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="GOODS_TYPE_CODE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="VARCHAR2(50)" DbType="String" Direction="Input" ParameterName=":EMPLOYEE_ID" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="EMPLOYEE_ID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByID" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByID" GeneratorSourceName="FillByID" GetMethodModifier="Public" GetMethodName="GetDataByID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByID" UserSourceName="FillByID">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT  ID, TRANS_NO, EMPLOYEE_ID, CH_REPORT_NAME, JOB_CODE, SALES_DATE, MACHINE_MODEL_NO, SALES_QTY, SALES_PRICE, SALES_AMOUNT, 
+               T_TYPEID, T_TYPENAME, T_BUID, T_BUNAME, SHOP_CODE, SHOP_NAME, CUSTOMER_CODE, CUSTOMER_NAME, GOODS_TYPE_CODE, 
+               GOODS_TYPE_NAME, TRANS_TYPE_CODE, TRANS_TYPE_NAME, CREATOR_ID, CREATE_DATE, CONSUMER_NAME, CONSUMER_PHONE_NO, 
+               INVOICE_STATUS_NAME, INVOICE_STATUS_CODE, UNQUALIFIED_REASON_NAME, UNQUALIFIED_REASON_CODE, BOARD_FLAG, BRAND_CODE, 
+               TVSIZE, T_TVSIZEID, ACT_NO, ACT_NAME, SEX, SEX_NAME, AREA_ID, ADDR, AGE_PERIOD_ID, AGE_PERIOD_NAME, CH_NO, SN_NO, INVOICE_FLAG, 
+               BRAND_NAME, LOCK_TYPE_CODE, LOCK_TYPE_NAME FROM HPSI10_QC.V_SALES_TRANS_APP_QUERY WHERE (ID = :ID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="ID" ColumnName="ID" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="VARCHAR2(50)" DbType="String" Direction="Input" ParameterName=":ID" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="ID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByShop" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByShop" GeneratorSourceName="FillByShop" GetMethodModifier="Public" GetMethodName="GetDataByShop" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByShop" UserSourceName="FillByShop">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT  ID, TRANS_NO, EMPLOYEE_ID, CH_REPORT_NAME, JOB_CODE, SALES_DATE, MACHINE_MODEL_NO, SALES_QTY, SALES_PRICE, SALES_AMOUNT, 
+               T_TYPEID, T_TYPENAME, T_BUID, T_BUNAME, SHOP_CODE, SHOP_NAME, CUSTOMER_CODE, CUSTOMER_NAME, GOODS_TYPE_CODE, 
+               GOODS_TYPE_NAME, TRANS_TYPE_CODE, TRANS_TYPE_NAME, CREATOR_ID, CREATE_DATE, CONSUMER_NAME, CONSUMER_PHONE_NO, 
+               INVOICE_STATUS_NAME, INVOICE_STATUS_CODE, UNQUALIFIED_REASON_NAME, UNQUALIFIED_REASON_CODE, BOARD_FLAG, BRAND_CODE, 
+               TVSIZE, T_TVSIZEID, ACT_NO, ACT_NAME, SEX, SEX_NAME, AREA_ID, ADDR, AGE_PERIOD_ID, AGE_PERIOD_NAME, CH_NO, SN_NO, INVOICE_FLAG, 
+               BRAND_NAME, LOCK_TYPE_CODE, LOCK_TYPE_NAME FROM HPSI10_QC.V_SALES_TRANS_APP_QUERY WHERE (SALES_DATE &gt;= :startDate) AND (SALES_DATE &lt;= :endDate) AND (GOODS_TYPE_CODE = :GOODS_TYPE_CODE) AND (SHOP_CODE = :SHOP_CODE)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="startDate" ColumnName="SALES_DATE" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="DATE(8)" DbType="Date" Direction="Input" ParameterName=":startDate" Precision="0" ProviderType="Date" Scale="0" Size="8" SourceColumn="SALES_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="endDate" ColumnName="SALES_DATE" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="DATE(8)" DbType="Date" Direction="Input" ParameterName=":endDate" Precision="0" ProviderType="Date" Scale="0" Size="8" SourceColumn="SALES_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="GOODS_TYPE_CODE" ColumnName="GOODS_TYPE_CODE" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="VARCHAR2(50)" DbType="String" Direction="Input" ParameterName=":GOODS_TYPE_CODE" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="GOODS_TYPE_CODE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="SHOP_CODE" ColumnName="SHOP_CODE" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="VARCHAR2(50)" DbType="String" Direction="Input" ParameterName=":SHOP_CODE" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="SHOP_CODE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DbObjectType="View" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByMemberId" GetMethodModifier="Public" GetMethodName="GetDataByMemberId" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByMemberId" UserSourceName="GetDataByMemberId">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT  ID, TRANS_NO, EMPLOYEE_ID, CH_REPORT_NAME, JOB_CODE, SALES_DATE, MACHINE_MODEL_NO, SALES_QTY, SALES_PRICE, SALES_AMOUNT, 
+               T_TYPEID, T_TYPENAME, T_BUID, T_BUNAME, SHOP_CODE, SHOP_NAME, CUSTOMER_CODE, CUSTOMER_NAME, GOODS_TYPE_CODE, 
+               GOODS_TYPE_NAME, TRANS_TYPE_CODE, TRANS_TYPE_NAME, CREATOR_ID, CREATE_DATE, CONSUMER_NAME, CONSUMER_PHONE_NO, 
+               INVOICE_STATUS_NAME, INVOICE_STATUS_CODE, UNQUALIFIED_REASON_NAME, UNQUALIFIED_REASON_CODE, BOARD_FLAG, BRAND_CODE, 
+               TVSIZE, T_TVSIZEID, ACT_NO, ACT_NAME, SEX, SEX_NAME, AREA_ID, ADDR, AGE_PERIOD_ID, AGE_PERIOD_NAME, CH_NO, SN_NO, INVOICE_FLAG, 
+               BRAND_NAME, LOCK_TYPE_CODE, LOCK_TYPE_NAME
+FROM     HPSI10_QC.V_SALES_TRANS_APP_QUERY where member_id=:member_id</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="member_id" ColumnName="MEMBER_ID" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="VARCHAR2(36)" DbType="String" Direction="Input" ParameterName=":member_id" Precision="0" ProviderType="Varchar2" Scale="0" Size="36" SourceColumn="MEMBER_ID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DbObjectType="View" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetReturnDataByChNo" GetMethodModifier="Public" GetMethodName="GetReturnDataByChNo" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetReturnDataByChNo" UserSourceName="GetReturnDataByChNo">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT  ID, TRANS_NO, EMPLOYEE_ID, CH_REPORT_NAME, JOB_CODE, SALES_DATE, MACHINE_MODEL_NO, SALES_QTY, SALES_PRICE, SALES_AMOUNT, 
+               T_TYPEID, T_TYPENAME, T_BUID, T_BUNAME, SHOP_CODE, SHOP_NAME, CUSTOMER_CODE, CUSTOMER_NAME, GOODS_TYPE_CODE, 
+               GOODS_TYPE_NAME, TRANS_TYPE_CODE, TRANS_TYPE_NAME, CREATOR_ID, CREATE_DATE, CONSUMER_NAME, CONSUMER_PHONE_NO, 
+               INVOICE_STATUS_NAME, INVOICE_STATUS_CODE, UNQUALIFIED_REASON_NAME, UNQUALIFIED_REASON_CODE, BOARD_FLAG, BRAND_CODE, 
+               TVSIZE, T_TVSIZEID, ACT_NO, ACT_NAME, SEX, SEX_NAME, AREA_ID, ADDR, AGE_PERIOD_ID, AGE_PERIOD_NAME, CH_NO, SN_NO, INVOICE_FLAG, 
+               BRAND_NAME, LOCK_TYPE_CODE, LOCK_TYPE_NAME FROM HPSI10_QC.V_SALES_TRANS_APP_QUERY WHERE (TRANS_TYPE_CODE = 'ShopReturn') AND (CH_NO = :NO)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="NO" ColumnName="CH_NO" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="VARCHAR2(50)" DbType="String" Direction="Input" ParameterName=":NO" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="CH_NO" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="SNCountQuery" Modifier="Public" Name="SNCountQuery" QueryType="Scalar" ScalarCallRetval="System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="SNCountQuery">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT  COUNT(*) AS EXPR1
+FROM     HPSI10_QC.V_SALES_TRANS_APP_QUERY
+WHERE   (SN_NO = :SN)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="SN" ColumnName="SN_NO" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="VARCHAR2(50)" DbType="String" Direction="Input" ParameterName=":SN" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="SN_NO" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TF_FILEINFOTableAdapter" GeneratorDataComponentClassName="TF_FILEINFOTableAdapter" Name="TF_FILEINFO" UserDataComponentName="TF_FILEINFOTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="HPSI10_QC.TF_FILEINFO" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM "HPSI10_QC"."TF_FILEINFO" WHERE (("T_FILEID" = :Original_T_FILEID) AND ("T_FILENAME" = :Original_T_FILENAME) AND ((:IsNull_CREATOR = 1 AND "CREATOR" IS NULL) OR ("CREATOR" = :Original_CREATOR)) AND ((:IsNull_CREATE_DATE = 1 AND "CREATE_DATE" IS NULL) OR ("CREATE_DATE" = :Original_CREATE_DATE)) AND ((:IsNull_MODIFIER = 1 AND "MODIFIER" IS NULL) OR ("MODIFIER" = :Original_MODIFIER)) AND ((:IsNull_MODIFY_DATE = 1 AND "MODIFY_DATE" IS NULL) OR ("MODIFY_DATE" = :Original_MODIFY_DATE)) AND ("ACTIVE_FLAG" = :Original_ACTIVE_FLAG) AND ((:IsNull_FILE_TYPE = 1 AND "FILE_TYPE" IS NULL) OR ("FILE_TYPE" = :Original_FILE_TYPE)) AND ((:IsNull_FILE_SIZE = 1 AND "FILE_SIZE" IS NULL) OR ("FILE_SIZE" = :Original_FILE_SIZE)) AND ((:IsNull_VIRTUAL_PATH = 1 AND "VIRTUAL_PATH" IS NULL) OR ("VIRTUAL_PATH" = :Original_VIRTUAL_PATH)) AND ((:IsNull_UPLOAD_NAME = 1 AND "UPLOAD_NAME" IS NULL) OR ("UPLOAD_NAME" = :Original_UPLOAD_NAME)) AND ((:IsNull_PHYSICAL_PATH = 1 AND "PHYSICAL_PATH" IS NULL) OR ("PHYSICAL_PATH" = :Original_PHYSICAL_PATH)) AND ((:IsNull_DESCP = 1 AND "DESCP" IS NULL) OR ("DESCP" = :Original_DESCP)) AND ((:IsNull_GROUP_CODE = 1 AND "GROUP_CODE" IS NULL) OR ("GROUP_CODE" = :Original_GROUP_CODE)) AND ((:IsNull_FOREIGN_KEY = 1 AND "FOREIGN_KEY" IS NULL) OR ("FOREIGN_KEY" = :Original_FOREIGN_KEY)) AND ((:IsNull_FILE_DOC_GROUP = 1 AND "FILE_DOC_GROUP" IS NULL) OR ("FILE_DOC_GROUP" = :Original_FILE_DOC_GROUP)) AND ((:IsNull_FILE_TYPE_CODE = 1 AND "FILE_TYPE_CODE" IS NULL) OR ("FILE_TYPE_CODE" = :Original_FILE_TYPE_CODE)) AND ((:IsNull_FILE_TYPE_NAME = 1 AND "FILE_TYPE_NAME" IS NULL) OR ("FILE_TYPE_NAME" = :Original_FILE_TYPE_NAME)))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_T_FILEID" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="T_FILEID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_T_FILENAME" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="T_FILENAME" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_CREATOR" Precision="0" ProviderType="Int32" Scale="0" Size="36" SourceColumn="CREATOR" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_CREATOR" Precision="0" ProviderType="Varchar2" Scale="0" Size="36" SourceColumn="CREATOR" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_CREATE_DATE" Precision="0" ProviderType="Int32" Scale="0" Size="7" SourceColumn="CREATE_DATE" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="Original_CREATE_DATE" Precision="0" ProviderType="Date" Scale="0" Size="7" SourceColumn="CREATE_DATE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_MODIFIER" Precision="0" ProviderType="Int32" Scale="0" Size="36" SourceColumn="MODIFIER" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_MODIFIER" Precision="0" ProviderType="Varchar2" Scale="0" Size="36" SourceColumn="MODIFIER" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_MODIFY_DATE" Precision="0" ProviderType="Int32" Scale="0" Size="7" SourceColumn="MODIFY_DATE" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="Original_MODIFY_DATE" Precision="0" ProviderType="Date" Scale="0" Size="7" SourceColumn="MODIFY_DATE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="Original_ACTIVE_FLAG" Precision="0" ProviderType="Decimal" Scale="0" Size="22" SourceColumn="ACTIVE_FLAG" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FILE_TYPE" Precision="0" ProviderType="Int32" Scale="0" Size="50" SourceColumn="FILE_TYPE" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_FILE_TYPE" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_TYPE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FILE_SIZE" Precision="0" ProviderType="Int32" Scale="0" Size="22" SourceColumn="FILE_SIZE" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="Original_FILE_SIZE" Precision="0" ProviderType="Decimal" Scale="0" Size="22" SourceColumn="FILE_SIZE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_VIRTUAL_PATH" Precision="0" ProviderType="Int32" Scale="0" Size="200" SourceColumn="VIRTUAL_PATH" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_VIRTUAL_PATH" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="VIRTUAL_PATH" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_UPLOAD_NAME" Precision="0" ProviderType="Int32" Scale="0" Size="200" SourceColumn="UPLOAD_NAME" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_UPLOAD_NAME" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="UPLOAD_NAME" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_PHYSICAL_PATH" Precision="0" ProviderType="Int32" Scale="0" Size="200" SourceColumn="PHYSICAL_PATH" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_PHYSICAL_PATH" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="PHYSICAL_PATH" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_DESCP" Precision="0" ProviderType="Int32" Scale="0" Size="200" SourceColumn="DESCP" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_DESCP" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="DESCP" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_GROUP_CODE" Precision="0" ProviderType="Int32" Scale="0" Size="30" SourceColumn="GROUP_CODE" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_GROUP_CODE" Precision="0" ProviderType="Varchar2" Scale="0" Size="30" SourceColumn="GROUP_CODE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FOREIGN_KEY" Precision="0" ProviderType="Int32" Scale="0" Size="64" SourceColumn="FOREIGN_KEY" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_FOREIGN_KEY" Precision="0" ProviderType="Varchar2" Scale="0" Size="64" SourceColumn="FOREIGN_KEY" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FILE_DOC_GROUP" Precision="0" ProviderType="Int32" Scale="0" Size="50" SourceColumn="FILE_DOC_GROUP" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_FILE_DOC_GROUP" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_DOC_GROUP" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FILE_TYPE_CODE" Precision="0" ProviderType="Int32" Scale="0" Size="50" SourceColumn="FILE_TYPE_CODE" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_FILE_TYPE_CODE" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_TYPE_CODE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FILE_TYPE_NAME" Precision="0" ProviderType="Int32" Scale="0" Size="50" SourceColumn="FILE_TYPE_NAME" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_FILE_TYPE_NAME" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_TYPE_NAME" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO "HPSI10_QC"."TF_FILEINFO" ("T_FILEID", "T_FILENAME", "CREATOR", "CREATE_DATE", "MODIFIER", "MODIFY_DATE", "ACTIVE_FLAG", "FILE_TYPE", "FILE_SIZE", "VIRTUAL_PATH", "UPLOAD_NAME", "PHYSICAL_PATH", "DESCP", "GROUP_CODE", "FOREIGN_KEY", "FILE_DOC_GROUP", "FILE_TYPE_CODE", "FILE_TYPE_NAME") VALUES (:T_FILEID, :T_FILENAME, :CREATOR, :CREATE_DATE, :MODIFIER, :MODIFY_DATE, :ACTIVE_FLAG, :FILE_TYPE, :FILE_SIZE, :VIRTUAL_PATH, :UPLOAD_NAME, :PHYSICAL_PATH, :DESCP, :GROUP_CODE, :FOREIGN_KEY, :FILE_DOC_GROUP, :FILE_TYPE_CODE, :FILE_TYPE_NAME)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="T_FILEID" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="T_FILEID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="T_FILENAME" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="T_FILENAME" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="CREATOR" Precision="0" ProviderType="Varchar2" Scale="0" Size="36" SourceColumn="CREATOR" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="CREATE_DATE" Precision="0" ProviderType="Date" Scale="0" Size="7" SourceColumn="CREATE_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="MODIFIER" Precision="0" ProviderType="Varchar2" Scale="0" Size="36" SourceColumn="MODIFIER" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="MODIFY_DATE" Precision="0" ProviderType="Date" Scale="0" Size="7" SourceColumn="MODIFY_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="ACTIVE_FLAG" Precision="0" ProviderType="Decimal" Scale="0" Size="22" SourceColumn="ACTIVE_FLAG" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="FILE_TYPE" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_TYPE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="FILE_SIZE" Precision="0" ProviderType="Decimal" Scale="0" Size="22" SourceColumn="FILE_SIZE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="VIRTUAL_PATH" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="VIRTUAL_PATH" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="UPLOAD_NAME" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="UPLOAD_NAME" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="PHYSICAL_PATH" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="PHYSICAL_PATH" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="DESCP" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="DESCP" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="GROUP_CODE" Precision="0" ProviderType="Varchar2" Scale="0" Size="30" SourceColumn="GROUP_CODE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="FOREIGN_KEY" Precision="0" ProviderType="Varchar2" Scale="0" Size="64" SourceColumn="FOREIGN_KEY" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="FILE_DOC_GROUP" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_DOC_GROUP" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="FILE_TYPE_CODE" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_TYPE_CODE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="FILE_TYPE_NAME" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_TYPE_NAME" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT T_FILEID, T_FILENAME, CREATOR, CREATE_DATE, MODIFIER, MODIFY_DATE, ACTIVE_FLAG, FILE_TYPE, FILE_SIZE, VIRTUAL_PATH, UPLOAD_NAME, PHYSICAL_PATH, DESCP, GROUP_CODE, FOREIGN_KEY, FILE_DOC_GROUP, FILE_TYPE_CODE, FILE_TYPE_NAME FROM HPSI10_QC.TF_FILEINFO</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE "HPSI10_QC"."TF_FILEINFO" SET "T_FILEID" = :T_FILEID, "T_FILENAME" = :T_FILENAME, "CREATOR" = :CREATOR, "CREATE_DATE" = :CREATE_DATE, "MODIFIER" = :MODIFIER, "MODIFY_DATE" = :MODIFY_DATE, "ACTIVE_FLAG" = :ACTIVE_FLAG, "FILE_TYPE" = :FILE_TYPE, "FILE_SIZE" = :FILE_SIZE, "VIRTUAL_PATH" = :VIRTUAL_PATH, "UPLOAD_NAME" = :UPLOAD_NAME, "PHYSICAL_PATH" = :PHYSICAL_PATH, "DESCP" = :DESCP, "GROUP_CODE" = :GROUP_CODE, "FOREIGN_KEY" = :FOREIGN_KEY, "FILE_DOC_GROUP" = :FILE_DOC_GROUP, "FILE_TYPE_CODE" = :FILE_TYPE_CODE, "FILE_TYPE_NAME" = :FILE_TYPE_NAME WHERE (("T_FILEID" = :Original_T_FILEID) AND ("T_FILENAME" = :Original_T_FILENAME) AND ((:IsNull_CREATOR = 1 AND "CREATOR" IS NULL) OR ("CREATOR" = :Original_CREATOR)) AND ((:IsNull_CREATE_DATE = 1 AND "CREATE_DATE" IS NULL) OR ("CREATE_DATE" = :Original_CREATE_DATE)) AND ((:IsNull_MODIFIER = 1 AND "MODIFIER" IS NULL) OR ("MODIFIER" = :Original_MODIFIER)) AND ((:IsNull_MODIFY_DATE = 1 AND "MODIFY_DATE" IS NULL) OR ("MODIFY_DATE" = :Original_MODIFY_DATE)) AND ("ACTIVE_FLAG" = :Original_ACTIVE_FLAG) AND ((:IsNull_FILE_TYPE = 1 AND "FILE_TYPE" IS NULL) OR ("FILE_TYPE" = :Original_FILE_TYPE)) AND ((:IsNull_FILE_SIZE = 1 AND "FILE_SIZE" IS NULL) OR ("FILE_SIZE" = :Original_FILE_SIZE)) AND ((:IsNull_VIRTUAL_PATH = 1 AND "VIRTUAL_PATH" IS NULL) OR ("VIRTUAL_PATH" = :Original_VIRTUAL_PATH)) AND ((:IsNull_UPLOAD_NAME = 1 AND "UPLOAD_NAME" IS NULL) OR ("UPLOAD_NAME" = :Original_UPLOAD_NAME)) AND ((:IsNull_PHYSICAL_PATH = 1 AND "PHYSICAL_PATH" IS NULL) OR ("PHYSICAL_PATH" = :Original_PHYSICAL_PATH)) AND ((:IsNull_DESCP = 1 AND "DESCP" IS NULL) OR ("DESCP" = :Original_DESCP)) AND ((:IsNull_GROUP_CODE = 1 AND "GROUP_CODE" IS NULL) OR ("GROUP_CODE" = :Original_GROUP_CODE)) AND ((:IsNull_FOREIGN_KEY = 1 AND "FOREIGN_KEY" IS NULL) OR ("FOREIGN_KEY" = :Original_FOREIGN_KEY)) AND ((:IsNull_FILE_DOC_GROUP = 1 AND "FILE_DOC_GROUP" IS NULL) OR ("FILE_DOC_GROUP" = :Original_FILE_DOC_GROUP)) AND ((:IsNull_FILE_TYPE_CODE = 1 AND "FILE_TYPE_CODE" IS NULL) OR ("FILE_TYPE_CODE" = :Original_FILE_TYPE_CODE)) AND ((:IsNull_FILE_TYPE_NAME = 1 AND "FILE_TYPE_NAME" IS NULL) OR ("FILE_TYPE_NAME" = :Original_FILE_TYPE_NAME)))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="T_FILEID" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="T_FILEID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="T_FILENAME" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="T_FILENAME" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="CREATOR" Precision="0" ProviderType="Varchar2" Scale="0" Size="36" SourceColumn="CREATOR" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="CREATE_DATE" Precision="0" ProviderType="Date" Scale="0" Size="7" SourceColumn="CREATE_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="MODIFIER" Precision="0" ProviderType="Varchar2" Scale="0" Size="36" SourceColumn="MODIFIER" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="MODIFY_DATE" Precision="0" ProviderType="Date" Scale="0" Size="7" SourceColumn="MODIFY_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="ACTIVE_FLAG" Precision="0" ProviderType="Decimal" Scale="0" Size="22" SourceColumn="ACTIVE_FLAG" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="FILE_TYPE" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_TYPE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="FILE_SIZE" Precision="0" ProviderType="Decimal" Scale="0" Size="22" SourceColumn="FILE_SIZE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="VIRTUAL_PATH" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="VIRTUAL_PATH" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="UPLOAD_NAME" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="UPLOAD_NAME" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="PHYSICAL_PATH" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="PHYSICAL_PATH" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="DESCP" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="DESCP" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="GROUP_CODE" Precision="0" ProviderType="Varchar2" Scale="0" Size="30" SourceColumn="GROUP_CODE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="FOREIGN_KEY" Precision="0" ProviderType="Varchar2" Scale="0" Size="64" SourceColumn="FOREIGN_KEY" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="FILE_DOC_GROUP" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_DOC_GROUP" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="FILE_TYPE_CODE" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_TYPE_CODE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="FILE_TYPE_NAME" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_TYPE_NAME" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_T_FILEID" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="T_FILEID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_T_FILENAME" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="T_FILENAME" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_CREATOR" Precision="0" ProviderType="Int32" Scale="0" Size="36" SourceColumn="CREATOR" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_CREATOR" Precision="0" ProviderType="Varchar2" Scale="0" Size="36" SourceColumn="CREATOR" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_CREATE_DATE" Precision="0" ProviderType="Int32" Scale="0" Size="7" SourceColumn="CREATE_DATE" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="Original_CREATE_DATE" Precision="0" ProviderType="Date" Scale="0" Size="7" SourceColumn="CREATE_DATE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_MODIFIER" Precision="0" ProviderType="Int32" Scale="0" Size="36" SourceColumn="MODIFIER" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_MODIFIER" Precision="0" ProviderType="Varchar2" Scale="0" Size="36" SourceColumn="MODIFIER" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_MODIFY_DATE" Precision="0" ProviderType="Int32" Scale="0" Size="7" SourceColumn="MODIFY_DATE" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Date" Direction="Input" ParameterName="Original_MODIFY_DATE" Precision="0" ProviderType="Date" Scale="0" Size="7" SourceColumn="MODIFY_DATE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="Original_ACTIVE_FLAG" Precision="0" ProviderType="Decimal" Scale="0" Size="22" SourceColumn="ACTIVE_FLAG" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FILE_TYPE" Precision="0" ProviderType="Int32" Scale="0" Size="50" SourceColumn="FILE_TYPE" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_FILE_TYPE" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_TYPE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FILE_SIZE" Precision="0" ProviderType="Int32" Scale="0" Size="22" SourceColumn="FILE_SIZE" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="Original_FILE_SIZE" Precision="0" ProviderType="Decimal" Scale="0" Size="22" SourceColumn="FILE_SIZE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_VIRTUAL_PATH" Precision="0" ProviderType="Int32" Scale="0" Size="200" SourceColumn="VIRTUAL_PATH" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_VIRTUAL_PATH" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="VIRTUAL_PATH" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_UPLOAD_NAME" Precision="0" ProviderType="Int32" Scale="0" Size="200" SourceColumn="UPLOAD_NAME" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_UPLOAD_NAME" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="UPLOAD_NAME" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_PHYSICAL_PATH" Precision="0" ProviderType="Int32" Scale="0" Size="200" SourceColumn="PHYSICAL_PATH" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_PHYSICAL_PATH" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="PHYSICAL_PATH" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_DESCP" Precision="0" ProviderType="Int32" Scale="0" Size="200" SourceColumn="DESCP" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_DESCP" Precision="0" ProviderType="Varchar2" Scale="0" Size="200" SourceColumn="DESCP" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_GROUP_CODE" Precision="0" ProviderType="Int32" Scale="0" Size="30" SourceColumn="GROUP_CODE" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_GROUP_CODE" Precision="0" ProviderType="Varchar2" Scale="0" Size="30" SourceColumn="GROUP_CODE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FOREIGN_KEY" Precision="0" ProviderType="Int32" Scale="0" Size="64" SourceColumn="FOREIGN_KEY" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_FOREIGN_KEY" Precision="0" ProviderType="Varchar2" Scale="0" Size="64" SourceColumn="FOREIGN_KEY" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FILE_DOC_GROUP" Precision="0" ProviderType="Int32" Scale="0" Size="50" SourceColumn="FILE_DOC_GROUP" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_FILE_DOC_GROUP" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_DOC_GROUP" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FILE_TYPE_CODE" Precision="0" ProviderType="Int32" Scale="0" Size="50" SourceColumn="FILE_TYPE_CODE" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_FILE_TYPE_CODE" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_TYPE_CODE" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FILE_TYPE_NAME" Precision="0" ProviderType="Int32" Scale="0" Size="50" SourceColumn="FILE_TYPE_NAME" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_FILE_TYPE_NAME" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="FILE_TYPE_NAME" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="T_FILEID" DataSetColumn="T_FILEID" />
+              <Mapping SourceColumn="T_FILENAME" DataSetColumn="T_FILENAME" />
+              <Mapping SourceColumn="CREATOR" DataSetColumn="CREATOR" />
+              <Mapping SourceColumn="CREATE_DATE" DataSetColumn="CREATE_DATE" />
+              <Mapping SourceColumn="MODIFIER" DataSetColumn="MODIFIER" />
+              <Mapping SourceColumn="MODIFY_DATE" DataSetColumn="MODIFY_DATE" />
+              <Mapping SourceColumn="ACTIVE_FLAG" DataSetColumn="ACTIVE_FLAG" />
+              <Mapping SourceColumn="FILE_TYPE" DataSetColumn="FILE_TYPE" />
+              <Mapping SourceColumn="FILE_SIZE" DataSetColumn="FILE_SIZE" />
+              <Mapping SourceColumn="VIRTUAL_PATH" DataSetColumn="VIRTUAL_PATH" />
+              <Mapping SourceColumn="UPLOAD_NAME" DataSetColumn="UPLOAD_NAME" />
+              <Mapping SourceColumn="PHYSICAL_PATH" DataSetColumn="PHYSICAL_PATH" />
+              <Mapping SourceColumn="DESCP" DataSetColumn="DESCP" />
+              <Mapping SourceColumn="GROUP_CODE" DataSetColumn="GROUP_CODE" />
+              <Mapping SourceColumn="FOREIGN_KEY" DataSetColumn="FOREIGN_KEY" />
+              <Mapping SourceColumn="FILE_DOC_GROUP" DataSetColumn="FILE_DOC_GROUP" />
+              <Mapping SourceColumn="FILE_TYPE_CODE" DataSetColumn="FILE_TYPE_CODE" />
+              <Mapping SourceColumn="FILE_TYPE_NAME" DataSetColumn="FILE_TYPE_NAME" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="HPSI10_QC.TF_FILEINFO" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT T_FILEID, T_FILENAME, CREATOR, CREATE_DATE, MODIFIER, MODIFY_DATE, ACTIVE_FLAG, FILE_TYPE, FILE_SIZE, VIRTUAL_PATH, UPLOAD_NAME, PHYSICAL_PATH, DESCP, GROUP_CODE, FOREIGN_KEY, FILE_DOC_GROUP, FILE_TYPE_CODE, FILE_TYPE_NAME FROM HPSI10_QC.TF_FILEINFO
+where FOREIGN_KEY=:FOREIGN_KEY and ACTIVE_FLAG=1</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="FOREIGN_KEY" ColumnName="FOREIGN_KEY" DataSourceName="HPSI10_QC.TF_FILEINFO" DataTypeServer="VARCHAR2(64)" DbType="String" Direction="Input" ParameterName=":FOREIGN_KEY" Precision="0" ProviderType="Varchar2" Scale="0" Size="64" SourceColumn="FOREIGN_KEY" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_SALES_CUSINV_APP_QUERYTableAdapter" GeneratorDataComponentClassName="V_SALES_CUSINV_APP_QUERYTableAdapter" Name="V_SALES_CUSINV_APP_QUERY" UserDataComponentName="V_SALES_CUSINV_APP_QUERYTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="HPSI10_QC.V_SALES_CUSINV_APP_QUERY" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ID, WHS_NO, WHS_NAME, PRODUCT_NO, INVENTORY_QTY, WAIT_CHECK_QTY, WAIT_PRO_QTY, WAIT_PUTAWAY_QTY, ALLOCATED_QTY, WAIT_SHIP_QTY, UNIT_CODE, UNIT_NAME, INDATE, OUTDATE, BATCH_CODE, LEVEL_ID, ACTIVE_FLAG, COMPANY_CODE, T_TYPEID, TYPENAMESTR, T_BUID, T_BUNAME, PRODUCTNAME, CDG1201_CODE, CDG1201NAME, TVSIZE, ENDINGINVQTY FROM HPSI10_QC.V_SALES_CUSINV_APP_QUERY</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ID" DataSetColumn="ID" />
+              <Mapping SourceColumn="WHS_NO" DataSetColumn="WHS_NO" />
+              <Mapping SourceColumn="WHS_NAME" DataSetColumn="WHS_NAME" />
+              <Mapping SourceColumn="PRODUCT_NO" DataSetColumn="PRODUCT_NO" />
+              <Mapping SourceColumn="INVENTORY_QTY" DataSetColumn="INVENTORY_QTY" />
+              <Mapping SourceColumn="WAIT_CHECK_QTY" DataSetColumn="WAIT_CHECK_QTY" />
+              <Mapping SourceColumn="WAIT_PRO_QTY" DataSetColumn="WAIT_PRO_QTY" />
+              <Mapping SourceColumn="WAIT_PUTAWAY_QTY" DataSetColumn="WAIT_PUTAWAY_QTY" />
+              <Mapping SourceColumn="ALLOCATED_QTY" DataSetColumn="ALLOCATED_QTY" />
+              <Mapping SourceColumn="WAIT_SHIP_QTY" DataSetColumn="WAIT_SHIP_QTY" />
+              <Mapping SourceColumn="UNIT_CODE" DataSetColumn="UNIT_CODE" />
+              <Mapping SourceColumn="UNIT_NAME" DataSetColumn="UNIT_NAME" />
+              <Mapping SourceColumn="INDATE" DataSetColumn="INDATE" />
+              <Mapping SourceColumn="OUTDATE" DataSetColumn="OUTDATE" />
+              <Mapping SourceColumn="BATCH_CODE" DataSetColumn="BATCH_CODE" />
+              <Mapping SourceColumn="LEVEL_ID" DataSetColumn="LEVEL_ID" />
+              <Mapping SourceColumn="ACTIVE_FLAG" DataSetColumn="ACTIVE_FLAG" />
+              <Mapping SourceColumn="COMPANY_CODE" DataSetColumn="COMPANY_CODE" />
+              <Mapping SourceColumn="T_TYPEID" DataSetColumn="T_TYPEID" />
+              <Mapping SourceColumn="TYPENAMESTR" DataSetColumn="TYPENAMESTR" />
+              <Mapping SourceColumn="T_BUID" DataSetColumn="T_BUID" />
+              <Mapping SourceColumn="T_BUNAME" DataSetColumn="T_BUNAME" />
+              <Mapping SourceColumn="PRODUCTNAME" DataSetColumn="PRODUCTNAME" />
+              <Mapping SourceColumn="CDG1201_CODE" DataSetColumn="CDG1201_CODE" />
+              <Mapping SourceColumn="CDG1201NAME" DataSetColumn="CDG1201NAME" />
+              <Mapping SourceColumn="TVSIZE" DataSetColumn="TVSIZE" />
+              <Mapping SourceColumn="ENDINGINVQTY" DataSetColumn="ENDINGINVQTY" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="HPSI10_QC.V_SALES_CUSINV_APP_QUERY" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT ID, WHS_NO, WHS_NAME, PRODUCT_NO, INVENTORY_QTY, WAIT_CHECK_QTY, WAIT_PRO_QTY, WAIT_PUTAWAY_QTY, ALLOCATED_QTY, WAIT_SHIP_QTY, UNIT_CODE, UNIT_NAME, INDATE, OUTDATE, BATCH_CODE, LEVEL_ID, ACTIVE_FLAG, COMPANY_CODE, T_TYPEID, TYPENAMESTR, T_BUID, T_BUNAME, PRODUCTNAME, CDG1201_CODE, CDG1201NAME, TVSIZE, ENDINGINVQTY FROM HPSI10_QC.V_SALES_CUSINV_APP_QUERY where WHS_NO=:WHS_NO</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="WHS_NO" ColumnName="WHS_NO" DataSourceName="HPSI10_QC.V_SALES_CUSINV_APP_QUERY" DataTypeServer="VARCHAR2(30)" DbType="String" Direction="Input" ParameterName=":WHS_NO" Precision="0" ProviderType="Varchar2" Scale="0" Size="30" SourceColumn="WHS_NO" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+        </Tables>
+        <Sources>
+          <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="QtyQuery" MethodsParameterType="CLR" Modifier="Public" Name="QtyQuery" QueryType="Scalar" ScalarCallRetval="System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="QtyQuery">
+            <SelectCommand>
+              <DbCommand CommandType="Text" ModifiedByUser="true">
+                <CommandText>SELECT sum(SALES_QTY) as qty FROM HPSI10_QC.V_SALES_TRANS_APP_QUERY WHERE (SALES_DATE &gt;= :startDate) AND (SALES_DATE &lt;= :endDate)  AND (EMPLOYEE_ID = :EMPLOYEE_ID)</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="startDate" ColumnName="SALES_DATE" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="DATE(8)" DbType="Date" Direction="Input" ParameterName=":startDate" Precision="0" ProviderType="Date" Scale="0" Size="8" SourceColumn="SALES_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="endDate" ColumnName="SALES_DATE" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="DATE(8)" DbType="Date" Direction="Input" ParameterName=":endDate" Precision="0" ProviderType="Date" Scale="0" Size="8" SourceColumn="SALES_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="VARCHAR2(50)" DbType="String" Direction="Input" ParameterName=":EMPLOYEE_ID" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="EMPLOYEE_ID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="TotalAmountQuery" MethodsParameterType="CLR" Modifier="Public" Name="TotalAmountQuery" QueryType="Scalar" ScalarCallRetval="System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="TotalAmountQuery">
+            <SelectCommand>
+              <DbCommand CommandType="Text" ModifiedByUser="true">
+                <CommandText>SELECT sum(SALES_AMOUNT) as SALES_AMOUNT FROM HPSI10_QC.V_SALES_TRANS_APP_QUERY WHERE (SALES_DATE &gt;= :startDate) AND (SALES_DATE &lt;= :endDate) </CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="startDate" ColumnName="SALES_DATE" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="DATE(8)" DbType="Date" Direction="Input" ParameterName=":startDate" Precision="0" ProviderType="Date" Scale="0" Size="8" SourceColumn="SALES_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="endDate" ColumnName="SALES_DATE" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="DATE(8)" DbType="Date" Direction="Input" ParameterName=":endDate" Precision="0" ProviderType="Date" Scale="0" Size="8" SourceColumn="SALES_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="TotalQtyQuery" MethodsParameterType="CLR" Modifier="Public" Name="TotalQtyQuery" QueryType="Scalar" ScalarCallRetval="System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="TotalQtyQuery">
+            <SelectCommand>
+              <DbCommand CommandType="Text" ModifiedByUser="true">
+                <CommandText>SELECT sum(SALES_QTY) as SALES_QTY FROM HPSI10_QC.V_SALES_TRANS_APP_QUERY WHERE (SALES_DATE &gt;= :startDate) AND (SALES_DATE &lt;= :endDate) </CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="startDate" ColumnName="SALES_DATE" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="DATE(8)" DbType="Date" Direction="Input" ParameterName=":startDate" Precision="0" ProviderType="Date" Scale="0" Size="8" SourceColumn="SALES_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="endDate" ColumnName="SALES_DATE" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="DATE(8)" DbType="Date" Direction="Input" ParameterName=":endDate" Precision="0" ProviderType="Date" Scale="0" Size="8" SourceColumn="SALES_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+          <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="CtQuery" MethodsParameterType="CLR" Modifier="Public" Name="CtQuery" QueryType="Scalar" ScalarCallRetval="System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="CtQuery">
+            <SelectCommand>
+              <DbCommand CommandType="Text" ModifiedByUser="true">
+                <CommandText>SELECT count(1) as ct FROM HPSI10_QC.V_SALES_TRANS_APP_QUERY WHERE (SALES_DATE &gt;= :startDate) AND (SALES_DATE &lt;= :endDate) and (EMPLOYEE_ID = :EMPLOYEE_ID) and (INVOICE_FLAG is null or INVOICE_FLAG='N')</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="startDate" ColumnName="SALES_DATE" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="DATE(8)" DbType="Date" Direction="Input" ParameterName=":startDate" Precision="0" ProviderType="Date" Scale="0" Size="8" SourceColumn="SALES_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="endDate" ColumnName="SALES_DATE" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="DATE(8)" DbType="Date" Direction="Input" ParameterName=":endDate" Precision="0" ProviderType="Date" Scale="0" Size="8" SourceColumn="SALES_DATE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" DataSourceName="HPSI10_QC.V_SALES_TRANS_APP_QUERY" DataTypeServer="VARCHAR2(50)" DbType="String" Direction="Input" ParameterName=":EMPLOYEE_ID" Precision="0" ProviderType="Varchar2" Scale="0" Size="50" SourceColumn="EMPLOYEE_ID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSetStanby" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSetStanby" msprop:Generator_UserDSName="DataSetStanby">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="V_SALES_TRANS_APP_QUERY" msprop:Generator_TableClassName="V_SALES_TRANS_APP_QUERYDataTable" msprop:Generator_TableVarName="tableV_SALES_TRANS_APP_QUERY" msprop:Generator_RowChangedName="V_SALES_TRANS_APP_QUERYRowChanged" msprop:Generator_TablePropName="V_SALES_TRANS_APP_QUERY" msprop:Generator_RowDeletingName="V_SALES_TRANS_APP_QUERYRowDeleting" msprop:Generator_RowChangingName="V_SALES_TRANS_APP_QUERYRowChanging" msprop:Generator_RowEvHandlerName="V_SALES_TRANS_APP_QUERYRowChangeEventHandler" msprop:Generator_RowDeletedName="V_SALES_TRANS_APP_QUERYRowDeleted" msprop:Generator_RowClassName="V_SALES_TRANS_APP_QUERYRow" msprop:Generator_UserTableName="V_SALES_TRANS_APP_QUERY" msprop:Generator_RowEvArgName="V_SALES_TRANS_APP_QUERYRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TRANS_NO" msprop:Generator_ColumnVarNameInTable="columnTRANS_NO" msprop:Generator_ColumnPropNameInRow="TRANS_NO" msprop:Generator_ColumnPropNameInTable="TRANS_NOColumn" msprop:Generator_UserColumnName="TRANS_NO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="EMPLOYEE_ID" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="EMPLOYEE_ID" msprop:Generator_ColumnVarNameInTable="columnEMPLOYEE_ID" msprop:Generator_ColumnPropNameInTable="EMPLOYEE_IDColumn" msprop:Generator_UserColumnName="EMPLOYEE_ID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CH_REPORT_NAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="CH_REPORT_NAME" msprop:Generator_ColumnVarNameInTable="columnCH_REPORT_NAME" msprop:Generator_ColumnPropNameInTable="CH_REPORT_NAMEColumn" msprop:Generator_UserColumnName="CH_REPORT_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="JOB_CODE" msprop:Generator_ColumnVarNameInTable="columnJOB_CODE" msprop:Generator_ColumnPropNameInRow="JOB_CODE" msprop:Generator_ColumnPropNameInTable="JOB_CODEColumn" msprop:Generator_UserColumnName="JOB_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SALES_DATE" msprop:Generator_ColumnVarNameInTable="columnSALES_DATE" msprop:Generator_ColumnPropNameInRow="SALES_DATE" msprop:Generator_ColumnPropNameInTable="SALES_DATEColumn" msprop:Generator_UserColumnName="SALES_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="MACHINE_MODEL_NO" msprop:Generator_ColumnVarNameInTable="columnMACHINE_MODEL_NO" msprop:Generator_ColumnPropNameInRow="MACHINE_MODEL_NO" msprop:Generator_ColumnPropNameInTable="MACHINE_MODEL_NOColumn" msprop:Generator_UserColumnName="MACHINE_MODEL_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SALES_QTY" msprop:Generator_ColumnVarNameInTable="columnSALES_QTY" msprop:Generator_ColumnPropNameInRow="SALES_QTY" msprop:Generator_ColumnPropNameInTable="SALES_QTYColumn" msprop:Generator_UserColumnName="SALES_QTY" type="xs:long" />
+              <xs:element name="SALES_PRICE" msprop:Generator_ColumnVarNameInTable="columnSALES_PRICE" msprop:Generator_ColumnPropNameInRow="SALES_PRICE" msprop:Generator_ColumnPropNameInTable="SALES_PRICEColumn" msprop:Generator_UserColumnName="SALES_PRICE" type="xs:decimal" />
+              <xs:element name="SALES_AMOUNT" msprop:Generator_ColumnVarNameInTable="columnSALES_AMOUNT" msprop:Generator_ColumnPropNameInRow="SALES_AMOUNT" msprop:Generator_ColumnPropNameInTable="SALES_AMOUNTColumn" msprop:Generator_UserColumnName="SALES_AMOUNT" type="xs:decimal" />
+              <xs:element name="T_TYPEID" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="T_TYPEID" msprop:Generator_ColumnVarNameInTable="columnT_TYPEID" msprop:Generator_ColumnPropNameInTable="T_TYPEIDColumn" msprop:Generator_UserColumnName="T_TYPEID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="T_TYPENAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="T_TYPENAME" msprop:Generator_ColumnVarNameInTable="columnT_TYPENAME" msprop:Generator_ColumnPropNameInTable="T_TYPENAMEColumn" msprop:Generator_UserColumnName="T_TYPENAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="128" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="T_BUID" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="T_BUID" msprop:Generator_ColumnVarNameInTable="columnT_BUID" msprop:Generator_ColumnPropNameInTable="T_BUIDColumn" msprop:Generator_UserColumnName="T_BUID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="T_BUNAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="T_BUNAME" msprop:Generator_ColumnVarNameInTable="columnT_BUNAME" msprop:Generator_ColumnPropNameInTable="T_BUNAMEColumn" msprop:Generator_UserColumnName="T_BUNAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SHOP_CODE" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="SHOP_CODE" msprop:Generator_ColumnVarNameInTable="columnSHOP_CODE" msprop:Generator_ColumnPropNameInTable="SHOP_CODEColumn" msprop:Generator_UserColumnName="SHOP_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SHOP_NAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="SHOP_NAME" msprop:Generator_ColumnVarNameInTable="columnSHOP_NAME" msprop:Generator_ColumnPropNameInTable="SHOP_NAMEColumn" msprop:Generator_UserColumnName="SHOP_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CUSTOMER_CODE" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="CUSTOMER_CODE" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_CODE" msprop:Generator_ColumnPropNameInTable="CUSTOMER_CODEColumn" msprop:Generator_UserColumnName="CUSTOMER_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CUSTOMER_NAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="CUSTOMER_NAME" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_NAME" msprop:Generator_ColumnPropNameInTable="CUSTOMER_NAMEColumn" msprop:Generator_UserColumnName="CUSTOMER_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_TYPE_CODE" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="GOODS_TYPE_CODE" msprop:Generator_ColumnVarNameInTable="columnGOODS_TYPE_CODE" msprop:Generator_ColumnPropNameInTable="GOODS_TYPE_CODEColumn" msprop:Generator_UserColumnName="GOODS_TYPE_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_TYPE_NAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="GOODS_TYPE_NAME" msprop:Generator_ColumnVarNameInTable="columnGOODS_TYPE_NAME" msprop:Generator_ColumnPropNameInTable="GOODS_TYPE_NAMEColumn" msprop:Generator_UserColumnName="GOODS_TYPE_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TRANS_TYPE_CODE" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="TRANS_TYPE_CODE" msprop:Generator_ColumnVarNameInTable="columnTRANS_TYPE_CODE" msprop:Generator_ColumnPropNameInTable="TRANS_TYPE_CODEColumn" msprop:Generator_UserColumnName="TRANS_TYPE_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TRANS_TYPE_NAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="TRANS_TYPE_NAME" msprop:Generator_ColumnVarNameInTable="columnTRANS_TYPE_NAME" msprop:Generator_ColumnPropNameInTable="TRANS_TYPE_NAMEColumn" msprop:Generator_UserColumnName="TRANS_TYPE_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CREATOR_ID" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="CREATOR_ID" msprop:Generator_ColumnVarNameInTable="columnCREATOR_ID" msprop:Generator_ColumnPropNameInTable="CREATOR_IDColumn" msprop:Generator_UserColumnName="CREATOR_ID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CREATE_DATE" msprop:Generator_ColumnVarNameInTable="columnCREATE_DATE" msprop:Generator_ColumnPropNameInRow="CREATE_DATE" msprop:Generator_ColumnPropNameInTable="CREATE_DATEColumn" msprop:Generator_UserColumnName="CREATE_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="INVOICE_FLAG" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="INVOICE_FLAG" msprop:Generator_ColumnVarNameInTable="columnINVOICE_FLAG" msprop:Generator_ColumnPropNameInTable="INVOICE_FLAGColumn" msprop:Generator_UserColumnName="INVOICE_FLAG" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CONSUMER_NAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="CONSUMER_NAME" msprop:Generator_ColumnVarNameInTable="columnCONSUMER_NAME" msprop:Generator_ColumnPropNameInTable="CONSUMER_NAMEColumn" msprop:Generator_UserColumnName="CONSUMER_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CONSUMER_PHONE_NO" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="CONSUMER_PHONE_NO" msprop:Generator_ColumnVarNameInTable="columnCONSUMER_PHONE_NO" msprop:Generator_ColumnPropNameInTable="CONSUMER_PHONE_NOColumn" msprop:Generator_UserColumnName="CONSUMER_PHONE_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INVOICE_STATUS_NAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="INVOICE_STATUS_NAME" msprop:Generator_ColumnVarNameInTable="columnINVOICE_STATUS_NAME" msprop:Generator_ColumnPropNameInTable="INVOICE_STATUS_NAMEColumn" msprop:Generator_UserColumnName="INVOICE_STATUS_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UNQUALIFIED_REASON_NAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="UNQUALIFIED_REASON_NAME" msprop:Generator_ColumnVarNameInTable="columnUNQUALIFIED_REASON_NAME" msprop:Generator_ColumnPropNameInTable="UNQUALIFIED_REASON_NAMEColumn" msprop:Generator_UserColumnName="UNQUALIFIED_REASON_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INVOICE_STATUS_CODE" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="INVOICE_STATUS_CODE" msprop:Generator_ColumnVarNameInTable="columnINVOICE_STATUS_CODE" msprop:Generator_ColumnPropNameInTable="INVOICE_STATUS_CODEColumn" msprop:Generator_UserColumnName="INVOICE_STATUS_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UNQUALIFIED_REASON_CODE" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="UNQUALIFIED_REASON_CODE" msprop:Generator_ColumnVarNameInTable="columnUNQUALIFIED_REASON_CODE" msprop:Generator_ColumnPropNameInTable="UNQUALIFIED_REASON_CODEColumn" msprop:Generator_UserColumnName="UNQUALIFIED_REASON_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BOARD_FLAG" msprop:nullValue="0" msprop:Generator_ColumnPropNameInRow="BOARD_FLAG" msprop:Generator_ColumnVarNameInTable="columnBOARD_FLAG" msprop:Generator_ColumnPropNameInTable="BOARD_FLAGColumn" msprop:Generator_UserColumnName="BOARD_FLAG" type="xs:decimal" />
+              <xs:element name="BRAND_CODE" msprop:Generator_ColumnVarNameInTable="columnBRAND_CODE" msprop:Generator_ColumnPropNameInRow="BRAND_CODE" msprop:Generator_ColumnPropNameInTable="BRAND_CODEColumn" msprop:Generator_UserColumnName="BRAND_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TVSIZE" msprop:Generator_ColumnVarNameInTable="columnTVSIZE" msprop:Generator_ColumnPropNameInRow="TVSIZE" msprop:Generator_ColumnPropNameInTable="TVSIZEColumn" msprop:Generator_UserColumnName="TVSIZE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="T_TVSIZEID" msprop:Generator_ColumnVarNameInTable="columnT_TVSIZEID" msprop:Generator_ColumnPropNameInRow="T_TVSIZEID" msprop:Generator_ColumnPropNameInTable="T_TVSIZEIDColumn" msprop:Generator_UserColumnName="T_TVSIZEID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ACT_NO" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="ACT_NO" msprop:Generator_ColumnVarNameInTable="columnACT_NO" msprop:Generator_ColumnPropNameInTable="ACT_NOColumn" msprop:Generator_UserColumnName="ACT_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ACT_NAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="ACT_NAME" msprop:Generator_ColumnVarNameInTable="columnACT_NAME" msprop:Generator_ColumnPropNameInTable="ACT_NAMEColumn" msprop:Generator_UserColumnName="ACT_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SEX" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="SEX" msprop:Generator_ColumnVarNameInTable="columnSEX" msprop:Generator_ColumnPropNameInTable="SEXColumn" msprop:Generator_UserColumnName="SEX" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SEX_NAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="SEX_NAME" msprop:Generator_ColumnVarNameInTable="columnSEX_NAME" msprop:Generator_ColumnPropNameInTable="SEX_NAMEColumn" msprop:Generator_UserColumnName="SEX_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AREA_ID" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="AREA_ID" msprop:Generator_ColumnVarNameInTable="columnAREA_ID" msprop:Generator_ColumnPropNameInTable="AREA_IDColumn" msprop:Generator_UserColumnName="AREA_ID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ADDR" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="ADDR" msprop:Generator_ColumnVarNameInTable="columnADDR" msprop:Generator_ColumnPropNameInTable="ADDRColumn" msprop:Generator_UserColumnName="ADDR" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AGE_PERIOD_ID" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="AGE_PERIOD_ID" msprop:Generator_ColumnVarNameInTable="columnAGE_PERIOD_ID" msprop:Generator_ColumnPropNameInTable="AGE_PERIOD_IDColumn" msprop:Generator_UserColumnName="AGE_PERIOD_ID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AGE_PERIOD_NAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="AGE_PERIOD_NAME" msprop:Generator_ColumnVarNameInTable="columnAGE_PERIOD_NAME" msprop:Generator_ColumnPropNameInTable="AGE_PERIOD_NAMEColumn" msprop:Generator_UserColumnName="AGE_PERIOD_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CH_NO" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="CH_NO" msprop:Generator_ColumnVarNameInTable="columnCH_NO" msprop:Generator_ColumnPropNameInTable="CH_NOColumn" msprop:Generator_UserColumnName="CH_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SN_NO" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="SN_NO" msprop:Generator_ColumnVarNameInTable="columnSN_NO" msprop:Generator_ColumnPropNameInTable="SN_NOColumn" msprop:Generator_UserColumnName="SN_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BRAND_NAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="BRAND_NAME" msprop:Generator_ColumnVarNameInTable="columnBRAND_NAME" msprop:Generator_ColumnPropNameInTable="BRAND_NAMEColumn" msprop:Generator_UserColumnName="BRAND_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LOCK_TYPE_CODE" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="LOCK_TYPE_CODE" msprop:Generator_ColumnVarNameInTable="columnLOCK_TYPE_CODE" msprop:Generator_ColumnPropNameInTable="LOCK_TYPE_CODEColumn" msprop:Generator_UserColumnName="LOCK_TYPE_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LOCK_TYPE_NAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="LOCK_TYPE_NAME" msprop:Generator_ColumnVarNameInTable="columnLOCK_TYPE_NAME" msprop:Generator_ColumnPropNameInTable="LOCK_TYPE_NAMEColumn" msprop:Generator_UserColumnName="LOCK_TYPE_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TF_FILEINFO" msprop:Generator_TableClassName="TF_FILEINFODataTable" msprop:Generator_TableVarName="tableTF_FILEINFO" msprop:Generator_TablePropName="TF_FILEINFO" msprop:Generator_RowDeletingName="TF_FILEINFORowDeleting" msprop:Generator_RowChangingName="TF_FILEINFORowChanging" msprop:Generator_RowEvHandlerName="TF_FILEINFORowChangeEventHandler" msprop:Generator_RowDeletedName="TF_FILEINFORowDeleted" msprop:Generator_UserTableName="TF_FILEINFO" msprop:Generator_RowChangedName="TF_FILEINFORowChanged" msprop:Generator_RowEvArgName="TF_FILEINFORowChangeEvent" msprop:Generator_RowClassName="TF_FILEINFORow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="T_FILEID" msprop:Generator_ColumnVarNameInTable="columnT_FILEID" msprop:Generator_ColumnPropNameInRow="T_FILEID" msprop:Generator_ColumnPropNameInTable="T_FILEIDColumn" msprop:Generator_UserColumnName="T_FILEID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="T_FILENAME" msprop:Generator_ColumnVarNameInTable="columnT_FILENAME" msprop:Generator_ColumnPropNameInRow="T_FILENAME" msprop:Generator_ColumnPropNameInTable="T_FILENAMEColumn" msprop:Generator_UserColumnName="T_FILENAME">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CREATOR" msprop:Generator_ColumnVarNameInTable="columnCREATOR" msprop:Generator_ColumnPropNameInRow="CREATOR" msprop:Generator_ColumnPropNameInTable="CREATORColumn" msprop:Generator_UserColumnName="CREATOR" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="36" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CREATE_DATE" msprop:Generator_ColumnVarNameInTable="columnCREATE_DATE" msprop:Generator_ColumnPropNameInRow="CREATE_DATE" msprop:Generator_ColumnPropNameInTable="CREATE_DATEColumn" msprop:Generator_UserColumnName="CREATE_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="MODIFIER" msprop:Generator_ColumnVarNameInTable="columnMODIFIER" msprop:Generator_ColumnPropNameInRow="MODIFIER" msprop:Generator_ColumnPropNameInTable="MODIFIERColumn" msprop:Generator_UserColumnName="MODIFIER" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="36" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MODIFY_DATE" msprop:Generator_ColumnVarNameInTable="columnMODIFY_DATE" msprop:Generator_ColumnPropNameInRow="MODIFY_DATE" msprop:Generator_ColumnPropNameInTable="MODIFY_DATEColumn" msprop:Generator_UserColumnName="MODIFY_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ACTIVE_FLAG" msprop:Generator_ColumnVarNameInTable="columnACTIVE_FLAG" msprop:Generator_ColumnPropNameInRow="ACTIVE_FLAG" msprop:Generator_ColumnPropNameInTable="ACTIVE_FLAGColumn" msprop:Generator_UserColumnName="ACTIVE_FLAG" type="xs:decimal" />
+              <xs:element name="FILE_TYPE" msprop:Generator_ColumnVarNameInTable="columnFILE_TYPE" msprop:Generator_ColumnPropNameInRow="FILE_TYPE" msprop:Generator_ColumnPropNameInTable="FILE_TYPEColumn" msprop:Generator_UserColumnName="FILE_TYPE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FILE_SIZE" msprop:Generator_ColumnVarNameInTable="columnFILE_SIZE" msprop:Generator_ColumnPropNameInRow="FILE_SIZE" msprop:Generator_ColumnPropNameInTable="FILE_SIZEColumn" msprop:Generator_UserColumnName="FILE_SIZE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="VIRTUAL_PATH" msprop:Generator_ColumnVarNameInTable="columnVIRTUAL_PATH" msprop:Generator_ColumnPropNameInRow="VIRTUAL_PATH" msprop:Generator_ColumnPropNameInTable="VIRTUAL_PATHColumn" msprop:Generator_UserColumnName="VIRTUAL_PATH" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UPLOAD_NAME" msprop:Generator_ColumnVarNameInTable="columnUPLOAD_NAME" msprop:Generator_ColumnPropNameInRow="UPLOAD_NAME" msprop:Generator_ColumnPropNameInTable="UPLOAD_NAMEColumn" msprop:Generator_UserColumnName="UPLOAD_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PHYSICAL_PATH" msprop:Generator_ColumnVarNameInTable="columnPHYSICAL_PATH" msprop:Generator_ColumnPropNameInRow="PHYSICAL_PATH" msprop:Generator_ColumnPropNameInTable="PHYSICAL_PATHColumn" msprop:Generator_UserColumnName="PHYSICAL_PATH" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESCP" msprop:Generator_ColumnVarNameInTable="columnDESCP" msprop:Generator_ColumnPropNameInRow="DESCP" msprop:Generator_ColumnPropNameInTable="DESCPColumn" msprop:Generator_UserColumnName="DESCP" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GROUP_CODE" msprop:Generator_ColumnVarNameInTable="columnGROUP_CODE" msprop:Generator_ColumnPropNameInRow="GROUP_CODE" msprop:Generator_ColumnPropNameInTable="GROUP_CODEColumn" msprop:Generator_UserColumnName="GROUP_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FOREIGN_KEY" msprop:Generator_ColumnVarNameInTable="columnFOREIGN_KEY" msprop:Generator_ColumnPropNameInRow="FOREIGN_KEY" msprop:Generator_ColumnPropNameInTable="FOREIGN_KEYColumn" msprop:Generator_UserColumnName="FOREIGN_KEY" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="64" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FILE_DOC_GROUP" msprop:Generator_ColumnVarNameInTable="columnFILE_DOC_GROUP" msprop:Generator_ColumnPropNameInRow="FILE_DOC_GROUP" msprop:Generator_ColumnPropNameInTable="FILE_DOC_GROUPColumn" msprop:Generator_UserColumnName="FILE_DOC_GROUP" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FILE_TYPE_CODE" msprop:Generator_ColumnVarNameInTable="columnFILE_TYPE_CODE" msprop:Generator_ColumnPropNameInRow="FILE_TYPE_CODE" msprop:Generator_ColumnPropNameInTable="FILE_TYPE_CODEColumn" msprop:Generator_UserColumnName="FILE_TYPE_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FILE_TYPE_NAME" msprop:Generator_ColumnVarNameInTable="columnFILE_TYPE_NAME" msprop:Generator_ColumnPropNameInRow="FILE_TYPE_NAME" msprop:Generator_ColumnPropNameInTable="FILE_TYPE_NAMEColumn" msprop:Generator_UserColumnName="FILE_TYPE_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="V_SALES_CUSINV_APP_QUERY" msprop:Generator_TableClassName="V_SALES_CUSINV_APP_QUERYDataTable" msprop:Generator_TableVarName="tableV_SALES_CUSINV_APP_QUERY" msprop:Generator_RowChangedName="V_SALES_CUSINV_APP_QUERYRowChanged" msprop:Generator_TablePropName="V_SALES_CUSINV_APP_QUERY" msprop:Generator_RowDeletingName="V_SALES_CUSINV_APP_QUERYRowDeleting" msprop:Generator_RowChangingName="V_SALES_CUSINV_APP_QUERYRowChanging" msprop:Generator_RowEvHandlerName="V_SALES_CUSINV_APP_QUERYRowChangeEventHandler" msprop:Generator_RowDeletedName="V_SALES_CUSINV_APP_QUERYRowDeleted" msprop:Generator_RowClassName="V_SALES_CUSINV_APP_QUERYRow" msprop:Generator_UserTableName="V_SALES_CUSINV_APP_QUERY" msprop:Generator_RowEvArgName="V_SALES_CUSINV_APP_QUERYRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="64" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WHS_NO" msprop:Generator_ColumnVarNameInTable="columnWHS_NO" msprop:Generator_ColumnPropNameInRow="WHS_NO" msprop:Generator_ColumnPropNameInTable="WHS_NOColumn" msprop:Generator_UserColumnName="WHS_NO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WHS_NAME" msprop:Generator_ColumnVarNameInTable="columnWHS_NAME" msprop:Generator_ColumnPropNameInRow="WHS_NAME" msprop:Generator_ColumnPropNameInTable="WHS_NAMEColumn" msprop:Generator_UserColumnName="WHS_NAME">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PRODUCT_NO" msprop:Generator_ColumnVarNameInTable="columnPRODUCT_NO" msprop:Generator_ColumnPropNameInRow="PRODUCT_NO" msprop:Generator_ColumnPropNameInTable="PRODUCT_NOColumn" msprop:Generator_UserColumnName="PRODUCT_NO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INVENTORY_QTY" msprop:Generator_ColumnVarNameInTable="columnINVENTORY_QTY" msprop:Generator_ColumnPropNameInRow="INVENTORY_QTY" msprop:Generator_ColumnPropNameInTable="INVENTORY_QTYColumn" msprop:Generator_UserColumnName="INVENTORY_QTY" type="xs:decimal" />
+              <xs:element name="WAIT_CHECK_QTY" msprop:Generator_ColumnVarNameInTable="columnWAIT_CHECK_QTY" msprop:Generator_ColumnPropNameInRow="WAIT_CHECK_QTY" msprop:Generator_ColumnPropNameInTable="WAIT_CHECK_QTYColumn" msprop:Generator_UserColumnName="WAIT_CHECK_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="WAIT_PRO_QTY" msprop:Generator_ColumnVarNameInTable="columnWAIT_PRO_QTY" msprop:Generator_ColumnPropNameInRow="WAIT_PRO_QTY" msprop:Generator_ColumnPropNameInTable="WAIT_PRO_QTYColumn" msprop:Generator_UserColumnName="WAIT_PRO_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="WAIT_PUTAWAY_QTY" msprop:Generator_ColumnVarNameInTable="columnWAIT_PUTAWAY_QTY" msprop:Generator_ColumnPropNameInRow="WAIT_PUTAWAY_QTY" msprop:Generator_ColumnPropNameInTable="WAIT_PUTAWAY_QTYColumn" msprop:Generator_UserColumnName="WAIT_PUTAWAY_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ALLOCATED_QTY" msprop:Generator_ColumnVarNameInTable="columnALLOCATED_QTY" msprop:Generator_ColumnPropNameInRow="ALLOCATED_QTY" msprop:Generator_ColumnPropNameInTable="ALLOCATED_QTYColumn" msprop:Generator_UserColumnName="ALLOCATED_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="WAIT_SHIP_QTY" msprop:Generator_ColumnVarNameInTable="columnWAIT_SHIP_QTY" msprop:Generator_ColumnPropNameInRow="WAIT_SHIP_QTY" msprop:Generator_ColumnPropNameInTable="WAIT_SHIP_QTYColumn" msprop:Generator_UserColumnName="WAIT_SHIP_QTY" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UNIT_CODE" msprop:Generator_ColumnVarNameInTable="columnUNIT_CODE" msprop:Generator_ColumnPropNameInRow="UNIT_CODE" msprop:Generator_ColumnPropNameInTable="UNIT_CODEColumn" msprop:Generator_UserColumnName="UNIT_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UNIT_NAME" msprop:Generator_ColumnVarNameInTable="columnUNIT_NAME" msprop:Generator_ColumnPropNameInRow="UNIT_NAME" msprop:Generator_ColumnPropNameInTable="UNIT_NAMEColumn" msprop:Generator_UserColumnName="UNIT_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INDATE" msprop:Generator_ColumnVarNameInTable="columnINDATE" msprop:Generator_ColumnPropNameInRow="INDATE" msprop:Generator_ColumnPropNameInTable="INDATEColumn" msprop:Generator_UserColumnName="INDATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="OUTDATE" msprop:Generator_ColumnVarNameInTable="columnOUTDATE" msprop:Generator_ColumnPropNameInRow="OUTDATE" msprop:Generator_ColumnPropNameInTable="OUTDATEColumn" msprop:Generator_UserColumnName="OUTDATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BATCH_CODE" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="BATCH_CODE" msprop:Generator_ColumnVarNameInTable="columnBATCH_CODE" msprop:Generator_ColumnPropNameInTable="BATCH_CODEColumn" msprop:Generator_UserColumnName="BATCH_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LEVEL_ID" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="LEVEL_ID" msprop:Generator_ColumnVarNameInTable="columnLEVEL_ID" msprop:Generator_ColumnPropNameInTable="LEVEL_IDColumn" msprop:Generator_UserColumnName="LEVEL_ID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="64" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ACTIVE_FLAG" msprop:nullValue="0" msprop:Generator_ColumnPropNameInRow="ACTIVE_FLAG" msprop:Generator_ColumnVarNameInTable="columnACTIVE_FLAG" msprop:Generator_ColumnPropNameInTable="ACTIVE_FLAGColumn" msprop:Generator_UserColumnName="ACTIVE_FLAG" type="xs:decimal" />
+              <xs:element name="COMPANY_CODE" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="COMPANY_CODE" msprop:Generator_ColumnVarNameInTable="columnCOMPANY_CODE" msprop:Generator_ColumnPropNameInTable="COMPANY_CODEColumn" msprop:Generator_UserColumnName="COMPANY_CODE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="T_TYPEID" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="T_TYPEID" msprop:Generator_ColumnVarNameInTable="columnT_TYPEID" msprop:Generator_ColumnPropNameInTable="T_TYPEIDColumn" msprop:Generator_UserColumnName="T_TYPEID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TYPENAMESTR" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="TYPENAMESTR" msprop:Generator_ColumnVarNameInTable="columnTYPENAMESTR" msprop:Generator_ColumnPropNameInTable="TYPENAMESTRColumn" msprop:Generator_UserColumnName="TYPENAMESTR" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="128" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="T_BUID" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="T_BUID" msprop:Generator_ColumnVarNameInTable="columnT_BUID" msprop:Generator_ColumnPropNameInTable="T_BUIDColumn" msprop:Generator_UserColumnName="T_BUID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="T_BUNAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="T_BUNAME" msprop:Generator_ColumnVarNameInTable="columnT_BUNAME" msprop:Generator_ColumnPropNameInTable="T_BUNAMEColumn" msprop:Generator_UserColumnName="T_BUNAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PRODUCTNAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="PRODUCTNAME" msprop:Generator_ColumnVarNameInTable="columnPRODUCTNAME" msprop:Generator_ColumnPropNameInTable="PRODUCTNAMEColumn" msprop:Generator_UserColumnName="PRODUCTNAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CDG1201_CODE" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="CDG1201_CODE" msprop:Generator_ColumnVarNameInTable="columnCDG1201_CODE" msprop:Generator_ColumnPropNameInTable="CDG1201_CODEColumn" msprop:Generator_UserColumnName="CDG1201_CODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CDG1201NAME" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="CDG1201NAME" msprop:Generator_ColumnVarNameInTable="columnCDG1201NAME" msprop:Generator_ColumnPropNameInTable="CDG1201NAMEColumn" msprop:Generator_UserColumnName="CDG1201NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TVSIZE" msprop:nullValue="0" msprop:Generator_ColumnPropNameInRow="TVSIZE" msprop:Generator_ColumnVarNameInTable="columnTVSIZE" msprop:Generator_ColumnPropNameInTable="TVSIZEColumn" msprop:Generator_UserColumnName="TVSIZE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ENDINGINVQTY" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="ENDINGINVQTY" msprop:Generator_ColumnVarNameInTable="columnENDINGINVQTY" msprop:Generator_ColumnPropNameInTable="ENDINGINVQTYColumn" msprop:Generator_UserColumnName="ENDINGINVQTY" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TF_FILEINFO" />
+      <xs:field xpath="mstns:T_FILEID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

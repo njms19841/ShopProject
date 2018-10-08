@@ -1,0 +1,23 @@
+﻿
+<div class="row">
+    <div class="col-md-4">
+        <h2>APP下载安装</h2>
+        <p>登录路径：/Token </p>
+        <p>参数：grant_type=password&username=XXXXXXXXXX&password=XXXXXXXXXXXX </p>
+        <p>ContentType :application/xml</p>
+        <p>返回JSON</p>
+        <p>
+            {
+            "access_token": "",
+            "token_type": "bearer",
+            "expires_in": 1209599,
+            "userName": "XXXX",
+            ".issued": "Tue, 18 Apr 2017 18:44:03 GMT",
+            ".expires": "Tue, 02 May 2017 18:44:03 GMT"
+            }
+        </p>
+        <p>返回的access_token，在后续请求中，放入Http Headers中，名称为："Authorization"，内容为："bearer access_token值"</p>
+
+    </div>
+
+</div>

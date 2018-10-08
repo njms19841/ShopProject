@@ -1,0 +1,43 @@
+﻿@model List<Market.APIService.Controllers.View1_3_3PModel> 
+<div class="card" style="width:100%">
+    <div class="card-content"  style="width:100%">
+        <div class="card-content-inner">
+            <div class="row  no-gutter">
+                <div class="col-40">门店</div>
+                <div class="col-20">导购员数</div>
+                <div class="col-20">日销量</div>
+                <div class="col-20">月销量</div>
+            </div>
+            @{ 
+                foreach (var item in Model)
+                {
+            <div class="row  no-gutter" style="border-top:1px solid;">
+                <div class="col-40">@item.text1</div>
+                <div class="col-20">@item.qty1</div>
+                @{
+                    if (item.qty2 == 0)
+                    {
+                        <div class="col-20">&nbsp;</div>
+                    }
+                    else
+                    {
+                        <div class="col-20">@item.qty2.ToString("N0")</div>
+                    }
+                    if (item.qty3 == 0)
+                    {
+                        <div class="col-20">&nbsp;</div>
+                    }
+                    else
+                    {
+                        <div class="col-20">@item.qty3.ToString("N0")</div>
+                    }
+                }
+                
+                
+                
+            </div>
+                    }
+                }
+        </div>
+    </div>
+    </div>

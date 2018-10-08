@@ -1,0 +1,251 @@
+﻿
+      @model Market.APIService.Models.MemberMode  
+
+            <div class="card">
+                <div style="width:100%;background-color:white;font-size:15px;height:180px;border-bottom:1px solid gray;">
+                    <div style="width:49%;float:left;height:160px;">
+                        <img src="@Model.picRUL" style="height:160px;padding-left:10px;padding-top:10px" />
+                    </div>
+                    <div style="width:49%;float:left;height:150px; ">
+                        <div style="width:49%;float:left;height:70px;">
+                            <img src="https://iretailerapp.flnet.com/APPQC/noIco.jpg" style="height:60px; width:60px; padding-left:10px;padding-top:10px" />
+
+                        </div>
+                        <div style="width:49%;float:left;height:70px;">
+                            <img src="https://iretailerapp.flnet.com/APPQC/noIco.jpg" style="height:60px; width:60px;padding-left:10px;padding-top:10px" />
+
+                        </div>
+                        <div style="width:49%;float:left;height:70px;">
+                            <img src="https://iretailerapp.flnet.com/APPQC/noIco.jpg" style="height:60px; width:60px;padding-left:10px;padding-top:10px" />
+
+                        </div>
+                        <div style="width:49%;float:left;height:70px;">
+                            <img src="https://iretailerapp.flnet.com/APPQC/noIco.jpg" style="height:60px; width:60px;padding-left:10px;padding-top:10px" />
+
+                        </div>
+                       
+                    </div>
+
+                </div>
+                </div>
+<div class="buttons-tab fixed-tab" data-offset="44" >
+    <a href="#tab1" class="tab-link active button">会员详细</a>
+    <a href="#tab2" class="tab-link button">关注商品</a>
+</div>
+
+<div class="tabs">
+    <div id="tab1" class="tab active" style="width:100%;">
+        <div class="list-block">
+            <ul>
+                <!-- Text inputs -->
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">姓名:</div>
+                            <div class="item-input">
+                                
+                                <input type="text" placeholder="请输入姓名" value="@Model.name">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">手机:</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="请输入手机号" value="@Model.phoneNumber">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">年龄:</div>
+                            <div class="item-input">
+                                <input type="text" disabled="disabled" value="@Model.age 岁">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">住址:</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="请输入地址" value="@Model.adder">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">微信/备注:</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="请输入微信" value="@Model.weiChat">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">会员类型:</div>
+                            <div class="item-input">
+                                <input type="text" disabled="disabled" value="@Model.MemberType">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">注册门店:</div>
+                            <div class="item-input">
+                                <input type="text" disabled="disabled" value="@Model.regShop">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                
+            </ul>
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">最近购买机型:</div>
+                            <div class="item-input">
+                                <input type="text" disabled="disabled" value="@Model.LAST_BUY_MODEL">
+                              
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">最近购买数量:</div>
+                            <div class="item-input">
+                                @Model.LAST_BUY_QTY 台
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="card-content-inner">
+
+                        <div style="width:100%">
+                            历史购买记录:
+                        </div>
+                        @{
+                            foreach (var item in Model.ByList)
+                            {
+                                <div class="row  no-gutter" style="font-size:14px;">
+                                    <div class="col-60" style="padding-left:5px;">@item.MAC</div>
+                                    <div class="col-35">@item.qty.ToString() 台</div>
+                                </div>
+                            }
+                        }
+
+                    </div>
+
+                </li>
+              </ul>
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">到访次数:</div>
+                            <div class="item-input">
+                                @Model.VISIT_COUNT.ToString() 次
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    
+                        <div class="card-content-inner">
+
+                            <div style="width:100%">
+                                到访记录:<a href="#"  style="width:100px;" >更多</a>
+                            </div>
+                            @{
+                                if (Model.IOList.Count > 2)
+                                {
+                                    foreach (var item in Model.IOList)
+                                    {
+                                        <div class="row  no-gutter" style="font-size:14px;">
+                                            <div class="col-60" style="padding-left:5px;">@item.SHOP_NAME</div>
+                                            <div class="col-35">@item.Time.ToString("yyyy/MM/dd HH:mm")</div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (var item in Model.IOList)
+                                    {
+                                    <div class="row  no-gutter" style="font-size:14px;">
+                                        <div class="col-60" style="padding-left:5px;">@item.SHOP_NAME</div>
+                                        <div class="col-35">@item.Time.ToString("yyyy/MM/dd HH:mm")</div>
+                                    </div>
+                                        }
+                                    }
+                                }
+
+                        </div>
+
+
+                       
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">备注:</div>
+                            <div class="item-input">
+                                @Model.MEMO
+                            </div>
+                        </div>
+                    </div>
+                </li>
+               </ul>
+</div>
+    </div>
+    <div id="tab2" class="tab" style="width:100%;">
+        <div class="content-block" style="width:100%;">
+            <div class="list-block">
+                <ul>
+                @{
+                    foreach (var item in Model.lookMacsList)
+                    {
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">@item</div>
+                                    <div class="item-input">
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                }
+                    </ul></div>
+            </div>
+        </div>
+   
+</div>
+
+
+               
+             
+
+
+           
+    
+      
+    
+

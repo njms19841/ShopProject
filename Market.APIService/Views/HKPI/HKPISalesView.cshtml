@@ -1,0 +1,1335 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+
+
+
+    <link href="https://iretailerapp.flnet.com/Content/framework7.css" rel="stylesheet">
+
+    <title>仪表盘</title>
+
+    <script type="text/javascript" src="https://iretailerapp.flnet.com/Scripts/framework7.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+    <style>
+        .buttonNoSelect {
+            background-color: white;
+            color: rgb(36,172,202);
+            font-size: 16pt;
+            height: 30pt;
+            border: 1pt solid rgb(36,172,202); /* Green */
+        }
+
+        .buttonSelect {
+            background-color: rgb(36,172,202);
+            color: white;
+            font-size: 16pt;
+            height: 30pt;
+            border: 1pt solid rgb(36,172,202); /* Green */
+        }
+        .TabNoSelect {
+            font-size: 15px;height:37pt;color: #acacac;border:none;
+        }
+
+        .TabSelect {
+            font-size: 15px;height:37pt;color: rgb(36,172,202);border:3pt solid rgb(36,172,202);border-top:none;border-left:none;border-right:none;
+        }
+    </style>
+</head>
+<body>
+
+    @{
+        string userId = (string)ViewData["userId"];
+        string shopCode = (string)ViewData["shopCode"];
+        
+        //List<Market.APIService.Controllers.CusModel> Vdata = (List < Market.APIService.Controllers.CusModel>) ViewData["vModel"];
+    }
+    <div id="app" style="background-color:rgb(247,247,247);">
+        <div class="view view-main">
+            
+                <div id="Dview" style="padding-top:6pt;padding-left:6pt;padding-right:6pt;" class="page-content">
+                    <div style="width:100%;height: 37pt; text-align: center;padding-left:-6pt;padding-right:-6pt; background-color:white;">
+                        <div  style="width:33%;height:37pt;float:left;background-color:white;">
+                            <button id="tab1" onclick="ChangeTabSelect(1)" style="width:100%;background-color:white;" class="TabSelect">销售量</button>
+                        </div>
+                         <div style="width:33%;height:37pt;float:left;background-color:white;" >
+                             <button id="tab2" onclick="ChangeTabSelect(2)" style="width:100%;background-color:white;"class="TabNoSelect">销售额</button>
+                         </div>
+                        <div style="width:33%;height:37pt;float:left;background-color:white;">
+                            <button id="tab3" onclick="ChangeTabSelect(3)" style="width:100%;background-color:white;" class="TabNoSelect">转化率</button>
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: 5pt; opacity:0.4; text-align: center;background:url('/Content/Img/imb_shadow.png');background-size:100% 5pt;background-repeat:no-repeat;">
+                    </div>
+                    <div style="width: 100%; height: 3pt; text-align: center;">
+                    </div>
+
+                    <div style="border-radius: 5pt; width: 100%; height: 122pt; text-align: center; padding-top: 10pt; background-color: white;">
+                        <div style="width: 100%; height: 48pt; display: flex; ">
+                            <div style="height:48pt;flex:0.5;"></div>
+                            <div onclick="prearrowDay();" style="width:40pt; height:48pt; float:left; ">
+                                <div style="width:100%;height:16pt;"></div>
+                                <img style="height:15pt; width:9pt;" src="/Content/Img/img_prearrow.png" />
+                                <div style="width:100%;height:17.5pt;"></div>
+                            </div>
+
+                            <div onclick="clickButton();" style="width:30pt; height:48pt; float:left; ">
+                                <div style="width:100%;height:10pt;"></div>
+                                <div style="width:28pt; height:28pt; float:left; text-align:center; background-color:rgb(36,172,202); border-radius:5pt;">
+                                    <div style="width:100%;height:7.5pt;"></div>
+                                    <div id="lab_SelectModel" style="width:100%;height:15pt;font-size:15pt;color:white;line-height:15pt;">周</div>
+                                    <div style="width:100%;height:7.5pt;"></div>
+                                </div>
+                                <div style="width:100%;height:10pt;"></div>
+                            </div>
+                            <div style="height:48pt;width:5pt;" onclick="clickButton();"></div>
+                            <div style="float:left;height:48pt;" onclick="clickButton();">
+                                <div style="width:100%;height:7pt;"></div>
+                                <div id="lab_SelectDay" style="width:100%;height:15pt;font-size:14pt;color:rgb(36,172,202);line-height:15pt;">05-20 ~ 05-27</div>
+                                <div style="width:100%;height:5pt;"></div>
+                                <div id="lab_SelectDay2" style="width:100%;height:12pt;font-size:10pt;color:rgb(103,218,224);line-height:12pt;">相比05-20 ~ 05-27</div>
+                                <div style="width:100%;height:9pt;"></div>
+
+                            </div>
+
+
+                            <div onclick="nextDay();" style="width:40pt; height:48pt; float:left;">
+                                <div style="width:100%;height:16pt;"></div>
+                                <img style="height:15pt; width:9pt;" src="/Content/Img/img_next.png" />
+                                <div style="width:100%;height:17.5pt;"></div>
+                            </div>
+                            <div style="height:48pt;flex:0.5;"></div>
+                        </div>
+                        <div style="width:100%;height:13pt;"></div>
+                        <div style="width: 100%; height: 63pt;">
+                            <div style="width: 30%; height: 63pt;float:left">
+                                <div id="lab_data1" style="width: 100%;  height: 25pt;font-size:23pt;line-height:25pt;color:rgb(51, 51, 51);  ">
+                                    400
+                                </div>
+                                <div style="width:100%;height:6pt;"></div>
+                                <div id="lab_tile_data1" style="border-image: none; width: 100%; height: 14pt; color: rgb(186, 186, 186); line-height: 14pt; font-size: 12pt; border-right-width: 1pt; border-right-style: solid;">
+                                    本周客流量
+                                </div>
+                            </div>
+                            <div style="width: 40%; height: 63pt;float:left; ">
+                                <div id="lab_data2" style="width: 100%; height: 25pt;font-size:23pt;line-height:25pt; color:rgb(51, 51, 51);  ">
+                                    400
+                                </div>
+                                <div style="width:100%;height:6pt;"></div>
+                                <div id="lab_tile_data2" style="border-image: none; width: 100%; height: 14pt; color: rgb(186, 186, 186); line-height: 14pt; font-size: 12pt; border-right-width: 1pt; border-right-style: solid;">
+                                    前一周客流量
+                                </div>
+                            </div>
+                            <div style="width: 30%; height: 63pt;float:left; ">
+                                <div id="lab_data3" style="width: 100%;  height: 25pt;font-size:23pt;line-height:25pt;color:rgb(51, 51, 51);  ">
+                                    +10%
+                                </div>
+                                <div style="width:100%;height:6pt;"></div>
+                                <div style="border-image: none; width: 100%; height: 14pt; color: rgb(186, 186, 186); line-height: 14pt; font-size: 12pt;">
+                                    对比
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: 10pt; opacity:0.4; text-align: center;background:url('/Content/Img/imb_shadow.png');background-size:100% 10pt;background-repeat:no-repeat;">
+                    </div>
+
+                    <div style="width:100%;height:7px;"></div>
+                    <div style="border-radius: 5pt; width: 100%; height: 260pt; text-align: center; padding-top: 10pt; background-color:  white;">
+                        <div style="width:100%; height: 21pt;display:flex;">
+                            <div style="height: 20pt; flex:0.5;float:left;">
+
+                            </div>
+                            <div id="title_chart" style="width:auto; height: 21pt;line-height:21pt;font-weight:bold; font-size:12pt;color:rgb(36,172,202);border-bottom:solid;border-bottom-width:3pt; border-bottom-color:rgb(36,172,202); float:left;">
+                                对比图
+                            </div>
+                            <div style="height: 20pt; flex:0.5;float:left;">
+                            </div>
+                        </div>
+                        
+                        <div id="char1" style="width:97%;height:239pt;">
+
+                        </div>
+                    </div>
+                    <div style="width:100%;height:10px;"></div>
+                    <div style="border-radius: 5pt; width: 100%; text-align: center; padding-top: 10pt; min-height: 300pt; background-color:  white;">
+                        <div style="width:100%; height: 30pt;display:flex;">
+                            <div style="height: 20pt; flex:0.5;float:left;">
+
+                            </div>
+                            <div id="title_table" style="width: auto; height: 21pt;line-height:21pt;font-weight:bold;font-size:12pt;color:rgb(36,172,202);border-bottom:solid;border-bottom-width:3pt; border-bottom-color:rgb(36,172,202); float:left;">
+                                明细对比
+                            </div>
+                            <div style="height: 20pt; flex:0.5;float:left;">
+                            </div>
+                        </div>
+                            <div class="data-table" style="color:black; ">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th style="color: black; font-size: 10pt;width:10% ">时间</th>
+                                            <th style="color: black; font-size: 10pt;width:20%" id="datarowTitle1">今日</th>
+                                            <th style="color: black; font-size: 10pt;width:20%" id="datarowTitle2">昨日</th>
+                                            <th style="color: black; font-size: 10pt;width:35%">对比</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tableDataRows"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    
+                    <br />
+                </div>
+
+
+
+
+            </div>
+
+    </div>
+
+
+    <script>
+
+
+        var myApp = new Framework7({
+            // App root element
+            root: '#app',
+            // App Name
+            name: 'My App',
+            // App id
+            id: 'com.myapp.test',
+            // Enable swipe panel
+            panel: {
+                swipe: 'left',
+            },
+            // Add default routes
+            routes: [
+              {
+                  path: '/about/',
+                  url: 'about.html',
+              },
+            ],
+            // ... other parameters
+        });
+        var $$ = Framework7.$;
+        var dialog = null;
+        function clickButton() {
+
+            myApp.request.get('DateSelectView',
+                null,
+                function (data) {
+                    dialog = myApp.dialog.create({
+                        title: ' <div style="width:100%;"><div style="width:100%;height:7pt;"></div><div style="width:100%;line-height: 20pt; height: 20pt; color:rgb(36,172,202); text-align:center;" >选择时间段</div></div>',
+                        text: data,
+                        buttons: [
+
+                        ]
+                    });
+                    selectBtn = 0;
+                    dialog.open();
+
+                    CreatePick();
+
+                    $$('#picker-date-container-1').hide();
+                    $$('#picker-date-container-2').hide();
+                    $$('#picker-date-container-0').show();
+
+                });
+
+
+
+        }
+
+        // 对Date的扩展，将 Date 转化为指定格式的String
+        // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
+        // 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
+        // 例子：
+        // (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+        // (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+        Date.prototype.Format = function (fmt) { //author: meizz
+            var o = {
+                "M+": this.getMonth() + 1,                 //月份
+                "d+": this.getDate(),                    //日
+                "h+": this.getHours(),                   //小时
+                "m+": this.getMinutes(),                 //分
+                "s+": this.getSeconds(),                 //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds()             //毫秒
+            };
+            if (/(y+)/.test(fmt))
+                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt))
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+
+        /**
+*js中更改日期
+* y年， m月， d日， h小时， n分钟，s秒
+*/
+        function DateAdd(part, value, date) {
+            var now = date;
+            value *= 1;
+            if (isNaN(value)) {
+                value = 0;
+            }
+            switch (part) {
+                case "y":
+                    now.setFullYear(date.getFullYear() + value);
+                    break;
+                case "m":
+                    now.setMonth(date.getMonth() + value);
+                    break;
+                case "d":
+                    now.setDate(date.getDate() + value);
+                    break;
+                case "h":
+                    now.setHours(date.getHours() + value);
+                    break;
+                case "n":
+                    now.setMinutes(date.getMinutes() + value);
+                    break;
+                case "s":
+                    now.setSeconds(date.getSeconds() + value);
+                    break;
+                default:
+
+            }
+            return now;
+        }
+        ///定义公用变量
+        var today = new Date();
+
+        var selectBtn = 0;//表示选择的模式
+        var selectDay = today.getDate();//控件选择的日期
+        var selectYear = today.getFullYear();//控件选择的年份
+        var selectMonth = today.getMonth();//控件选择的月份 0开始
+        var selectWeek = 1;
+
+        var c_selectBtn = 0;//确定选择的模式
+        var c_selectDay = today.getDate();//确定选择的日期
+        var c_selectYear = today.getFullYear();//确定选择的年份
+        var c_selectMonth = today.getMonth() * 1 + 1;//确定选择的月份
+        var c_selectWeek = 1;
+        //getYearWeek(DateAdd('d', -7, new Date(c_selectYear, c_selectMonth, c_selectDay)).Format("yyyy-MM-dd"));
+        myApp.request.json('GetWeekNumber?dt=' + today.Format("yyyy-MM-dd"),
+                null,
+                function (data) {
+                    c_selectWeek = data.weekNumber;
+                    selectWeek = data.weekNumber;
+                });
+
+        //初始化UI元素
+        $$('#lab_SelectModel').text('日');
+        $$('#lab_tile_data1').text('本日销售量');
+        $$('#lab_tile_data2').text('前一日销售量');
+        $$('#lab_SelectDay').text(today.Format("MM-dd") + '~' + today.Format("MM-dd"));
+        var tempDay = DateAdd('d', -1, today)
+        $$('#lab_SelectDay2').text('相比' + tempDay.Format("MM-dd") + '~' + tempDay.Format("MM-dd"));
+        var selectTab = 1;
+        function ChangeTabSelect(index) {
+           
+
+            if (selectTab != index) {
+                selectTab = index;
+
+                if ($$('#tab' + index).hasClass("TabNoSelect") == true) {
+                    $$('#tab' + index).removeClass("TabNoSelect");
+                }
+                $$('#tab' + index).addClass("TabSelect");
+
+                for (var i = 1; i <= 3; i++) {
+
+                    if (i != index) {
+                        if ($$('#tab' + i).hasClass("TabNoSelect") == true) {
+                            $$('#tab' + i).removeClass("TabNoSelect");
+                        }
+                        if ($$('#tab' + i).hasClass("TabSelect") == true) {
+                            $$('#tab' + i).removeClass("TabSelect");
+                        }
+                        $$('#tab' + i).addClass("TabNoSelect");
+
+                       
+                    }
+
+                }
+                CloseModle(2);
+            }
+
+        }
+        function ChangeSelectBtn(index) {
+
+
+            if (selectBtn != index) {
+                selectBtn = index;
+
+                if ($$('#dateSelect_btn_' + index).hasClass("buttonNoSelect") == true) {
+                    $$('#dateSelect_btn_' + index).removeClass("buttonNoSelect");
+                }
+                $$('#dateSelect_btn_' + index).addClass("buttonSelect");
+
+                for (var i = 0; i <= 2; i++) {
+
+                    if (i != index) {
+                        if ($$('#dateSelect_btn_' + i).hasClass("buttonNoSelect") == true) {
+                            $$('#dateSelect_btn_' + i).removeClass("buttonNoSelect");
+                        }
+                        if ($$('#dateSelect_btn_' + i).hasClass("buttonSelect") == true) {
+                            $$('#dateSelect_btn_' + i).removeClass("buttonSelect");
+                        }
+                        $$('#dateSelect_btn_' + i).addClass("buttonNoSelect");
+
+                        $$('#picker-date-container-' + i).hide();
+                    }
+                    else {
+                        $$('#picker-date-container-' + i).show();
+                    }
+
+                }
+            }
+
+        }
+        function CreateDataTable(data)
+        {
+            if (selectTab == 3)
+            {
+                //tableDataRows
+                var rowsHtml = "";
+                for (var i = 0; i < data.numbers.length; i++) {
+                    rowsHtml = rowsHtml +
+                        '<tr>' +
+                '<td style="font-size: 9pt;width:10%">' + data.timeGroupName[i] + '</td>' +
+                '<td class="numeric-cell" style="font-size: 9pt;width:20%">' + (data.numbers[i]*100).toFixed(0) +'%'+ '</td>' +
+                '<td class="numeric-cell" style="font-size: 9pt;width:20%">' + (data.preNumbers[i] * 100).toFixed(0) + '%' + '</td>'
+                    if (data.preNumbersCt[i] == 0) {
+                        rowsHtml = rowsHtml + '<td class="numeric-cell" style="font-size: 9pt;width:35%">' + (data.preNumbersCt[i] * 100).toFixed(0) + '%' +
+                        '  <img style="width:9pt;vertical-align:middle;" src="/Content/Img/img_normal.png" />' +
+                      '</td>' +
+                      '</tr>'
+                    } else if (data.preNumbersCt[i] > 0) {
+                        rowsHtml = rowsHtml + '<td class="numeric-cell" style="font-size: 9pt;width:35%">' + (data.preNumbersCt[i] * 100).toFixed(0) + '%' +
+                        '  <img style=" width:9pt;vertical-align:middle;" src="/Content/Img/img_up.png" />' +
+                      '</td>' +
+                      '</tr>'
+                    } else if (data.preNumbersCt[i] < 0) {
+                        rowsHtml = rowsHtml + '<td class="numeric-cell" style="font-size: 9pt;width:35%">' + (data.preNumbersCt[i] * 100).toFixed(0) + '%' +
+                        '  <img style="width:9pt;vertical-align:middle;" src="/Content/Img/img_down.png" />' +
+                      '</td>' +
+                      '</tr>'
+                    }
+
+                }
+                $$('#tableDataRows').html(rowsHtml);
+            }
+            else
+            {
+                //tableDataRows
+                var rowsHtml = "";
+                for (var i = 0; i < data.numbers.length; i++) {
+                    rowsHtml = rowsHtml +
+                        '<tr>' +
+                '<td style="font-size: 9pt;width:10%">' + data.timeGroupName[i] + '</td>' +
+                '<td class="numeric-cell" style="font-size: 9pt;width:20%">' + data.numbers[i].toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + '</td>' +
+                '<td class="numeric-cell" style="font-size: 9pt;width:20%">' + data.preNumbers[i].toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + '</td>'
+                    if (data.preNumbersCt[i] == 0) {
+                        rowsHtml = rowsHtml + '<td class="numeric-cell" style="font-size: 9pt;width:35%">' + (data.preNumbersCt[i] * 100).toFixed(0) + '%' +
+                        '  <img style="width:9pt;vertical-align:middle;" src="/Content/Img/img_normal.png" />' +
+                      '</td>' +
+                      '</tr>'
+                    } else if (data.preNumbersCt[i] > 0) {
+                        rowsHtml = rowsHtml + '<td class="numeric-cell" style="font-size: 9pt;width:35%">' + (data.preNumbersCt[i] * 100).toFixed(0) + '%' +
+                        '  <img style=" width:9pt;vertical-align:middle;" src="/Content/Img/img_up.png" />' +
+                      '</td>' +
+                      '</tr>'
+                    } else if (data.preNumbersCt[i] < 0) {
+                        rowsHtml = rowsHtml + '<td class="numeric-cell" style="font-size: 9pt;width:35%">' + (data.preNumbersCt[i] * 100).toFixed(0) + '%' +
+                        '  <img style="width:9pt;vertical-align:middle;" src="/Content/Img/img_down.png" />' +
+                      '</td>' +
+                      '</tr>'
+                    }
+
+                }
+                $$('#tableDataRows').html(rowsHtml);
+            }
+            
+        }
+        function prearrowDay()
+        {
+            if (c_selectBtn == 0) {
+
+                var tempDay = DateAdd('d', -1, new Date(c_selectYear, c_selectMonth, c_selectDay))
+                selectBtn = 0;//表示选择的模式
+                selectDay = tempDay.getDate();//控件选择的日期
+                selectYear = tempDay.getFullYear();//控件选择的年份
+                selectMonth = tempDay.getMonth();//控件选择的月份 0开始
+                CloseModle(2);
+            }
+            else if (c_selectBtn == 1) {
+                if (c_selectWeek == 1) {
+                    selectYear = c_selectYear * 1 - 1;
+                    selectWeek = 53;
+
+                }
+                else {
+                    selectYear = c_selectYear;
+                    selectWeek = c_selectWeek * 1 - 1;
+                }
+                CloseModle(2);
+
+            }
+            else if (c_selectBtn == 2) {
+                var tempDay = DateAdd('m', -1, new Date(c_selectYear, c_selectMonth, c_selectDay))
+                selectBtn = 2;//表示选择的模式
+                selectDay = tempDay.getDate();//控件选择的日期
+                selectYear = tempDay.getFullYear();//控件选择的年份
+                selectMonth = tempDay.getMonth();//控件选择的月份 0开始
+
+                CloseModle(2);
+            }
+        }
+        function nextDay()
+        {
+            if (c_selectBtn == 0)
+            {
+
+                var tempDay = DateAdd('d', 1, new Date(c_selectYear, c_selectMonth, c_selectDay))
+               selectBtn = 0;//表示选择的模式
+               selectDay = tempDay.getDate();//控件选择的日期
+               selectYear = tempDay.getFullYear();//控件选择的年份
+               selectMonth = tempDay.getMonth();//控件选择的月份 0开始
+               CloseModle(2);
+            }
+            else if(c_selectBtn == 1)
+            {
+                if (c_selectWeek == 53) {
+                    selectYear = c_selectYear * 1 + 1;
+                    selectWeek = 1;
+
+                }
+                else {
+                    selectYear = c_selectYear;
+                    selectWeek = c_selectWeek*1+1;
+                }
+                CloseModle(2);
+
+            }
+            else if (c_selectBtn == 2)
+            {
+                var tempDay = DateAdd('m', 1, new Date(c_selectYear, c_selectMonth, c_selectDay))
+                selectBtn = 2;//表示选择的模式
+                selectDay = tempDay.getDate();//控件选择的日期
+                selectYear = tempDay.getFullYear();//控件选择的年份
+                selectMonth = tempDay.getMonth();//控件选择的月份 0开始
+
+                CloseModle(2);
+            }
+        }
+        function CloseModle(model) {
+
+            if (model == 1) {
+
+                selectDay = c_selectDay; //重置选择的日期
+                selectYear = c_selectYear; //重置选择的年份
+                selectMonth = c_selectMonth;//重置选择的月份
+                selectWeek = c_selectWeek;
+                selectBtn = c_selectBtn;
+            }
+            else if (model == 2) {
+
+                c_selectBtn = selectBtn;//确定选择的模式
+                c_selectDay = selectDay;//确定选择的日期
+                c_selectYear = selectYear;//确定选择的年份
+                c_selectMonth = selectMonth;//确定选择的月份
+                c_selectWeek = selectWeek;
+                if (c_selectBtn == 0)//日期模式
+                {
+
+                    $$('#lab_SelectModel').text('日');
+                    $$('#lab_tile_data1').text('本日销售量');
+                    $$('#lab_tile_data2').text('前一日销售量');
+                    $$('#title_chart').text('销售量对比图');
+                    $$('#title_table').text('销售量对比明细');
+                    if (selectTab == 2)
+                    {
+                        $$('#lab_tile_data1').text('本日销售额');
+                        $$('#lab_tile_data2').text('前一日销售额');
+                        $$('#title_chart').text('销售额对比图');
+                        $$('#title_table').text('销售额对比明细');
+                    }
+                    else if (selectTab == 3)
+                    {
+                        $$('#lab_tile_data1').text('本日转化率');
+                        $$('#lab_tile_data2').text('前一日转化率');
+                        $$('#title_chart').text('转化率对比图');
+                        $$('#title_table').text('转化率对比明细');
+                    }
+                    var tempDay = new Date(c_selectYear, c_selectMonth, c_selectDay);
+                    $$('#lab_SelectDay').text(tempDay.Format("MM-dd") + '~' + tempDay.Format("MM-dd"));
+                    var tempDay2 = DateAdd('d', -1, new Date(c_selectYear, c_selectMonth, c_selectDay))
+
+                    $$('#lab_SelectDay2').text('相比' + tempDay2.Format("MM-dd") + '~' + tempDay2.Format("MM-dd"));
+                    var url = 'GetSalesQueryData?startTime=' + tempDay.Format("yyyy-MM-dd") + "&endTime=" + tempDay.Format("yyyy-MM-dd") + "&shopCode=" + '@shopCode' + "&model=0&model2=" + selectTab;
+                   
+                    myApp.request.json(url,
+                              null,
+                                function (data) {
+                                   
+                                    if (selectTab == 3) {
+                                        $$('#lab_data1').text((data.totalNumber * 100).toFixed(0) + "%")
+
+                                        $$('#lab_data2').text((data.totalPreNumber * 100).toFixed(0) + "%")
+
+                                        $$('#lab_data3').text((data.totalNumberCt * 100).toFixed(0) + "%")
+                                    }
+                                    else {
+                                        $$('#lab_data1').text(data.totalNumber.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'))
+                                        if (data.totalNumber > 1000) {
+                                            $$('#lab_data1').text((data.totalNumber / 1000).toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + "K")
+                                        }
+                                        $$('#lab_data2').text(data.totalPreNumber.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'))
+                                        if (data.totalPreNumber > 1000) {
+                                            $$('#lab_data2').text((data.totalPreNumber / 1000).toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + "K")
+                                        }
+                                        $$('#lab_data3').text((data.totalNumberCt * 100).toFixed(0) + "%")
+                                    }
+                                   
+                                    if (selectTab == 1) {
+                                        myChart.setOption({
+                                            tooltip: {
+                                                trigger: 'axis',
+                                                formatter: function (datas) {
+                                                    var res = datas[0].name + '<br/>'
+                                                    for (var i = 0, length = datas.length; i < length; i++) {
+                                                        res += datas[i].seriesName + '：'
+                                                            + datas[i].data.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + '<br/>'
+                                                    }
+                                                    return res
+                                                }
+                                            },
+                                            legend: {
+                                                data: ['今日销售量(台)', '昨日销售量(台)'],
+                                                bottom: '0pt',
+                                            },
+                                            xAxis: {
+                                                data: data.timeGroupName
+                                            },
+                                            series: [{
+                                                // 根据名字对应到相应的系列
+                                                name: '今日销售量(台)',
+                                                data: data.numbers
+                                            }, {
+                                                // 根据名字对应到相应的系列
+                                                name: '昨日销售量(台)',
+                                                data: data.preNumbers
+                                            }]
+                                        });
+                                    } else if (selectTab == 2) {
+                                        myChart.setOption({
+                                            tooltip: {
+                                                trigger: 'axis',
+                                                formatter: function (datas) {
+                                                    var res = datas[0].name + '<br/>'
+                                                    for (var i = 0, length = datas.length; i < length; i++) {
+                                                        res += datas[i].seriesName + '：'
+                                                            + datas[i].data.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + '<br/>'
+                                                    }
+                                                    return res
+                                                }
+                                            },
+                                            legend: {
+                                                data: ['今日销售额', '昨日销售额'],
+                                                bottom: '0pt',
+                                            },
+                                            xAxis: {
+                                                data: data.timeGroupName
+                                            },
+                                            series: [{
+                                                // 根据名字对应到相应的系列
+                                                name: '今日销售额',
+                                                data: data.numbers
+                                            }, {
+                                                // 根据名字对应到相应的系列
+                                                name: '昨日销售额',
+                                                data: data.preNumbers
+                                            }]
+                                        });
+                                    }
+                                    else if (selectTab == 3) {
+                                        myChart.setOption({
+                                            tooltip: {
+                                                trigger: 'axis',
+                                                formatter: function (datas) {
+                                                    var res = datas[0].name + '<br/>'
+                                                    for (var i = 0, length = datas.length; i < length; i++) {
+                                                        res += datas[i].seriesName + '：'
+                                                            + (datas[i].data * 100).toFixed(0) + '%' + '<br/>'
+                                                    }
+                                                    return res
+                                                }
+                                            },
+                                            legend: {
+                                                data: ['今日转化率', '昨日转化率'],
+                                                bottom: '0pt',
+                                            },
+                                            xAxis: {
+                                                data: data.timeGroupName
+                                            },
+                                            series: [{
+                                                // 根据名字对应到相应的系列
+                                                name: '今日转化率',
+                                                data: data.numbers
+                                            }, {
+                                                // 根据名字对应到相应的系列
+                                                name: '昨日转化率',
+                                                data: data.preNumbers
+                                            }]
+                                        });
+                                    }
+                                    $$('#datarowTitle1').text('今日');
+                                    $$('#datarowTitle2').text('昨日');
+                                    CreateDataTable(data);
+                                }, function (xhr, status) {
+                                    alert(xhr);
+                                }
+                                );
+
+                }
+                else if (c_selectBtn == 1)//周模式
+                {
+                    myApp.request.json('GetWeekDays?year=' + c_selectYear + "&weeks=" + c_selectWeek,
+                               null,
+                   function (data) {
+
+                       //alert(data.lastDay); //2018-01-01
+                       $$('#lab_SelectModel').text('周');
+                       $$('#lab_tile_data1').text('本周销售量');
+                       $$('#lab_tile_data2').text('前一周销售量');
+                       $$('#title_chart').text('销售量对比图');
+                       $$('#title_table').text('销售量对比明细');
+                       if (selectTab == 2) {
+                           $$('#lab_tile_data1').text('本周销售额');
+                           $$('#lab_tile_data2').text('前一周销售额');
+                           $$('#title_chart').text('销售额对比图');
+                           $$('#title_table').text('销售额对比明细');
+                       }
+                       else if (selectTab == 3) {
+                           $$('#lab_tile_data1').text('本周转化率');
+                           $$('#lab_tile_data2').text('前一周转化率');
+                           $$('#title_chart').text('转化率对比图');
+                           $$('#title_table').text('转化率对比明细');
+                       }
+                       var tempStartDay = new Date(data.firstDay.substr(0, 4), (Number(data.firstDay.substr(5, 2))) - 1, data.firstDay.substr(8));
+                       var tempEndDay = new Date(data.lastDay.substr(0, 4), (Number(data.lastDay.substr(5, 2))) - 1, data.lastDay.substr(8));
+
+                       var tempStartDay2 = DateAdd('d', -7, new Date(data.firstDay.substr(0, 4), (Number(data.firstDay.substr(5, 2))) - 1, data.firstDay.substr(8)));
+                       var tempEndDay2 = DateAdd('d', -7, new Date(data.lastDay.substr(0, 4), (Number(data.lastDay.substr(5, 2))) - 1, data.lastDay.substr(8)));
+
+                       $$('#lab_SelectDay').text(tempStartDay.Format("MM-dd") + '~' + tempEndDay.Format("MM-dd"));
+                       $$('#lab_SelectDay2').text('相比' + tempStartDay2.Format("MM-dd") + '~' + tempEndDay2.Format("MM-dd"));
+                       myApp.request.json('GetSalesQueryData?startTime=' + tempStartDay.Format("yyyy-MM-dd") + "&endTime=" + tempEndDay.Format("yyyy-MM-dd") + "&shopCode=" + '@shopCode' + "&model=1&model2=" + selectTab,
+                              null,
+                                function (data) {
+                                    
+                                    if (selectTab == 3) {
+                                        $$('#lab_data1').text((data.totalNumber * 100).toFixed(0) + "%")
+
+                                        $$('#lab_data2').text((data.totalPreNumber * 100).toFixed(0) + "%")
+
+                                        $$('#lab_data3').text((data.totalNumberCt * 100).toFixed(0) + "%")
+                                    }
+                                    else {
+                                        $$('#lab_data1').text(data.totalNumber.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'))
+                                        if (data.totalNumber > 1000) {
+                                            $$('#lab_data1').text((data.totalNumber / 1000).toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + "K")
+                                        }
+                                        $$('#lab_data2').text(data.totalPreNumber.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'))
+                                        if (data.totalPreNumber > 1000) {
+                                            $$('#lab_data2').text((data.totalPreNumber / 1000).toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + "K")
+                                        }
+                                        $$('#lab_data3').text((data.totalNumberCt * 100).toFixed(0) + "%")
+                                    }
+                                   
+                                    if (selectTab == 1) {
+                                        myChart.setOption({
+                                            tooltip: {
+                                                trigger: 'axis',
+                                                formatter: function (datas) {
+                                                    var res = datas[0].name + '<br/>'
+                                                    for (var i = 0, length = datas.length; i < length; i++) {
+                                                        res += datas[i].seriesName + '：'
+                                                            + datas[i].data.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + '<br/>'
+                                                    }
+                                                    return res
+                                                }
+                                            },
+                                            legend: {
+                                                data: ['本周销售量(台)', '上周销售量(台)'],
+                                                bottom: '0pt',
+                                            },
+                                            xAxis: {
+                                                data: data.timeGroupName
+                                            },
+                                            series: [{
+                                                // 根据名字对应到相应的系列
+                                                name: '本周销售量(台)',
+                                                data: data.numbers
+                                            }, {
+                                                // 根据名字对应到相应的系列
+                                                name: '上周销售量(台)',
+                                                data: data.preNumbers
+                                            }]
+                                        });
+                                    } else if (selectTab == 2) {
+                                        myChart.setOption({
+                                            tooltip: {
+                                                trigger: 'axis',
+                                                formatter: function (datas) {
+                                                    var res = datas[0].name + '<br/>'
+                                                    for (var i = 0, length = datas.length; i < length; i++) {
+                                                        res += datas[i].seriesName + '：'
+                                                            + datas[i].data.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + '<br/>'
+                                                    }
+                                                    return res
+                                                }
+                                            },
+                                            legend: {
+                                                data: ['本周销售额', '上周销售额'],
+                                                bottom: '0pt',
+                                            },
+                                            xAxis: {
+                                                data: data.timeGroupName
+                                            },
+                                            series: [{
+                                                // 根据名字对应到相应的系列
+                                                name: '本周销售额',
+                                                data: data.numbers
+                                            }, {
+                                                // 根据名字对应到相应的系列
+                                                name: '上周销售额',
+                                                data: data.preNumbers
+                                            }]
+                                        });
+
+                                    } else if (selectTab == 3) {
+
+                                        myChart.setOption({
+                                            tooltip: {
+                                                trigger: 'axis',
+                                                formatter: function (datas) {
+                                                    var res = datas[0].name + '<br/>'
+                                                    for (var i = 0, length = datas.length; i < length; i++) {
+                                                        res += datas[i].seriesName + '：'
+                                                            + (datas[i].data * 100).toFixed(0) + '%' + '<br/>'
+                                                    }
+                                                    return res
+                                                }
+                                            },
+                                            legend: {
+                                                data: ['本周转化率', '上周转化率'],
+                                                bottom: '0pt',
+                                            },
+                                            xAxis: {
+                                                data: data.timeGroupName
+                                            },
+                                            series: [{
+                                                // 根据名字对应到相应的系列
+                                                name: '本周转化率',
+                                                data: data.numbers
+                                            }, {
+                                                // 根据名字对应到相应的系列
+                                                name: '上周转化率',
+                                                data: data.preNumbers
+                                            }]
+                                        });
+
+                                    }
+                                    $$('#datarowTitle1').text('本周');
+                                    $$('#datarowTitle2').text('上周');
+                                    CreateDataTable(data);
+                                });
+
+
+                   });
+
+
+
+                }
+                else if (c_selectBtn == 2)//月模式
+                {
+
+                    myApp.request.json('GetMonthDays?year=' + c_selectYear + "&month=" + (c_selectMonth * 1 + 1),
+                              null,
+                  function (data) {
+
+                      //alert(data.lastDay); //2018-01-01
+                      $$('#lab_SelectModel').text('月');
+                      $$('#lab_tile_data1').text('本月销售量');
+                      $$('#lab_tile_data2').text('前一月销售量');
+                      $$('#title_chart').text('销售量对比图');
+                      $$('#title_table').text('销售量对比明细');
+                      if (selectTab == 2) {
+                          $$('#lab_tile_data1').text('本月销售额');
+                          $$('#lab_tile_data2').text('前一月销售额');
+                          $$('#title_chart').text('销售额对比图');
+                          $$('#title_table').text('销售额对比明细');
+                      }
+                      else if (selectTab == 3) {
+                          $$('#lab_tile_data1').text('本月转化率');
+                          $$('#lab_tile_data2').text('前一月转化率');
+                          $$('#title_chart').text('转化率对比图');
+                          $$('#title_table').text('转化率对比明细');
+                      }
+                      var tempStartDay = new Date(data.firstDay.substr(0, 4), (Number(data.firstDay.substr(5, 2))) - 1, data.firstDay.substr(8));
+                      var tempEndDay = new Date(data.lastDay.substr(0, 4), (Number(data.lastDay.substr(5, 2))) - 1, data.lastDay.substr(8));
+
+
+                      var tempDay2 = DateAdd('m', -1, new Date(tempStartDay.getFullYear(), tempStartDay.getMonth(), 1));
+                      myApp.request.json('GetMonthDays?year=' + tempDay2.getFullYear() + "&month=" + (tempDay2.getMonth() * 1 + 1),
+                             null,
+                 function (data) {
+
+                     //alert(data.lastDay); //2018-01-01
+
+                     var tempStartDay2 = new Date(data.firstDay.substr(0, 4), (Number(data.firstDay.substr(5, 2))) - 1, data.firstDay.substr(8));
+                     var tempEndDay2 = new Date(data.lastDay.substr(0, 4), (Number(data.lastDay.substr(5, 2))) - 1, data.lastDay.substr(8));
+
+
+                     $$('#lab_SelectDay2').text('相比' + tempStartDay2.Format("MM-dd") + '~' + tempEndDay2.Format("MM-dd"));
+
+
+
+                 });
+
+
+                      $$('#lab_SelectDay').text(tempStartDay.Format("MM-dd") + '~' + tempEndDay.Format("MM-dd"));
+
+                      myApp.request.json('GetSalesQueryData?startTime=' + tempStartDay.Format("yyyy-MM-dd") + "&endTime=" + tempEndDay.Format("yyyy-MM-dd") + "&shopCode=" + '@shopCode' + "&model=2&model2=" + selectTab,
+                              null,
+                                function (data) {
+                                   
+                                    if (selectTab == 3)
+                                    {
+                                        $$('#lab_data1').text((data.totalNumber * 100).toFixed(0) + "%")
+                                       
+                                        $$('#lab_data2').text((data.totalPreNumber * 100).toFixed(0) + "%")
+                                       
+                                        $$('#lab_data3').text((data.totalNumberCt * 100).toFixed(0) + "%")
+                                    }
+                                    else
+
+                                    {
+                                        $$('#lab_data1').text(data.totalNumber.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'))
+                                        if (data.totalNumber > 1000) {
+                                            $$('#lab_data1').text((data.totalNumber / 1000).toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + "K")
+                                        }
+                                        $$('#lab_data2').text(data.totalPreNumber.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'))
+                                        if (data.totalPreNumber > 1000) {
+                                            $$('#lab_data2').text((data.totalPreNumber / 1000).toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + "K")
+                                        }
+                                        $$('#lab_data3').text((data.totalNumberCt * 100).toFixed(0) + "%")
+                                    }
+                                    if (selectTab == 1) {
+                                        myChart.setOption({
+                                            tooltip: {
+                                                trigger: 'axis',
+                                                formatter: function (datas) {
+                                                    var res = datas[0].name + '<br/>'
+                                                    for (var i = 0, length = datas.length; i < length; i++) {
+                                                        res += datas[i].seriesName + '：'
+                                                            + datas[i].data.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + '<br/>'
+                                                    }
+                                                    return res
+                                                }
+                                            },
+                                            legend: {
+                                                data: ['本月销售量(台)', '上月销售量(台)'],
+                                                bottom: '0pt',
+                                            },
+                                            xAxis: {
+                                                data: data.timeGroupName
+                                            },
+                                            series: [{
+                                                // 根据名字对应到相应的系列
+                                                name: '本月销售量(台)',
+                                                data: data.numbers
+                                            }, {
+                                                // 根据名字对应到相应的系列
+                                                name: '上月销售量(台)',
+                                                data: data.preNumbers
+                                            }]
+                                        });
+                                    }
+                                    if (selectTab == 2) {
+                                        myChart.setOption({
+                                            tooltip: {
+                                                trigger: 'axis',
+                                                formatter: function (datas) {
+                                                    var res = datas[0].name + '<br/>'
+                                                    for (var i = 0, length = datas.length; i < length; i++) {
+                                                        res += datas[i].seriesName + '：'
+                                                            + datas[i].data.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + '<br/>'
+                                                    }
+                                                    return res
+                                                }
+                                            },
+                                            legend: {
+                                                data: ['本月销售额', '上月销售额'],
+                                                bottom: '0pt',
+                                            },
+                                            xAxis: {
+                                                data: data.timeGroupName
+                                            },
+                                            series: [{
+                                                // 根据名字对应到相应的系列
+                                                name: '本月销售额',
+                                                data: data.numbers
+                                            }, {
+                                                // 根据名字对应到相应的系列
+                                                name: '上月销售额',
+                                                data: data.preNumbers
+                                            }]
+                                        });
+                                    }
+                                    if (selectTab == 3) {
+                                        myChart.setOption({
+                                            tooltip: {
+                                                trigger: 'axis',
+                                                formatter: function (datas) {
+                                                    var res = datas[0].name + '<br/>'
+                                                    for (var i = 0, length = datas.length; i < length; i++) {
+                                                        res += datas[i].seriesName + '：'
+                                                            + (datas[i].data * 100).toFixed(0)+'%' + '<br/>'
+                                                    }
+                                                    return res
+                                                }
+                                            },
+                                            legend: {
+                                                data: ['本月转化率', '上月转化率'],
+                                                bottom: '0pt',
+                                            },
+                                            xAxis: {
+                                                data: data.timeGroupName
+                                            },
+                                            series: [{
+                                                // 根据名字对应到相应的系列
+                                                name: '本月转化率',
+                                                data: data.numbers
+                                            }, {
+                                                // 根据名字对应到相应的系列
+                                                name: '上月转化率',
+                                                data: data.preNumbers
+                                            }]
+                                        });
+                                    }
+                                    $$('#datarowTitle1').text('本月');
+                                    $$('#datarowTitle2').text('上月');
+                                    CreateDataTable(data);
+
+                                });
+
+
+                  });
+                }
+            }
+            if (dialog!=null)
+            dialog.close();
+        }
+        function CreatePick() {
+            var pickerInline = myApp.picker.create({
+                containerEl: '#picker-date-container-0',
+
+                toolbar: false,
+                rotateEffect: true,
+                value: [
+                  selectYear,
+                  selectMonth,
+                  selectDay
+                ],
+                formatValue: function (values, displayValues) {
+                    var m = new Number(values[1]) + 1;
+                    return displayValues[0] + '-' + m + '-' + values[2];
+                },
+                cols: [
+                    // Years
+                    {
+                        values: (function () {
+                            var arr = [];
+                            for (var i = 2017; i <= today.getFullYear()+2 ; i++) { arr.push(i); }
+                            return arr;
+                        })(),
+                        textAlign: 'left',
+                        width: '40%'
+                    },
+                  // Months
+                  {
+                      values: ('0 1 2 3 4 5 6 7 8 9 10 11').split(' '),
+                      displayValues: ('1月 2月 3月 4月 5月 6月 7月 8月 9月 10月 11月 12月').split(' '),
+                      textAlign: 'left',
+                      width: '30%'
+                  },
+                  // Days
+                  {
+                      values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+                      textAlign: 'left',
+                      width: '30%'
+                  },
+
+                ],
+                on: {
+                    change: function (picker, values, displayValues) {
+
+                        var daysInMonth = new Date(picker.value[0], picker.value[1] * 1 + 1, 0).getDate();
+
+                        if (values[2] > daysInMonth) {
+                            picker.cols[2].setValue(daysInMonth);
+                        }
+                        selectYear = picker.value[0];
+                        selectMonth = picker.value[1];
+                        selectDay = picker.value[2];
+
+                    },
+                }
+            });
+            pickerInline.open();
+            var pickerInlineWeek = myApp.picker.create({
+                containerEl: '#picker-date-container-1',
+
+                toolbar: false,
+                rotateEffect: true,
+                value: [
+                  selectYear,
+                  selectWeek
+                ],
+                formatValue: function (values, displayValues) {
+
+                    return displayValues[0];
+                },
+                cols: [
+                    // Years
+                    {
+                        values: (function () {
+                            var arr = [];
+                            for (var i = 2017; i <= today.getFullYear() + 2 ; i++) { arr.push(i); }
+                            return arr;
+                        })(),
+                        textAlign: 'left',
+                        width: '50%'
+                    },
+                  // Months
+                  {
+                      values: (function () {
+                          var arr = [];
+                          for (var i = 1; i <= 53 ; i++) { arr.push(i); }
+                          return arr;
+                      })(),
+                      displayValues: (function () {
+                          var arr = [];
+                          for (var i = 1; i <= 53 ; i++) { arr.push("第" + i + "周"); }
+                          return arr;
+                      })(),
+                      textAlign: 'left',
+                      width: '50%'
+                  },
+
+                ],
+                on: {
+                    change: function (picker, values, displayValues) {
+
+
+                        selectYear = picker.value[0];
+                        selectWeek = picker.value[1];
+
+                    },
+                }
+            });
+            pickerInlineWeek.open();
+            var pickerInlineMonth = myApp.picker.create({
+                containerEl: '#picker-date-container-2',
+
+                toolbar: false,
+                rotateEffect: true,
+                value: [
+                   selectYear,
+                  selectMonth,
+
+                ],
+                formatValue: function (values, displayValues) {
+
+                    return displayValues[0];
+                },
+                cols: [
+                    // Years
+                    {
+                        values: (function () {
+                            var arr = [];
+                            for (var i = 2017; i <= today.getFullYear() + 2 ; i++) { arr.push(i); }
+                            return arr;
+                        })(),
+                        textAlign: 'left',
+                        width: '50%'
+                    },
+                  // Months
+                  {
+                      values: ('0 1 2 3 4 5 6 7 8 9 10 11').split(' '),
+                      displayValues: ('1月 2月 3月 4月 5月 6月 7月 8月 9月 10月 11月 12月').split(' '),
+                      textAlign: 'left',
+                      width: '50%'
+                  },
+
+                ],
+                on: {
+                    change: function (picker, values, displayValues) {
+
+
+                        selectYear = picker.value[0];
+                        selectMonth = picker.value[1];
+
+                    },
+                }
+            });
+            pickerInlineMonth.open();
+        }
+        var myChart = echarts.init(document.getElementById('char1'));
+        // 指定图表的配置项和数据
+        var option = {
+
+            legend: {
+                data: ['今日销售量(台)', '昨日销售量(台)'],
+                bottom: '0pt',
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                top: '20pt',
+                left: '3pt',
+                right: '3pt',
+                bottom: '30pt',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLine: {
+
+                        lineStyle: {
+
+                            type: 'solid',
+
+                            color: 'rgb(186, 186, 186)',//左边线的颜色
+
+                            width: '1'//坐标线的宽度
+
+                        }
+
+                    },
+                    axisLabel: {
+
+                        textStyle: {
+                            color: 'rgb(186, 186, 186)',//坐标值得具体的颜色
+
+                        }
+
+                    }
+                }
+            ],
+            yAxis: [
+
+                {
+
+                    type: 'value',
+                    position: 'right',
+                    axisLine: {
+
+                        lineStyle: {
+
+                            type: 'solid',
+
+                            color: 'rgb(186, 186, 186)',//左边线的颜色
+
+                            width: '1'//坐标线的宽度
+
+                        }
+
+                    },
+                    axisLabel: {
+
+                        textStyle: {
+                            color: 'rgb(186, 186, 186)',//坐标值得具体的颜色
+
+                        }
+
+                    },
+                    splitLine: {           // 分隔线
+                        show: true,        // 默认显示，属性show控制显示与否
+                        // onGap: null,
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            color: '#ededed',
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+
+                }
+
+            ],
+            series: [
+                {
+                    name: '今日销售量(台)',
+                    type: 'bar',
+                    data: [10, 52, 200, 334, 390, 330, 220, 10, 52, 200, 334, 390, 330, 220],
+                    yAxisIndex: 0,
+                    itemStyle: {
+                        normal: {
+
+                            color: '#ffba00',
+                        }
+                    }
+                }, {
+                    name: '昨日销售量(台)',
+                    type: 'bar',
+                    yAxisIndex: 0,
+                    data: [100, 520, 2000, 3340, 3900, 3300, 2200, 100, 520, 2000, 3340, 3900, 3300, 2200],
+                    itemStyle: {
+
+                        normal: {
+
+                            color: '#23acc9',
+                        }
+                    }
+                }
+            ]
+        };
+
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        CloseModle(2)
+    </script>
+
+
+    <!-- Path to your app js-->
+
+
+
+</body>
+</html>

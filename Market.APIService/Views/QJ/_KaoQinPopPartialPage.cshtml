@@ -1,0 +1,24 @@
+﻿@model List<Market.APIService.Controllers.popModel>
+<div class="content-block-title">人员列表</div>
+
+<div class="list-block media-list">
+    <ul>
+        @{
+            foreach (var item in Model)
+            {
+                <li>
+                    <a href="#" onclick="CheckItem('@item.userId')" class="item-link item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title">@item.name</div>
+
+                            </div>
+                            <div class="item-subtitle">@item.orgName</div>
+
+                        </div>
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+</div>

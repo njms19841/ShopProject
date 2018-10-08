@@ -1,0 +1,724 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+
+
+
+    <link href="https://iretailerapp.flnet.com/Content/framework7.css" rel="stylesheet">
+
+    <title>战区sellout达标率排名</title>
+
+    <script type="text/javascript" src="https://iretailerapp.flnet.com/Scripts/framework7.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+    <style>
+        .tabNoSelect {
+            width: 50%;
+            height: 41px;
+            float: left;
+            text-align: center;
+            font-size: 15px;
+            line-height: 43px;
+            color: #acacac;
+            background-color: #ffffff;
+        }
+
+        .tabSelect {
+            width: 50%;
+            height: 41px;
+            float: left;
+            text-align: center;
+            font-size: 15px;
+            line-height: 43px;
+            color: #24acca;
+            border-bottom: solid;
+            border-color: #24acca;
+            border-width: 2px;
+            background-color: #ffffff;
+        }
+        .ButtonSelect {
+            background-color:rgb(36,172,202); width:150px; height: 21pt;line-height:21pt; font-size:12pt;color:white;border:solid; border-width:1pt; border-color:rgb(36,172,202); float:left;
+        }
+        .ButtonNoSelect {
+            width:150px; height: 21pt;line-height:21pt; font-size:12pt;color:rgb(36,172,202);border:solid;border-width:1pt; border-color:rgb(36,172,202); float:left;
+        }
+    </style>
+</head>
+<body>
+
+    @{
+        string userId = (string)ViewData["userId"];
+        string tbu = (string)ViewData["tbu"];
+        List<Market.APIService.Controllers.KeyValueModel> Month= (List<Market.APIService.Controllers.KeyValueModel>)ViewData["month"];
+
+        //List<Market.APIService.Controllers.CusModel> Vdata = (List < Market.APIService.Controllers.CusModel>) ViewData["vModel"];
+    }
+    <div id="app" style="background-color:rgb(247,247,247);">
+        <div class="view view-main">
+
+            <div id="Dview" style="padding-top:0px;padding-left:0px;padding-right:0px;" class="page-content">
+                <div style="width:100%;height:10px;display:flex;">
+                </div>
+
+                <div style="width:100%;height:43px;display:flex;">
+                    <div id="btn_typ1" onclick="ClickType(1);" class="tabNoSelect">日排名</div>
+                    <div id="btn_typ2" onclick="ClickType(2);" class="tabNoSelect">月排名</div>
+                </div>
+                <div id="type_view_1" style="width:100%;">
+                    <div style="width:100%;height:10px;display:flex;">
+                    </div>
+                    <div style="height:30px;display:flex">
+                        <div style="flex:0.5"></div>
+                        <div style="width:150px;">
+                            <div style="height: 30px;width:130px;float:left;text-align:right;">
+                                <div style="width:130px;height:5px;display:flex;">
+                                </div>
+                                <div style="width:130px;display:flex;color:rgb(36,172,202);">
+                                    <input type="date" id="Day" onchange="changeValue(1)" style="width:130px;text-align:right; font-size:15px" placeholder="开始日期" value="@System.DateTime.Now.ToString("yyyy-MM-dd")" />
+                                </div>
+
+                            </div>
+                            <div style="height: 30px;width:15px;float:left;text-align:right;">
+                                <div style="width:15px;height:5px;display:flex;">
+                                </div>
+                                <div style="width:15px;display:flex;color:rgb(36,172,202);">
+                                    <div style="width:15px; height:15px;">
+                                        <img src="~/Content/Img/img_downarrow.png" style="width:15px; height:10px; " />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div style="flex:0.5"></div>
+                    </div>
+                    <div style="width:100%;height:10px;display:flex;">
+                    </div>
+                    <div style="border-radius: 5pt; width: 100%; height: 350pt; text-align: center; padding-top: 10pt; background-color:  white;">
+                        <div style="width:100%; height: 21pt;display:flex;">
+                            <div style="height: 20pt; flex:0.5;float:left;">
+
+                            </div>
+                            <div id="button_SelectType1" onclick="ClickButtonType1(1)" class="ButtonSelect" style="border-right:none; ">
+                                销售额
+                            </div>
+                            <div id="button_SelectType2" onclick="ClickButtonType1(2)"  class="ButtonNoSelect" style="border-left:none;">
+                                销售量
+                            </div>
+                            <div style="height: 20pt; flex:0.5;float:left;">
+                            </div>
+                        </div>
+                        <div id="char1" style="width:100%;height:329pt;">
+
+                        </div>
+                    </div>
+
+                </div>
+                <div id="type_view_2" style="width:100%;">
+                    <div style="width:100%;height:10px;display:flex;">
+                    </div>
+                    <div style="height:30px;display:flex">
+                        <div style="flex:0.5"></div>
+                        <div >
+                            <div style="height: 30px;width:60px;float:left;text-align:right;">
+                                <div style="width:60px;height:5px;display:flex;">
+                                </div>
+                                <div style="width:60px;display:flex;color:rgb(36,172,202);">
+                                    <select id="month" onchange="changeValue(2);" style="width:85px">
+                                        @{
+                                            foreach (var bu in Month)
+                                            {
+                                                if (bu.isSelected)
+                                                {
+                                                    <option value="@bu.key" selected="selected">@bu.keyValue</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@bu.key">@bu.keyValue</option>
+                                                }
+                                            }
+
+                                        }
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div style="height: 30px;width:15px;float:left;text-align:right;">
+                                <div style="width:15px;height:5px;display:flex;">
+                                </div>
+                                <div style="width:15px;display:flex;color:rgb(36,172,202);">
+                                    <div style="width:15px; height:15px;">
+                                        <img src="~/Content/Img/img_downarrow.png" style="width:15px; height:10px; " />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div style="flex:0.5"></div>
+                    </div>
+                    <div style="width:100%;height:10px;display:flex;">
+                    </div>
+                    <div style="border-radius: 5pt; width: 100%; height: 350pt; text-align: center; padding-top: 10pt; background-color:  white;">
+                        <div style="width:100%; height: 21pt;display:flex;">
+                            <div style="height: 20pt; flex:0.5;float:left;">
+
+                            </div>
+                            <div id="button_SelectType3" onclick="ClickButtonType2(1)" class="ButtonSelect" style="border-right:none; ">
+                                销售额
+                            </div>
+                            <div id="button_SelectType4" onclick="ClickButtonType2(2)" class="ButtonNoSelect" style="border-left:none;">
+                                销售量
+                            </div>
+                            <div style="height: 20pt; flex:0.5;float:left;">
+                            </div>
+                        </div>
+                        <div id="char2" style="width:100%;height:329pt;">
+
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+    <script>
+       
+        var myApp = new Framework7({
+            // App root element
+            root: '#app',
+            // App Name
+            name: 'My App',
+            // App id
+            id: 'com.myapp.test',
+            // Enable swipe panel
+            panel: {
+                swipe: 'left',
+            },
+            // Add default routes
+            routes: [
+              {
+                  path: '/about/',
+                  url: 'about.html',
+              },
+            ],
+            // ... other parameters
+        });
+        
+        var $$ = Framework7.$;
+        var ButtonType1 = 1;
+        var char1yAxis = [];
+        var char1seriesData1 = [];
+        var char1seriesData2 = [];
+        var char1seriesData3 = [];
+        var char1seriesData4 = [];
+
+        var ButtonType2 = 1;
+        var char2yAxis = [];
+        var char2seriesData1 = [];
+        var char2seriesData2 = [];
+        var char2seriesData3 = [];
+        var char2seriesData4 = [];
+
+        function ClickButtonType1(type)
+        {
+            ButtonType1 = type;
+            if (type == 1) {
+
+               
+                if ($$('#button_SelectType1').hasClass("ButtonSelect") == true) {
+                    $$('#button_SelectType1').removeClass("ButtonSelect");
+                }
+                if ($$('#button_SelectType1').hasClass("ButtonNoSelect") == true) {
+                    $$('#button_SelectType1').removeClass("ButtonNoSelect");
+                }
+
+                if ($$('#button_SelectType2').hasClass("ButtonSelect") == true) {
+                    $$('#button_SelectType2').removeClass("ButtonSelect");
+                }
+                if ($$('#button_SelectType2').hasClass("ButtonNoSelect") == true) {
+                    $$('#button_SelectType2').removeClass("ButtonNoSelect");
+                }
+               
+                $$('#button_SelectType2').addClass("ButtonNoSelect");
+                $$('#button_SelectType1').addClass("ButtonSelect");
+
+            }
+            else if (type == 2)
+            {
+                if ($$('#button_SelectType1').hasClass("ButtonSelect") == true) {
+                    $$('#button_SelectType1').removeClass("ButtonSelect");
+                }
+                if ($$('#button_SelectType1').hasClass("ButtonNoSelect") == true) {
+                    $$('#button_SelectType1').removeClass("ButtonNoSelect");
+                }
+
+                if ($$('#button_SelectType2').hasClass("ButtonSelect") == true) {
+                    $$('#button_SelectType2').removeClass("ButtonSelect");
+                }
+                if ($$('#button_SelectType2').hasClass("ButtonNoSelect") == true) {
+                    $$('#button_SelectType2').removeClass("ButtonNoSelect");
+                }
+               
+
+                $$('#button_SelectType2').addClass("ButtonSelect");
+                $$('#button_SelectType1').addClass("ButtonNoSelect");
+
+            }
+            if (ButtonType1 == 1) {
+                myChart.setOption({
+                    yAxis: {
+                        data: char1yAxis
+                    },
+                    series: [{
+                        // 根据名字对应到相应的系列
+                        name: '达标率',
+                        data: char1seriesData4
+                    }, {
+                        // 根据名字对应到相应的系列
+                        name: '销售额',
+                        data: char1seriesData3
+                    }]
+
+                });
+            }
+            else if (ButtonType1 == 2) {
+                myChart.setOption({
+                    yAxis: {
+                        data: char1yAxis
+                    },
+                    series: [{
+                        // 根据名字对应到相应的系列
+                        name: '达标率',
+                        data: char1seriesData2
+                    }, {
+                        // 根据名字对应到相应的系列
+                        name: '销售量',
+                        data: char1seriesData1
+                    }]
+
+                });
+            }
+        }
+        function ClickButtonType2(type) {
+            ButtonType2 = type;
+            if (type == 1) {
+
+
+                if ($$('#button_SelectType3').hasClass("ButtonSelect") == true) {
+                    $$('#button_SelectType3').removeClass("ButtonSelect");
+                }
+                if ($$('#button_SelectType3').hasClass("ButtonNoSelect") == true) {
+                    $$('#button_SelectType3').removeClass("ButtonNoSelect");
+                }
+
+                if ($$('#button_SelectType4').hasClass("ButtonSelect") == true) {
+                    $$('#button_SelectType4').removeClass("ButtonSelect");
+                }
+                if ($$('#button_SelectType4').hasClass("ButtonNoSelect") == true) {
+                    $$('#button_SelectType4').removeClass("ButtonNoSelect");
+                }
+
+                $$('#button_SelectType4').addClass("ButtonNoSelect");
+                $$('#button_SelectType3').addClass("ButtonSelect");
+
+            }
+            else if (type == 2) {
+                if ($$('#button_SelectType3').hasClass("ButtonSelect") == true) {
+                    $$('#button_SelectType3').removeClass("ButtonSelect");
+                }
+                if ($$('#button_SelectType3').hasClass("ButtonNoSelect") == true) {
+                    $$('#button_SelectType3').removeClass("ButtonNoSelect");
+                }
+
+                if ($$('#button_SelectType4').hasClass("ButtonSelect") == true) {
+                    $$('#button_SelectType4').removeClass("ButtonSelect");
+                }
+                if ($$('#button_SelectType4').hasClass("ButtonNoSelect") == true) {
+                    $$('#button_SelectType4').removeClass("ButtonNoSelect");
+                }
+
+
+                $$('#button_SelectType4').addClass("ButtonSelect");
+                $$('#button_SelectType3').addClass("ButtonNoSelect");
+
+            }
+            if (ButtonType2 == 1) {
+                myChart2.setOption({
+                    yAxis: {
+                        data: char2yAxis
+                    },
+                    series: [{
+                        // 根据名字对应到相应的系列
+                        name: '达标率',
+                        data: char2seriesData4
+                    }, {
+                        // 根据名字对应到相应的系列
+                        name: '销售额',
+                        data: char2seriesData3
+                    }]
+
+                });
+            }
+            else if (ButtonType2 == 2) {
+                myChart2.setOption({
+                    yAxis: {
+                        data: char2yAxis
+                    },
+                    series: [{
+                        // 根据名字对应到相应的系列
+                        name: '达标率',
+                        data: char2seriesData2
+                    }, {
+                        // 根据名字对应到相应的系列
+                        name: '销售量',
+                        data: char2seriesData1
+                    }]
+
+                });
+            }
+        }
+        function ClickType(type) {
+
+            //myPhotoBrowserStandalone.open();
+            if (type == 1) {
+
+                $$('#type_view_2').hide();
+                $$('#type_view_1').show();
+                if ($$('#btn_typ1').hasClass("tabSelect") == true) {
+                    $$('#btn_typ1').removeClass("tabSelect");
+                }
+                if ($$('#btn_typ1').hasClass("tabNoSelect") == true) {
+                    $$('#btn_typ1').removeClass("tabNoSelect");
+                }
+                if ($$('#btn_typ2').hasClass("tabSelect") == true) {
+                    $$('#btn_typ2').removeClass("tabSelect");
+                }
+                if ($$('#btn_typ2').hasClass("tabNoSelect") == true) {
+                    $$('#btn_typ2').removeClass("tabNoSelect");
+                }
+
+                $$('#btn_typ1').addClass("tabSelect");
+                $$('#btn_typ2').addClass("tabNoSelect");
+                changeValue(1);
+
+
+            }
+            else if (type == 2) {
+               // $$('#table_clock').hide();
+                //$$('#table_clockDetail').show();
+
+                $$('#type_view_1').hide();
+                $$('#type_view_2').show();
+                if ($$('#btn_typ1').hasClass("tabSelect") == true) {
+                    $$('#btn_typ1').removeClass("tabSelect");
+                }
+                if ($$('#btn_typ1').hasClass("tabNoSelect") == true) {
+                    $$('#btn_typ1').removeClass("tabNoSelect");
+                }
+                if ($$('#btn_typ2').hasClass("tabSelect") == true) {
+                    $$('#btn_typ2').removeClass("tabSelect");
+                }
+                if ($$('#btn_typ2').hasClass("tabNoSelect") == true) {
+                    $$('#btn_typ2').removeClass("tabNoSelect");
+                }
+
+                $$('#btn_typ2').addClass("tabSelect");
+                $$('#btn_typ1').addClass("tabNoSelect");
+                changeValue(2);
+
+            }
+
+
+
+
+        }
+       
+        var myChart = echarts.init(document.getElementById('char1'));
+        var myChart2 = echarts.init(document.getElementById('char2'));
+       // var myChart2 = echarts.init(document.getElementById('char2'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: ''
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }, formatter: function (datas) {
+                    var res = datas[0].name + '<br/>'
+
+                    for (var i = 0, length = datas.length; i < length; i++) {
+                        if (datas[i].seriesName == "达标率") {
+                            res += datas[i].seriesName + '：'
+                               + datas[i].data + '%<br/>';
+                        }
+                        else {
+                            res += datas[i].seriesName + '：'
+                                + datas[i].data + '<br/>';
+                        }
+                    }
+                    return res
+                }
+            },
+            grid: {
+                left: '5px',
+                right: '5px',
+                bottom: '20px',
+                top:'15px',
+                containLabel: true
+            },
+            legend: {
+                type: 'plain',
+                bottom: '0pt',
+            },
+            xAxis: [
+         {
+             show: false,
+             type: 'value',
+             name: '销售额',
+             axisLabel: {
+                 formatter: '{value}'
+             }
+
+         }, {
+             type: 'value',
+             name: '达标率',
+             axisLabel: {
+                 formatter: '{value} %'
+             }
+         }, ],
+            yAxis: {
+                data: []
+            },
+            series: [{
+                name: '达标率',
+                type: 'bar',
+                data: [], xAxisIndex: 1,
+                itemStyle: {
+
+                    normal: {
+
+                        color: '#ffba00',
+                    }
+                }
+
+            },
+        {
+            name: '销售额',
+            type: 'bar',
+            data: [],
+            itemStyle: {
+
+                normal: {
+
+                    color: '#30b0cb',
+                }
+            }
+
+        }]
+        };
+        var option2 = {
+            title: {
+                text: ''
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }, formatter: function (datas) {
+                    var res = datas[0].name + '<br/>'
+
+                    for (var i = 0, length = datas.length; i < length; i++) {
+                        if (datas[i].seriesName == "达标率") {
+                            res += datas[i].seriesName + '：'
+                               + datas[i].data + '%<br/>';
+                        }
+                        else {
+                            res += datas[i].seriesName + '：'
+                                + datas[i].data + '<br/>';
+                        }
+                    }
+                    return res
+                }
+            },
+            grid: {
+                left: '5px',
+                right: '5px',
+                bottom: '20px',
+                top: '15px',
+                containLabel: true
+            },
+            legend: {
+                type: 'plain',
+                bottom: '0pt',
+            },
+            xAxis: [
+         {
+             show: false,
+             type: 'value',
+             name: '销售额',
+             axisLabel: {
+                 formatter: '{value}'
+             }
+
+         }, {
+             type: 'value',
+             name: '达标率',
+             axisLabel: {
+                 formatter: '{value} %'
+             }
+         }, ],
+            yAxis: {
+                data: []
+            },
+            series: [{
+                name: '达标率',
+                type: 'bar',
+                data: [], xAxisIndex: 1,
+                itemStyle: {
+
+                    normal: {
+
+                        color: '#ffba00',
+                    }
+                }
+
+            },
+        {
+            name: '销售额',
+            type: 'bar',
+            data: [],
+            itemStyle: {
+
+                normal: {
+
+                    color: '#30b0cb',
+                }
+            }
+
+        }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        myChart2.setOption(option2);
+
+        function changeValue(type) {
+            
+            //string month,string day,string bu,string type
+            var r = "GetView1DataJson?month=" + $$("#month").val() + "&day=" + $$("#Day").val() + "&bu=" + '@tbu' + "&type=" + type;
+           
+            myApp.request.json(r,
+               null,
+               function (data) {
+                   
+                 
+                   if (type == 1) {
+                    
+                       char1yAxis = data.type;
+                       char1seriesData1 = data.tvalue;
+                        char1seriesData2 =data.value;
+                         char1seriesData3 = data.value3;
+                         char1seriesData4 = data.value4;
+                         if (ButtonType1 == 1) {
+                             myChart.setOption({
+                                 yAxis: {
+                                     data: char1yAxis
+                                 },
+                                 series: [{
+                                     // 根据名字对应到相应的系列
+                                     name: '达标率',
+                                     data: char1seriesData4
+                                 }, {
+                                     // 根据名字对应到相应的系列
+                                     name: '销售额',
+                                     data: char1seriesData3
+                                 }]
+
+                             });
+                         }
+                         else if (ButtonType1 == 2) {
+                             myChart.setOption({
+                                 yAxis: {
+                                     data: char1yAxis
+                                 },
+                                 series: [{
+                                     // 根据名字对应到相应的系列
+                                     name: '达标率',
+                                     data: char1seriesData2
+                                 }, {
+                                     // 根据名字对应到相应的系列
+                                     name: '销售量',
+                                     data: char1seriesData1
+                                 }]
+
+                             });
+                         }
+                   } else if (type == 2) {
+
+                       char2yAxis = data.type;
+                       char2seriesData1 = data.tvalue;
+                       char2seriesData2 = data.value;
+                       char2seriesData3 = data.value3;
+                       char2seriesData4 = data.value4;
+                       if (ButtonType2 == 1) {
+                           myChart2.setOption({
+                               yAxis: {
+                                   data: char2yAxis
+                               },
+                               series: [{
+                                   // 根据名字对应到相应的系列
+                                   name: '达标率',
+                                   data: char2seriesData4
+                               }, {
+                                   // 根据名字对应到相应的系列
+                                   name: '销售额',
+                                   data: char2seriesData3
+                               }]
+
+                           });
+                       }
+                       else if (ButtonType2 == 2) {
+                           myChart2.setOption({
+                               yAxis: {
+                                   data: char2yAxis
+                               },
+                               series: [{
+                                   // 根据名字对应到相应的系列
+                                   name: '达标率',
+                                   data: char2seriesData2
+                               }, {
+                                   // 根据名字对应到相应的系列
+                                   name: '销售量',
+                                   data: char2seriesData1
+                               }]
+
+                           });
+                       }
+                   }
+               });
+           
+        }
+        ClickType(1);
+       // myChart2.setOption(option);
+    </script>
+
+
+</body>
+</html>

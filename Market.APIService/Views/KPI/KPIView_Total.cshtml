@@ -1,0 +1,377 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+
+
+
+    <link href="https://iretailerapp.flnet.com/Content/framework7.css" rel="stylesheet">
+
+    <title>仪表盘</title>
+
+    <script type="text/javascript" src="https://iretailerapp.flnet.com/Scripts/framework7.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+    <style>
+        .buttonNoSelect {
+            background-color: white;
+            color: rgb(36,172,202);
+            font-size: 16pt;
+            height: 30pt;
+            border: 1pt solid rgb(36,172,202); /* Green */
+        }
+
+        .buttonSelect {
+            background-color: rgb(36,172,202);
+            color: white;
+            font-size: 16pt;
+            height: 30pt;
+            border: 1pt solid rgb(36,172,202); /* Green */
+        }
+    </style>
+</head>
+<body>
+
+    @{
+        string userId = (string)ViewData["userId"];
+        //string shopCode = (string)ViewData["shopCode"];
+        
+        //List<Market.APIService.Controllers.CusModel> Vdata = (List < Market.APIService.Controllers.CusModel>) ViewData["vModel"];
+    }
+    <div id="app" style="background-color:rgb(247,247,247);">
+        <div class="view view-main">
+
+            <div id="Dview" style="padding-top:6px;padding-left:6px;padding-right:6px;" class="page-content">
+
+                <div style="border-radius: 5px; width: 100%; height: 153px; text-align: center; padding-top: 10px; background-color: white;">
+                    <div style="width:100%;height:14px;"></div>
+                    <div style="width: 100%;height:50px;">
+                        <div style="width: 50%; height: 50px;float:left;">
+                            <div style="width:100%;height: 23px;display:flex;">
+                                <div style="flex:0.5"></div>
+                                <div id="lab_data1" style="height: 23px;font-size:23px;line-height:23px;color:#333333;float:left;  ">
+                                    40,000
+                                </div>
+                                <div style="height: 23px;float:left;">
+                                    <div style="height:6px"></div>
+                                    <div style="font-size:14px;line-height:14px;height:14px; color:#333333;">台</div>
+                                </div>
+                                <div style="flex:0.5"></div>
+                            </div>
+                            <div style="width:100%;height:10px;"></div>
+                            <div style="border-image: none; width: 100%; height: 14px; color: rgb(186, 186, 186); line-height: 14px; font-size: 14px;border-right-width: 1px; border-right-style: solid;">
+                                总销售量
+                            </div>
+                        </div>
+                        <div style="width: 50%; height: 50px;float:left; ">
+                            <div id="lab_data2" style="width: 100%;  height: 23px;font-size:23px;line-height:23px;color:#333333;  ">
+                                40,000
+                            </div>
+                            <div style="width:100%;height:10px;"></div>
+                            <div  style="border-image: none; width: 100%; height: 14px; color: rgb(186, 186, 186); line-height: 14px; font-size: 14px;">
+                                总金额
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div style="width:100%;height:18px;"></div>
+                    <div style="width: 100%;height:50px;">
+                        <div style="width: 50%; height: 50px;float:left">
+                            <div id="lab_data3" style="width: 100%;  height: 23px;font-size:23px;line-height:23px;color:#333333;  ">
+                                80%
+                            </div>
+                            <div style="width:100%;height:10px;"></div>
+                            <div style="border-image: none; width: 100%; height: 14px; color: rgb(186, 186, 186); line-height: 14px; font-size: 14px;border-right-width: 1px; border-right-style: solid;">
+                                销售量达标率
+                            </div>
+                        </div>
+                        <div style="width: 50%; height: 50px;float:left; ">
+                            <div id="lab_data4"   style="width: 100%;  height: 23px;font-size:23px;line-height:23px;color:#333333;  ">
+                               70%
+                            </div>
+                            <div style="width:100%;height:10px;"></div>
+                            <div style="border-image: none; width: 100%; height: 14px; color: rgb(186, 186, 186); line-height: 14px; font-size: 14px;">
+                                销售额达标率
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div style="width: 100%; height: 10px; opacity:0.4; text-align: center;background:url('/Content/Img/imb_shadow.png');background-size:100% 10px;background-repeat:no-repeat;">
+                </div>
+                <div style="width:100%;height:7px;"></div>
+                <div style="border-radius: 5px; width: 100%; height: 300px; text-align: center; background-color:  white;">
+                    <div style="width:100%; height: 21px;display:flex;">
+                        <div style="height: 20px; flex:0.5;float:left;">
+
+                        </div>
+                        <div style="width:auto; height: 21px;line-height:21px;font-weight:bold; font-size:15px;color:rgb(36,172,202);border-bottom:solid;border-bottom-width:3px; border-bottom-color:rgb(36,172,202); float:left;">
+                            销售额
+                        </div>
+
+                        <div style="height: 20px; flex:0.5;float:left;">
+                        </div>
+                    </div>
+                    <div id="char1" style="width:100%;height:279px;">
+
+                    </div>
+                </div>
+
+        </div>
+
+    </div>
+</div>
+
+    <script>
+
+
+        var myApp = new Framework7({
+            // App root element
+            root: '#app',
+            // App Name
+            name: 'My App',
+            // App id
+            id: 'com.myapp.test',
+            // Enable swipe panel
+            panel: {
+                swipe: 'left',
+            },
+            // Add default routes
+            routes: [
+              {
+                  path: '/about/',
+                  url: 'about.html',
+              },
+            ],
+            // ... other parameters
+        });
+        var $$ = Framework7.$;
+       
+        var myChart = echarts.init(document.getElementById('char1'));
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: ''
+            },
+           
+            legend: {
+                show: false,
+                data: ['销售额'],
+                bottom: '0pt',
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }, formatter: function (datas) {
+                    var res = datas[0].name + '<br/>'
+
+                    for (var i = 0, length = datas.length; i < length; i++) {
+                       
+                            res += datas[i].seriesName + '：'
+                                + datas[i].data.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,') + '<br/>';
+                        
+                    }
+                    return res
+                }
+            },
+            grid: {
+                left: '50px',
+                right: '5px',
+                bottom: '5px',
+                top: '5px',
+                containLabel: true
+            },
+            xAxis: [
+         {
+             show: false,
+             type: 'value',
+             name: '销售额',
+             axisLabel: {
+                 formatter: '{value}'
+             }
+
+         }, ],
+            yAxis: {
+                data: ['天猫', '国美', '京东', '苏宁线上', '苏宁', '国美线上', '富连网', '战区', '推广员'],
+                axisLabel: {
+                   
+                    show: true, // 默认为true
+                    interval: 0, // 设置x轴文本标签全部显示
+                    
+                    formatter: function (data) {
+                        if (data == "天猫")
+                            return data + ' {a|}';
+                        else if (data == "国美")
+                            return data + ' {b|}';
+                        else if (data == "京东")
+                            return data + ' {c|}';
+                        else if (data == "苏宁线上")
+                            return data + ' {d|}';
+                        else if (data == "苏宁")
+                            return data + ' {d|}';
+                        else if (data == "国美线上")
+                            return data + ' {b|}';
+                        else if (data == "富连网")
+                            return data + ' {e|}';
+                        else if (data == "战区")
+                            return data + ' {f|}';
+                        else if (data == "推广员")
+                            return data + ' {e|}';
+                       
+                    }
+                    ,
+                    rich: {
+                        a: {
+                            backgroundColor: {
+                                image: 'https://iretailerapp.flnet.com/Content/Img/img_taobao.png'
+                            },
+                            // 可以只指定图片的高度，从而图片的宽度根据图片的长宽比自动得到。
+                            height: 20
+                        },
+                        b: {
+                            backgroundColor: {
+                                image: 'https://iretailerapp.flnet.com/Content/Img/img_gome.png'
+                            },
+                            // 可以只指定图片的高度，从而图片的宽度根据图片的长宽比自动得到。
+                            height: 20
+                        },
+                        c: {
+                            backgroundColor: {
+                                image: 'https://iretailerapp.flnet.com/Content/Img/img_jd.png'
+                            },
+                            // 可以只指定图片的高度，从而图片的宽度根据图片的长宽比自动得到。
+                            height: 20
+                        },
+                        d: {
+                            backgroundColor: {
+                                image: 'https://iretailerapp.flnet.com/Content/Img/img_suning.png'
+                            },
+                            // 可以只指定图片的高度，从而图片的宽度根据图片的长宽比自动得到。
+                            height: 20
+                        },
+                        e: {
+                            backgroundColor: {
+                                image: 'https://iretailerapp.flnet.com/Content/Img/img_flnet.png'
+                            },
+                            // 可以只指定图片的高度，从而图片的宽度根据图片的长宽比自动得到。
+                            height: 20
+                        },
+                        f: {
+                            backgroundColor: {
+                                image: 'https://iretailerapp.flnet.com/Content/Img/img_flnethome_s.png'
+                            },
+                            // 可以只指定图片的高度，从而图片的宽度根据图片的长宽比自动得到。
+                            height: 20
+                        },
+
+                    }
+                },
+                
+            },
+            series: [
+        {
+            name: '销售额',
+            type: 'bar',
+            data: [12, 23, 12, 23, 54, 34, 12, 78, 13],
+
+            itemStyle: {
+                normal: {
+                    color: function (value) {
+
+                        if (value.name == "天猫")
+                            return "#d90905";
+                        else if (value.name == "国美")
+                            return "#555555";
+                        else if (value.name == "京东")
+                            return "#7804d9";
+                        else if (value.name == "苏宁线上")
+                            return "#ffaa00";
+                        else if (value.name == "苏宁")
+                            return "#ff7e00";
+                        else if (value.name == "国美线上")
+                            return "#828282";
+                        else if (value.name == "富连网")
+                            return "#0088e2";
+                        else if (value.name == "战区")
+                            return "#0d6de6";
+                        else if (value.name == "推广员")
+                            return "#ffe900";
+                    }
+                }
+            }
+
+        }]
+        };
+
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+        var url = 'getKpiData?day=' + '@DateTime.Now.ToString("yyyy-MM-dd")';
+
+        myApp.request.json(url,
+                  null,
+                    function (data) {
+                       
+                        $$('#lab_data1').text(data.totalQty.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'))
+                        $$('#lab_data2').text(data.totalAmt.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,'))
+                       
+                        $$('#lab_data3').text((data.totalQty_Rate * 100).toFixed(0) + "%")
+                        $$('#lab_data4').text((data.totalAmt_Rate * 100).toFixed(0) + "%")
+
+                        myChart.setOption({
+                           
+                            series: [{
+                                name: '销售额',
+                                type: 'bar',
+                                data: data.arr,
+
+                                itemStyle: {
+                                    normal: {
+                                        color: function (value) {
+
+                                            if (value.name == "天猫")
+                                                return "#d90905";
+                                            else if (value.name == "国美")
+                                                return "#555555";
+                                            else if (value.name == "京东")
+                                                return "#7804d9";
+                                            else if (value.name == "苏宁线上")
+                                                return "#ffaa00";
+                                            else if (value.name == "苏宁")
+                                                return "#ff7e00";
+                                            else if (value.name == "国美线上")
+                                                return "#828282";
+                                            else if (value.name == "富连网")
+                                                return "#0088e2";
+                                            else if (value.name == "战区")
+                                                return "#0d6de6";
+                                            else if (value.name == "推广员")
+                                                return "#ffe900";
+                                        }
+                                    }
+                                }
+                            }]
+                        });
+                       
+                    });
+       
+    </script>
+
+
+    <!-- Path to your app js-->
+
+
+
+</body>
+</html>

@@ -1,0 +1,686 @@
+﻿@model Market.APIService.Controllers.View1_3PModel
+<div class="buttons-tab">
+    <a href="#tab1" class="tab-link active button"  onclick="hihTab2();">战区别</a>
+    <a href="#tab2" class="tab-link button" onclick="showTab2();">渠道别</a>
+    <a href="#tab3" class="tab-link button"  onclick="hihTab2();">客户别</a>
+    <a href="#tab4" class="tab-link button"  onclick="hihTab2();">门店别</a>
+    <a href="#tab5" class="tab-link button"  onclick="hihTab2();">型号别</a>
+    
+</div>
+
+<div class="content-block" style="width:100%">
+    <div class="tabs" style="width:100%">
+        <div id="tab1" class="tab active" style="width:100%">
+            <div class="content-block">
+                <select id="bu1" onchange="changeBu('1');" style="width:40%">
+                    @{
+                        foreach (var bu in Model.TBuList)
+                        {
+                            if (bu.isSelected)
+                            {
+                                <option value="@bu.key" selected="selected">@bu.keyValue</option>
+                            }
+                            else
+                            {
+                                <option value="@bu.key">@bu.keyValue</option>
+                            }
+                        }
+
+                    }
+                </select>
+                &nbsp; &nbsp; &nbsp;
+                <select id="tbu1" onchange="changeValue('1');" style="width:40%">
+                    @{
+                        foreach (var bu in Model.TSBuList)
+                        {
+                            if (bu.isSelected)
+                            {
+                                <option value="@bu.key" selected="selected">@bu.keyValue</option>
+                            }
+                            else
+                            {
+                                <option value="@bu.key">@bu.keyValue</option>
+                            }
+                        }
+
+                    }
+                </select>
+            </div>
+            <div id="char1" class="content-block" style="width:100%;height:300px;">
+
+            </div>
+        </div>
+        <div id="tab2" class="tab" style="width:100%">
+            <div class="content-block">
+                
+                <select id="bu2" onchange="changeBu('2');" >
+                    @{
+                        foreach (var bu in Model.TBuList2)
+                        {
+                            if (bu.isSelected)
+                            {
+                                <option value="@bu.key" selected="selected">@bu.keyValue</option>
+                            }
+                            else
+                            {
+                                <option value="@bu.key">@bu.keyValue</option>
+                            }
+                        }
+
+                    }
+                </select>
+                &nbsp; &nbsp;
+                <select id="tbu2" onchange="changeValue('2');" >
+                    @{
+                        foreach (var bu in Model.TSBuList2)
+                        {
+                            if (bu.isSelected)
+                            {
+                                <option value="@bu.key" selected="selected">@bu.keyValue</option>
+                            }
+                            else
+                            {
+                                <option value="@bu.key">@bu.keyValue</option>
+                            }
+                        }
+
+                    }
+                </select>
+                &nbsp; &nbsp;
+                <input type="date" id="Day2" value="@System.DateTime.Now.ToString("yyyy-MM-dd")" onchange="changeValue('2');">
+               
+                </div>
+                <div id="char2" class="content-block" style="width:100%;height:500px;" >
+
+                </div>
+            </div>
+        
+
+        <div id="tab3" class="tab" style="width:98%">
+            <div class="content-block">
+
+                <select id="bu3" onchange="changeBu('3');" >
+                    @{
+                        foreach (var bu in Model.TBuList2)
+                        {
+                            if (bu.isSelected)
+                            {
+                                <option value="@bu.key" selected="selected">@bu.keyValue</option>
+                            }
+                            else
+                            {
+                                <option value="@bu.key">@bu.keyValue</option>
+                            }
+                        }
+
+                    }
+                </select>
+                &nbsp; &nbsp;
+                <select id="tbu3" onchange="changeValue('3');">
+                    @{
+                        foreach (var bu in Model.TSBuList2)
+                        {
+                            if (bu.isSelected)
+                            {
+                                <option value="@bu.key" selected="selected">@bu.keyValue</option>
+                            }
+                            else
+                            {
+                                <option value="@bu.key">@bu.keyValue</option>
+                            }
+                        }
+
+                    }
+                </select>
+                &nbsp; &nbsp;
+                <input type="date" id="Day3" value="@System.DateTime.Now.ToString("yyyy-MM-dd")" onchange="changeValue('3');">
+
+            </div>
+            <div class="content-block" id="Dview3" style="width:98%">
+                </div>
+            </div>
+        <div id="tab4" class="tab" style="width:98%">
+            <div class="content-block">
+
+                <select id="bu4" onchange="changeBu('4');">
+                    @{
+                        foreach (var bu in Model.TBuList2)
+                        {
+                            if (bu.isSelected)
+                            {
+                                <option value="@bu.key" selected="selected">@bu.keyValue</option>
+                            }
+                            else
+                            {
+                                <option value="@bu.key">@bu.keyValue</option>
+                            }
+                        }
+
+                    }
+                </select>
+                &nbsp; &nbsp;
+                <select id="tbu4" onchange="changeValue('4');">
+                    @{
+                        foreach (var bu in Model.TSBuList2)
+                        {
+                            if (bu.isSelected)
+                            {
+                                <option value="@bu.key" selected="selected">@bu.keyValue</option>
+                            }
+                            else
+                            {
+                                <option value="@bu.key">@bu.keyValue</option>
+                            }
+                        }
+
+                    }
+                </select>
+                &nbsp; &nbsp;
+                <input type="date" id="Day4" value="@System.DateTime.Now.ToString("yyyy-MM-dd")" onchange="changeValue('4');" >
+
+            </div>
+            <div class="content-block" id="Dview4">
+            </div>
+        </div>
+        <div id="tab5" class="tab" style="width:98%">
+            <div class="content-block">
+
+                <select id="bu5" onchange="changeBu('5');" >
+                    @{
+                        foreach (var bu in Model.TBuList2)
+                        {
+                            if (bu.isSelected)
+                            {
+                                <option value="@bu.key" selected="selected">@bu.keyValue</option>
+                            }
+                            else
+                            {
+                                <option value="@bu.key">@bu.keyValue</option>
+                            }
+                        }
+
+                    }
+                </select>
+                &nbsp; &nbsp;
+                <select id="tbu5" onchange="changeValue('5');">
+                    @{
+                        foreach (var bu in Model.TSBuList2)
+                        {
+                            if (bu.isSelected)
+                            {
+                                <option value="@bu.key" selected="selected">@bu.keyValue</option>
+                            }
+                            else
+                            {
+                                <option value="@bu.key">@bu.keyValue</option>
+                            }
+                        }
+
+                    }
+                </select>
+                &nbsp; &nbsp;
+                <input type="date" id="Day5" value="@System.DateTime.Now.ToString("yyyy-MM-dd")" onchange="changeValue('5');">
+
+            </div>
+            <div class="content-block" id="Dview5">
+            </div>
+        </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+
+    function changeBu(type)
+    {
+        if (type == "1") {
+            var r = "GetTBuData?kind=" + $("#bu1").val() + "&userId=" + '@Model.userId';
+
+            $.ajax({
+                url: r,
+                type: "Get",
+                success: function (data) {
+                    $("#tbu1").empty();
+                    $.each(data, function (i, item) {
+
+                        var option = $("<option>").val(item["key"]).text(item["keyValue"]);
+
+                        $("#tbu1").append(option);
+                    })
+                    changeValue('1')
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.hidePreloader();
+
+                    $.toast("操作失败");
+
+                }
+            });
+        }
+        else if (type == "2") {
+            var r = "GetTBuData?kind=" + $("#bu2").val() + "&userId=" + '@Model.userId';
+
+            $.ajax({
+                url: r,
+                type: "Get",
+                success: function (data) {
+                    $("#tbu2").empty();
+                    $.each(data, function (i, item) {
+
+                        var option = $("<option>").val(item["key"]).text(item["keyValue"]);
+
+                        $("#tbu2").append(option);
+                    })
+                    changeValue('2')
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.hidePreloader();
+
+                    $.toast("操作失败");
+
+                }
+            });
+        }
+        else if (type == "3") {
+            var r = "GetTBuData?kind=" + $("#bu3").val() + "&userId=" + '@Model.userId';
+            alert('2');
+            $.ajax({
+                url: r,
+                type: "Get",
+                success: function (data) {
+                    $("#tbu3").empty();
+                    $.each(data, function (i, item) {
+
+                        var option = $("<option>").val(item["key"]).text(item["keyValue"]);
+
+                        $("#tbu3").append(option);
+                    })
+                    changeValue('3')
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.hidePreloader();
+
+                    $.toast("操作失败");
+
+                }
+            });
+        }
+        else if (type == "4") {
+            var r = "GetTBuData?kind=" + $("#bu4").val() + "&userId=" + '@Model.userId';
+
+            $.ajax({
+                url: r,
+                type: "Get",
+                success: function (data) {
+                    $("#tbu4").empty();
+                    $.each(data, function (i, item) {
+
+                        var option = $("<option>").val(item["key"]).text(item["keyValue"]);
+
+                        $("#tbu4").append(option);
+                    })
+                    changeValue('4')
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.hidePreloader();
+
+                    $.toast("操作失败");
+
+                }
+            });
+        }
+        else if (type == "5") {
+            var r = "GetTBuData?kind=" + $("#bu5").val() + "&userId=" + '@Model.userId';
+
+            $.ajax({
+                url: r,
+                type: "Get",
+                success: function (data) {
+                    $("#tbu5").empty();
+                    $.each(data, function (i, item) {
+
+                        var option = $("<option>").val(item["key"]).text(item["keyValue"]);
+
+                        $("#tbu5").append(option);
+                    })
+                    changeValue('5')
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.hidePreloader();
+
+                    $.toast("操作失败");
+
+                }
+            });
+        }
+
+    }
+
+    function changeValue(type)
+    {
+
+        var bu="";
+        var tbu="";
+        if (type == "1") {
+            myChart1.showLoading();
+
+            var r = "GetView131DataJson?bu=" + $("#bu1").val() + "&tbu=" + $("#tbu1").val();
+
+            $.ajax({
+                url: r,
+                type: "Get",
+                success: function (data) {
+
+                    myChart1.hideLoading();
+
+                    //TODO:处理添加新问卷成功后的事件
+                    myChart1.setOption({
+                        xAxis: {
+                            data: data.day,
+
+                        },
+                        series: [{
+                            // 根据名字对应到相应的系列
+                            name: '达标率',
+                            data: data.rvalue
+                        }, {
+                            name: '目标',
+                            data: data.tvalue
+                        }]
+                    });
+
+
+                    // $.hidePreloader();
+
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.hidePreloader();
+
+                    $.toast("操作失败");
+
+                }
+            });
+        }
+        else if (type == "2") {
+
+            myChart2.showLoading();
+
+            var r = "GetView132DataJson?bu=" + $("#bu2").val() + "&tbu=" + $("#tbu2").val() + "&day=" + $("#Day2").val();
+
+            $.ajax({
+                url: r,
+                type: "Get",
+                success: function (data) {
+                   //alert( JSON.stringify(data));
+                    myChart2.hideLoading();
+
+                    //TODO:处理添加新问卷成功后的事件
+                    myChart2.setOption({
+                        yAxis: {
+                            data: data.ttype,
+                        },
+                        series: [{
+                            // 根据名字对应到相应的系列
+                            name: '日销量',
+                            data: data.dvalue
+                        }, {
+                            name: '月累计',
+                            data: data.mvalue
+                        }]
+                    });
+
+
+                    // $.hidePreloader();
+
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.hidePreloader();
+
+                    $.toast("操作失败");
+
+                }
+            });
+
+        } else if (type == "3")
+        {
+
+            var r = "GetView13SubView?bu=" + $("#bu3").val() + "&tbu=" + $("#tbu3").val() + "&day=" + $("#Day3").val() + "&type=" + type;
+
+            $.ajax({
+                url: r,
+                type: "Get",
+                success: function (data) {
+
+                    $("#Dview3").html(data);
+
+
+                    // $.hidePreloader();
+
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.hidePreloader();
+
+                    $.toast("操作失败");
+
+                }
+            });
+        }
+        else if (type == "4") {
+
+            var r = "GetView13SubView?bu=" + $("#bu4").val() + "&tbu=" + $("#tbu4").val() + "&day=" + $("#Day4").val() + "&type=" + type;
+
+            $.ajax({
+                url: r,
+                type: "Get",
+                success: function (data) {
+
+                    $("#Dview4").html(data);
+
+
+                    // $.hidePreloader();
+
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.hidePreloader();
+
+                    $.toast("操作失败");
+
+                }
+            });
+        }
+        else if (type == "5") {
+
+            var r = "GetView13SubView?bu=" + $("#bu5").val() + "&tbu=" + $("#tbu5").val() + "&day=" + $("#Day5").val() + "&type=" + type;
+
+            $.ajax({
+                url: r,
+                type: "Get",
+                success: function (data) {
+
+                    $("#Dview5").html(data);
+
+
+                    // $.hidePreloader();
+
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.hidePreloader();
+
+                    $.toast("操作失败");
+
+                }
+            });
+        }
+        //string month,string day,string bu,string type
+
+    }
+    // 基于准备好的dom，初始化echarts实例
+
+    function showTab2() {
+        $("#tab2").show();
+    }
+    function hihTab2() {
+        $("#tab2").hide();
+    }
+    $("#tab2").show();
+    var myChart1 = echarts.init(document.getElementById('char1'));
+    var myChart2 = echarts.init(document.getElementById('char2'));
+
+        // 指定图表的配置项和数据
+    var option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                crossStyle: {
+                    color: '#999'
+                }
+            }, formatter: function (datas) {
+                var res = datas[0].name + '<br/>'
+
+                for (var i = 0, length = datas.length; i < length; i++) {
+                    if (datas[i].seriesName == "达标率") {
+                        res += datas[i].seriesName + '：'
+                           + datas[i].data + '%<br/>';
+                    }
+                    else {
+                        res += datas[i].seriesName + '：'
+                            + datas[i].data + '<br/>';
+                    }
+                }
+                return res
+            }
+        },
+        grid: {
+            left: '5px',
+            right: '5px',
+            bottom: '5px',
+            containLabel: true
+        },
+        legend: {
+            data: ['达标率', '目标']
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: [],
+                axisPointer: {
+                    type: 'shadow'
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '目标',
+
+                axisLabel: {
+                    formatter: '{value}'
+                }
+            },
+            {
+                type: 'value',
+                name: '达标率',
+
+                axisLabel: {
+                    formatter: '{value}%'
+                }
+            }
+        ],
+        series: [
+            {
+                name: '目标',
+                type: 'bar',
+                data: [], itemStyle: {
+
+                    normal: {
+
+                        color: '#92BFF6',
+                    }
+                }
+            },
+            {
+                name: '达标率',
+                type: 'line',
+                yAxisIndex: 1,
+                data: [],
+                itemStyle: {
+
+                    normal: {
+
+                        color: '#FE939B',
+                    }
+                }
+            }
+        ]
+    };
+    var option2 = {
+        title: {
+            text: ''
+        },
+        grid: {
+            left: '5px',
+            right: '5px',
+            bottom: '5px',
+            containLabel: true
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        legend: {
+            data: ['月累计', '日销量']
+        },
+        xAxis: {
+            type: 'value'
+        },
+        yAxis: {
+            data: []
+        },
+        series: [{
+            name: '月累计',
+            type: 'bar',
+            data: [], itemStyle: {
+
+                normal: {
+
+                    color: '#92BFF6',
+                }
+            }
+        },
+        {
+            name: '日销量',
+            type: 'bar',
+            data: [], itemStyle: {
+
+                normal: {
+
+                    color: '#FE939B',
+                }
+            }
+        }]
+    };
+        // 使用刚指定的配置项和数据显示图表。
+
+    myChart1.setOption(option);
+    myChart2.setOption(option2);
+        $("#tab2").hide();
+        changeValue("1");
+        changeValue("2");
+        changeValue("3");
+        changeValue("4");
+        changeValue("5");
+
+
+</script>

@@ -1,0 +1,242 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+
+
+
+    <link href="https://iretailerapp.flnet.com/Content/framework7.css" rel="stylesheet">
+
+    <title>请假签核</title>
+
+    <script type="text/javascript" src="https://iretailerapp.flnet.com/Scripts/framework7.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+    <style>
+        .tabNoSelect {
+             width:50%; height: 41px;float:left; text-align:center;font-size:15px;line-height:43px;color:#acacac;background-color:#ffffff;
+        }
+
+        .tabSelect {
+           width:50%; height: 41px;float:left; text-align:center;font-size:15px;line-height:43px;color:#24acca;border-bottom:solid;border-color:#24acca;border-width:2px;background-color:#ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    @{
+        string userId = (string)ViewData["userId"];
+        
+        
+        //List<Market.APIService.Controllers.CusModel> Vdata = (List < Market.APIService.Controllers.CusModel>) ViewData["vModel"];
+    }
+    <div id="app" style="background-color:rgb(247,247,247);">
+        <div class="view view-main">
+
+            <div id="Dview" style="padding-top:0px;padding-left:0px;padding-right:0px;" class="page-content">
+                <div style="width:100%;height:15px;display:flex;">
+                </div>
+                
+                <div style="width:100%;height:43px;display:flex;">
+                    <div id="btn_typ1" onclick="ClickType(1);" class="tabNoSelect">未送签</div>
+                    <div id="btn_typ2" onclick="ClickType(2);" class="tabNoSelect">已完成</div>
+                </div>
+                <div id="type_view_1" style="width:100%;">
+                  
+                   
+                </div>
+                <div id="type_view_2" style="width:100%;">
+                   
+                </div>
+            </div>
+
+
+
+
+
+    </div>
+</div>
+
+    <script>
+        function SeleectImage()
+        {
+            $$('#fileBtn').click();
+        }
+
+        function getLeveDay() {
+            myApp.request.json('ALLMemberLeveDataQuery?userId=' + "@userId",
+               null,
+               function (data) {
+                   
+
+                   var html1 = '';
+                   $$("#type_view_1").html(html1);
+                   var html2 = '';
+                   for (var i = 0; i < data.type1List.length;i++)
+                   {
+                       var item = data.type1List[i];
+
+                       var type = item.leaveType;
+                       var StarDay = item.startDay + '~';
+                       var EndDay = item.endDay;
+                       html2 = html2 + '<div onclick="window.location = \'MemberLeveOrderIndex?userId=' + item.userId + '&id=' + item.id + '&aUserId=' + '@userId' + '\'"  style="width:100%;height:89px;display:flex;border-bottom:solid;border-color:#dddddd;border-width:1px;">'
+                        + '<div style="width:10px;height:89px;float:left;color:#000000;font-size:14px;line-height:50px;text-align:center;"></div>'
+                        + '<div style="width:69px;height:89px;float:left;color:#000000;font-size:14px;line-height:50px;text-align:center;">'
+                        + '    <div style="width:100%;height:10px;"></div>'
+                         + '   <div style="width:100%;height:69px;">'
+                          + '      <img src="https://iretailerapp.flnet.com/Content/Img/tab_user_active.png" style="width:69px; height:69px;" />'
+                          + '  </div>'
+                       + ' </div>'
+                       + ' <div style="width:10px;height:89px;float:left;color:#000000;font-size:14px;line-height:50px;text-align:center;"></div>'
+                       + ' <div style="flex:1;height:89px;float:left;color:#000000;font-size:14px;text-align:left;">'
+                       + '     <div style="width:100%;height:15px;"></div>'
+                       + '     <div style="width:100%;height:15px;font-size:15px;color:#24acca">' + item.userName+ '</div>'
+                       + '     <div style="width:100%;height:10px;"></div>'
+                       + '     <div style="width:100%;height:10px;font-size:10px;">假别  ' + item.leaveType + '</div>'
+                       + '     <div style="width:100%;height:5px;"></div>'
+                        + '    <div style="width:100%;height:10px;font-size:10px;">时间  ' + item.startDay + '~' + item.endDay + '</div>'
+                       + ' </div>'
+                      + '  <div style="width:25px;height:89px;float:left;color:#000000;font-size:14px;">'
+                       + '     <div style="width:100%;height:35px;display:flex;">'
+                      + '      </div>'
+                       + '     <div style="width:15px; height:15px;">'
+                       + '         <img src="https://iretailerapp.flnet.com/Content/Img/img_next.png" style="width:15px; height:15px; " />'
+                       + '     </div>'
+                      + '  </div>'
+                   + ' </div>';
+                   }
+
+                   $$("#type_view_1").html(html2);
+
+                   var html3 = '';
+                   for (var i = 0; i < data.type2List.length; i++) {
+                       var item = data.type2List[i];
+                       var type = item.leaveType;
+                       var StarDay = item.startDay + '~';
+                       var EndDay = item.endDay;
+                       html3 = html3 + '<div onclick="window.location = \'MemberLeveOrderIndex?userId=' + item.userId + '&id=' + item.id + '&aUserId=' + '@userId' + '\'"  style="width:100%;height:89px;display:flex;border-bottom:solid;border-color:#dddddd;border-width:1px;">'
+                        + '<div style="width:10px;height:89px;float:left;color:#000000;font-size:14px;line-height:50px;text-align:center;"></div>'
+                        + '<div style="width:69px;height:89px;float:left;color:#000000;font-size:14px;line-height:50px;text-align:center;">'
+                        + '    <div style="width:100%;height:10px;"></div>'
+                         + '   <div style="width:100%;height:69px;">'
+                          + '      <img src="https://iretailerapp.flnet.com/Content/Img/tab_user_active.png" style="width:69px; height:69px;" />'
+                          + '  </div>'
+                       + ' </div>'
+                       + ' <div style="width:10px;height:89px;float:left;color:#000000;font-size:14px;line-height:50px;text-align:center;"></div>'
+                       + ' <div style="flex:1;height:89px;float:left;color:#000000;font-size:14px;text-align:left;">'
+                       + '     <div style="width:100%;height:15px;"></div>'
+                       + '     <div style="width:100%;height:15px;font-size:15px;color:#24acca">' + item.userName + '</div>'
+                       + '     <div style="width:100%;height:10px;"></div>'
+                       + '     <div style="width:100%;height:10px;font-size:10px;">假别  ' + item.leaveType + '</div>'
+                       + '     <div style="width:100%;height:5px;"></div>'
+                        + '    <div style="width:100%;height:10px;font-size:10px;">时间  ' + item.startDay + '~' + item.endDay + '</div>'
+                       + ' </div>'
+                      + '  <div style="width:25px;height:89px;float:left;color:#000000;font-size:14px;">'
+                       + '     <div style="width:100%;height:35px;display:flex;">'
+                      + '      </div>'
+                       + '     <div style="width:15px; height:15px;">'
+                       + '         <img src="https://iretailerapp.flnet.com/Content/Img/img_next.png" style="width:15px; height:15px; " />'
+                       + '     </div>'
+                      + '  </div>'
+                   + ' </div>';;
+                   }
+                   $$("#type_view_2").html(html3);
+
+               });
+        }
+        var myApp = new Framework7({
+            // App root element
+            root: '#app',
+            // App Name
+            name: 'My App',
+            // App id
+            id: 'com.myapp.test',
+            // Enable swipe panel
+            panel: {
+                swipe: 'left',
+            },
+            // Add default routes
+            routes: [
+              {
+                  path: '/about/',
+                  url: 'about.html',
+              },
+            ],
+            // ... other parameters
+        });
+        var $$ = Framework7.$;
+        var myPhotoBrowserStandalone = myApp.photoBrowser.create({
+            photos: [
+                'http://lorempixel.com/1024/1024/sports/1/',
+                'http://lorempixel.com/1024/1024/sports/2/',
+                'http://lorempixel.com/1024/1024/sports/3/',
+            ]
+        });
+        function ClickType(type) {
+
+            //myPhotoBrowserStandalone.open();
+            if (type == 1) {
+
+                $$('#type_view_2').hide();
+                $$('#type_view_1').show();
+                if ($$('#btn_typ1').hasClass("tabSelect") == true) {
+                    $$('#btn_typ1').removeClass("tabSelect");
+                }
+                if ($$('#btn_typ1').hasClass("tabNoSelect") == true) {
+                    $$('#btn_typ1').removeClass("tabNoSelect");
+                }
+                if ($$('#btn_typ2').hasClass("tabSelect") == true) {
+                    $$('#btn_typ2').removeClass("tabSelect");
+                }
+                if ($$('#btn_typ2').hasClass("tabNoSelect") == true) {
+                    $$('#btn_typ2').removeClass("tabNoSelect");
+                }
+
+                $$('#btn_typ1').addClass("tabSelect");
+                $$('#btn_typ2').addClass("tabNoSelect");
+
+
+
+            }
+            else if (type == 2) {
+               // $$('#table_clock').hide();
+                //$$('#table_clockDetail').show();
+
+                $$('#type_view_1').hide();
+                $$('#type_view_2').show();
+                if ($$('#btn_typ1').hasClass("tabSelect") == true) {
+                    $$('#btn_typ1').removeClass("tabSelect");
+                }
+                if ($$('#btn_typ1').hasClass("tabNoSelect") == true) {
+                    $$('#btn_typ1').removeClass("tabNoSelect");
+                }
+                if ($$('#btn_typ2').hasClass("tabSelect") == true) {
+                    $$('#btn_typ2').removeClass("tabSelect");
+                }
+                if ($$('#btn_typ2').hasClass("tabNoSelect") == true) {
+                    $$('#btn_typ2').removeClass("tabNoSelect");
+                }
+
+                $$('#btn_typ2').addClass("tabSelect");
+                $$('#btn_typ1').addClass("tabNoSelect");
+
+            }
+
+
+
+        }
+        ClickType(1);
+        getLeveDay();
+    </script>
+
+
+</body>
+</html>

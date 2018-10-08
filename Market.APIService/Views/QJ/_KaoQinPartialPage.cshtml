@@ -1,0 +1,255 @@
+﻿@model Market.APIService.Controllers.KaoQinQueryModel
+<div class="content-block-title">人员基本信息</div>
+<div class="card">
+    <div class="card-content">
+
+        <div class="card-content-inner">
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <!-- Date -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">姓名</div>
+                                <div class="item-input">
+                                    @Model.userName
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">所属组织</div>
+                                <div class="item-input">
+                                    @Model.OrgName
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-block-title">本月考勤明细</div>
+<div class="card">
+    <div class="card-content">
+        <div class="card-content-inner">
+            <div class="row  no-gutter">
+                <div class="col-20">日期</div>
+                <div class="col-20">上班</div>
+                <div class="col-20">下班</div>
+                <div class="col-20">请假</div>
+                <div class="col-20">状态</div>
+            </div>
+            @{
+                foreach (var item in Model.data)
+                {
+                    <div class="row  no-gutter">
+                        <div class="col-20">@item.day</div>
+                        <div class="col-20">@item.workIn</div>
+                        <div class="col-20">@item.workOut</div>
+                        <div class="col-20">@item.leave</div>
+                        @{
+                            if (item.state.Equals("1"))
+                            {
+                                <div class="col-20" style="color:green;">正常</div>
+                            }
+                            else
+                            {
+                                <div class="col-20" style="color:red;">异常</div>
+                            }
+                        }
+                    </div>
+                }
+            }
+
+
+
+                       
+                    
+
+        </div>
+    </div>
+</div>
+<div class="content-block-title">请假情况(本年累计)</div>
+<div class="card">
+    <div class="card-content">
+        <div class="card-content-inner">
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <!-- Date -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">产假</div>
+                                <div class="item-input">
+                                    @Model.YearQJDays_1
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">病假</div>
+                                <div class="item-input">
+                                    @Model.YearQJDays_2
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">事假</div>
+                                <div class="item-input">
+                                    @Model.YearQJDays_3
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">婚假</div>
+                                <div class="item-input">
+                                    @Model.YearQJDays_4
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">丧假</div>
+                                <div class="item-input">
+                                    @Model.YearQJDays_5
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">护理假</div>
+                                <div class="item-input">
+                                    @Model.YearQJDays_6
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">年休假</div>
+                                <div class="item-input">
+                                    @Model.YearQJDays_7
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">休息</div>
+                                <div class="item-input">
+                                    @Model.YearQJDays_8
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-block-title">请假情况(本月明细)</div>
+<div class="card">
+    <div class="card-content">
+        <div class="card-content-inner">
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <!-- Date -->
+                    @{
+                        foreach (var item in Model.LeveData)
+                        {
+                            <li class="item-content">
+                                <div class="item-media"><i class="icon icon-f7"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">@item.day</div>
+                                    @{
+                                        string type = "";
+                                        if (item.leaveType.Equals("1"))
+                                        {
+                                            type = "产假";
+                                        }
+                                        else if (item.leaveType.Equals("2"))
+                                        {
+                                            type = "病假";
+                                        }
+                                        else if (item.leaveType.Equals("3"))
+                                        {
+                                            type = "事假";
+                                        }
+                                        else if (item.leaveType.Equals("4"))
+                                        {
+                                            type = "婚假";
+                                        }
+                                        else if (item.leaveType.Equals("5"))
+                                        {
+                                            type = "丧假";
+                                        }
+                                        else if (item.leaveType.Equals("6"))
+                                        {
+                                            type = "护理假";
+                                        }
+                                        else if (item.leaveType.Equals("7"))
+                                        {
+                                            type = "年休假";
+                                        }
+                                        else if (item.leaveType.Equals("8"))
+                                        {
+                                            type = "休息";
+                                        }
+                                    }
+                                    <div class="item-input">@type</div>
+                                    @{
+                                        if (item.state.Equals("1"))
+                                        {
+                                            <div class="item-after">未确认</div>
+                                        }
+                                        else if (item.state.Equals("2"))
+                                        {
+                                            <div class="item-after" style="color:green;">已确认</div>
+                                        }
+                                        else if (item.state.Equals("3"))
+                                        {
+                                            <div class="item-after" style="color:red;">已拒绝</div>
+                                        }
+
+                                    }
+                                </div>
+                            </li>
+                                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

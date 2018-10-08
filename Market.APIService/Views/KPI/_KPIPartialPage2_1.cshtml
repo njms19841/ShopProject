@@ -1,0 +1,196 @@
+﻿@model Market.APIService.Controllers.View1_3PModel
+<div class="buttons-tab">
+    <a href="#tab1" class="tab-link active button" >开拓率</a>
+   
+</div>
+<div class="content-block" style="width:100%">
+    <div class="tabs" style="width:100%">
+        <div class="content-block">
+            <select id="bu2" onchange="changeValue('2');">
+                @{
+                    foreach (var bu in Model.TBuList)
+                    {
+                        if (bu.isSelected)
+                        {
+                            <option value="@bu.key" selected="selected">@bu.keyValue</option>
+                        }
+                        else
+                        {
+                            <option value="@bu.key">@bu.keyValue</option>
+                        }
+                    }
+
+                }
+            </select>
+           
+
+        </div>
+        <div id="char2" class="content-block" style="width:100%;height:1000px;">
+
+        </div>
+       
+    </div>
+</div>
+<script type="text/javascript">
+   
+    function changeValue(type)
+    {
+        
+        var bu="";
+        if (type == "1") {
+            myChart.showLoading();
+            bu = $("#bu").val();
+
+        }
+        else {
+            myChart2.showLoading();
+            bu = $("#bu2").val();
+
+        }
+        //string month,string day,string bu,string type
+        var r = "GetView21DataJson?" +"bu=" + bu ;
+        
+        $.ajax({
+            url: r,
+            type: "Get",
+            success: function (data) {
+               
+               
+                    myChart2.hideLoading();
+
+                    //TODO:处理添加新问卷成功后的事件
+                    myChart2.setOption({
+                        yAxis: {
+                            data: data.tbus
+                        },
+                        series: [{
+                            // 根据名字对应到相应的系列
+                            name:'开拓率',
+                            data: data.rvalue
+                        },
+                        {
+                            // 根据名字对应到相应的系列
+                            name: '门店数',
+                            data: data.tvalue
+                        }
+                        ]
+                    });
+                
+
+                // $.hidePreloader();
+
+            },
+
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.hidePreloader();
+
+                $.toast("操作失败");
+
+            }
+        });
+    }
+    // 基于准备好的dom，初始化echarts实例
+   
+    
+   
+    var myChart2 = echarts.init(document.getElementById('char2'));
+
+        // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: ''
+        },
+        grid: {
+            left: '5px',
+            right: '5px',
+            bottom: '5px',
+            containLabel: true
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            },
+            formatter: function (datas) {
+                var res = datas[0].name + '<br/>'
+                
+                for (var i = 0, length = datas.length; i < length; i++) {
+                    if (datas[i].seriesName == "开拓率")
+                    {
+                        res += datas[i].seriesName + '：'
+                           + datas[i].data + '%<br/>';
+                    }
+                    else
+                    {
+                        res += datas[i].seriesName + '：'
+                            + datas[i].data + '<br/>';
+                    }
+                }
+                return res
+            }
+        },
+        legend: {
+            data: ['开拓率', '门店数']
+        },
+        xAxis: [
+            {
+                type: 'value',
+                name: '门店数',
+                axisLabel: {
+                    formatter: '{value}'
+                }
+            
+            },
+            {
+            type: 'value',
+            name: '开拓率',
+           
+            axisLabel: {
+                formatter: '{value} %'
+            }
+        }
+        ],
+        yAxis: {
+            data: []
+        },
+        series: [{
+            name: '开拓率',
+            type: 'bar',
+            data: [],
+            xAxisIndex: 1, itemStyle: {
+
+                normal: {
+
+                    color: '#FE939B',
+                }
+            }
+            /*
+            itemStyle: {
+                normal: {
+                    color: '#74A8FE'
+                }
+            },*/
+        },
+        {
+            name: '门店数',
+            type: 'bar',
+            data: [],
+            itemStyle: {
+
+                normal: {
+
+                    color: '#92BFF6',
+                }
+            }
+           
+        }]
+    };
+
+        // 使用刚指定的配置项和数据显示图表。
+       
+        myChart2.setOption(option);
+      
+        changeValue("2");
+       
+        
+</script>
